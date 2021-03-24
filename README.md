@@ -6,10 +6,12 @@ GoodFood- это супермаркет, позволяющий выбирать
 
 - [Trello](https://trello.com/b/nrVUSokK/tpproject)
 - [Miro](https://miro.com/app/board/o9J_lPwXccQ=/)
+- [Техническое задание](https://github.com/LazarevY/ProductShop/blob/master/docs/technical_specification.pdf)
+- [Отчет по курсовому проекту](https://github.com/LazarevY/ProductShop/blob/master/docs/report.pdf)
 
 
 **Разработчики:**
 Студенты 4.2 группы 3 курса Факультета Компьютерных Наук
-- Лазарев Ярослав Владимирович
-- Трофимов Никита Алексеевич
-- Мотенко Маргарита Алексеевна
+- [Лазарев Ярослав Владимирович](https://github.com/LazarevY)
+- [Трофимов Никита Алексеевич](https://github.com/OnkoRonko)
+- [Мотенко Маргарита Алексеевна](https://github.com/MotenkoMargarita)
