@@ -15,13 +15,13 @@ import java.util.List;
 @Mapper
 public interface UserMapper {
 
-    @Select("SELECT * FROM users WHERE user_id = #{id}")
+    @Select("SELECT * FROM User WHERE user_id = #{id}")
     User getUser(@Param("id") Long id);
 
-    @Select("select * from users")
+    @Select("SELECT * FROM User")
     List<User> findAll();
 
-    @Insert("INSERT INTO users (firstName, lastName, phone) VALUES (#{firstName}, #{lastName}, #{phone})")
+    @Insert("INSERT INTO User (first_name, last_name, phone_number) VALUES (#{firstName}, #{lastName}, #{phone})")
     void addUser(String firstName, String lastName, String phone);
 
 }
