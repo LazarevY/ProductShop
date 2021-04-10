@@ -12,4 +12,9 @@
             </dataSource>
         </environment>
     </environments>
+
+    <mappers>
+        <mapper resource="mappers/UserMapper.xml"/>
+    </mappers>
+
 </configuration>
