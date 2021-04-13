@@ -7,14 +7,19 @@
             <dataSource type="POOLED">
                 <property name="driver" value="org.postgresql.Driver"/>
                 <property name="url" value="jdbc:postgresql://localhost:5432/product_shop"/>
-                <property name="username" value="lazarev"/>
-                <property name="password" value="12345"/>
+                <property name="username" value="postgres"/>
+                <property name="password" value="28z8x21"/>
             </dataSource>
         </environment>
     </environments>
 
     <mappers>
         <mapper resource="mappers/UserMapper.xml"/>
+        <mapper resource="mappers/GenderMapper.xml"/>
+        <mapper resource="mappers/OrderMapper.xml"/>
+        <mapper resource="mappers/OrderProductMapper.xml"/>
+        <mapper resource="mappers/OrderStatusMapper.xml"/>
+        <mapper resource="mappers/ProductMapper.xml"/>
     </mappers>
 
 </configuration>

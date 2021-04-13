@@ -7,5 +7,7 @@
         <result column="user_first_name" jdbcType="VARCHAR" property="firstName" />
         <result column="user_last_name" jdbcType="VARCHAR" property="lastName" />
         <result column="user_phone" jdbcType="VARCHAR" property="phone" />
+        <result column="user_email" jdbcType="VARCHAR" property="email" />
+        <result column="user_password_hash" jdbcType="VARCHAR" property="passwordHash" />
     </resultMap>
 </mapper>

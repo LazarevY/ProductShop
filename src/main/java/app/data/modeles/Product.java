@@ -2,12 +2,17 @@ package app.data.modeles;
 
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 public class Product {
     private Long id;
     private String name;
+    private String description;
     private Long weight;
-    private Long price;
-    private Long energyPrice;
-    private String image;
+    private Long calories;
+    private Long metadataId;
+
+    private List<Order> productsOrders= new ArrayList<>();
 }

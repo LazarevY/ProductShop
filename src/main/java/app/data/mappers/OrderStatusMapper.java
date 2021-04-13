@@ -1,23 +1,23 @@
 package app.data.mappers;
 
 import app.data.modeles.OrderStatus;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
 @Mapper
 public interface OrderStatusMapper {
 
-    @Select("SELECT * FROM Order_Status WHERE status_id = #{id}")
+    @Select("SELECT * FROM order_status WHERE order_status_id = #{id}")
+    @ResultMap("OrderStatusResultMap")
     OrderStatus getOrderStatus(@Param("id") Long id);
 
-    @Select("SELECT * FROM Order_Status")
+    @Select("SELECT * FROM order_status")
+    @ResultMap("OrderStatusResultMap")
     List<OrderStatus> findAll();
 
-    @Insert("INSERT INTO Order_Status (status_name) VALUES (#{name})")
+    @Insert("INSERT INTO order_status (order_status_name) " +
+            "VALUES (#{name})")
     void addOrderStatus(String name);
 
 }
