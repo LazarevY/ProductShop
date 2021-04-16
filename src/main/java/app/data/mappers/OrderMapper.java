@@ -10,14 +10,15 @@ public interface OrderMapper {
 
     @Select("SELECT * FROM orders WHERE order_id = #{id}")
     @ResultMap("OrderResultMap")
-    Order getOrder(@Param("id") Long id);
+    Order getById(@Param("id") long id);
 
     @Select("SELECT * FROM orders")
     @ResultMap("OrderResultMap")
     List<Order> findAll();
 
-    @Insert("INSERT INTO orders (order_status_id, user_id, store_id, common_price, stock_price, order_date) " +
-            "VALUES (#{orderStatusId}, #{userId}, #{storeId}, #{commonPrice}, #{stockPrice}, #{date})")
-    void addOrder(Long orderStatusId, Long userId, Long storeId, Long commonPrice, Long stockPrice, String date);
+    void addOrder(long orderStatusId, long userId, long storeId, int commonPrice, int stockPrice, String date);
+
+    @Delete("DELETE FROM orders WHERE order_id = #{id}")
+    void deleteById(long id);
 
 }

@@ -14,7 +14,7 @@ public interface GenderMapper {
 
     @Select("SELECT * FROM gender")
     @ResultMap("GenderResultMap")
-    List<Gender> findAll();
+    List<Gender> getAll();
 
     @Insert("INSERT INTO gender (gender_name) " +
             "VALUES (#{name})")

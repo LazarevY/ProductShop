@@ -16,8 +16,7 @@ public interface OrderStatusMapper {
     @ResultMap("OrderStatusResultMap")
     List<OrderStatus> findAll();
 
-    @Insert("INSERT INTO order_status (order_status_name) " +
-            "VALUES (#{name})")
+    @Insert("INSERT INTO order_status (order_status_name) VALUES (#{name})")
     void addOrderStatus(String name);
 
 }

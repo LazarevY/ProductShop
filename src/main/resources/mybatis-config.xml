@@ -20,6 +20,17 @@
         <mapper resource="mappers/OrderProductMapper.xml"/>
         <mapper resource="mappers/OrderStatusMapper.xml"/>
         <mapper resource="mappers/ProductMapper.xml"/>
+        <mapper resource="mappers/ProductsProductsCategoriesMapper.xml"/>
+
+        <mapper resource="mappers/PayMethodMapper.xml"/>
+        <mapper resource="mappers/ProductCategoryMapper.xml"/>
+        <mapper resource="mappers/ProductMetadataMapper.xml"/>
+        <mapper resource="mappers/StockClauseItemMapper.xml"/>
+        <mapper resource="mappers/StockClauseMapper.xml"/>
+        <mapper resource="mappers/StockMapper.xml"/>
+        <mapper resource="mappers/StoreMapper.xml"/>
+        <mapper resource="mappers/UserAddressMapper.xml"/>
+        <mapper resource="mappers/UserCalorieDataMapper.xml"/>
     </mappers>
 
 </configuration>

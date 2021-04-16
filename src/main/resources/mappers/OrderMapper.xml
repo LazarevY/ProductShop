@@ -3,12 +3,16 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="app.data.mappers.OrderMapper">
     <resultMap id="OrderResultMap" type="app.data.modeles.Order">
-        <result column="order_id" jdbcType="INTEGER" property="id" />
-        <result column="order_status_id" jdbcType="INTEGER" property="orderStatusId" />
-        <result column="user_id" jdbcType="INTEGER" property="userId" />
-        <result column="store_id" jdbcType="INTEGER" property="storeId" />
-        <result column="common_price" jdbcType="INTEGER" property="commonPrice" />
-        <result column="stock_price" jdbcType="INTEGER" property="stockPrice" />
-        <result column="order_date" jdbcType="DATE" property="date" />
+        <id column="order_id" jdbcType="INTEGER" property="id"/>
+        <result column="order_status_id" jdbcType="INTEGER" property="orderStatusId"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="store_id" jdbcType="INTEGER" property="storeId"/>
+        <result column="common_price" jdbcType="INTEGER" property="commonPrice"/>
+        <result column="stock_price" jdbcType="INTEGER" property="stockPrice"/>
+        <result column="order_date" jdbcType="DATE" property="date"/>
     </resultMap>
+    <insert id="addOrder">
+        INSERT INTO orders (order_status_id, user_id, store_id, common_price, stock_price, order_date)
+        VALUES (#{orderStatusId}, #{userId}, #{storeId}, #{commonPrice}, #{stockPrice}, #{date})
+    </insert>
 </mapper>
