@@ -26,14 +26,18 @@ public class SpringBootTestAppl implements CommandLineRunner {
     public void run(String...args) {
         var users = userMapper.findAll();
         var genders = genderMapper.findAll();
-        var orderProduct = orderProductMapper.getProductByOrder(2L);
+        var op = orderProductMapper.getOrderProduct(2L, 1L);
+        var orderProduct = orderProductMapper.getOrderByProduct(1L);
 
         for (var u: users)
             System.out.println(u.toString());
         for (var u: genders)
             System.out.println(u.toString());
+        for (var u: op)
+            System.out.println(u.toString());
         for (var u: orderProduct)
             System.out.println(u.toString());
+
     }
     public static void main(String[] args) {
         SpringApplication.run(SpringBootTestAppl.class, args);

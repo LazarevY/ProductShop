@@ -2,55 +2,69 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="app.data.mappers.OrderProductMapper">
-    <resultMap id="OrderResultMap" type="app.data.modeles.Order">
-        <result column="order_id" jdbcType="INTEGER" property="id" />
-        <result column="order_status_id" jdbcType="INTEGER" property="orderStatusId" />
-        <result column="user_id" jdbcType="INTEGER" property="userId" />
-        <result column="store_id" jdbcType="INTEGER" property="storeId" />
-        <result column="common_price" jdbcType="INTEGER" property="commonPrice" />
-        <result column="stock_price" jdbcType="INTEGER" property="stockPrice" />
-        <result column="order_date" jdbcType="DATE" property="date" />
-        <collection javaType="ArrayList" property="orderProducts" resultMap="OrderResultMap" />
+
+    <resultMap id="OrderProductBeanMap" type="app.data.modeles.OrderProduct">
+        <result column="order_id" jdbcType="INTEGER" property="orderId"/>
+        <result column="product_id" jdbcType="INTEGER" property="productId"/>
+        <result column="count_of_products" jdbcType="INTEGER" property="countOfProducts"/>
     </resultMap>
 
-    <resultMap id="ProductResultMap" type="app.data.modeles.Product">
-        <result column="product_id" jdbcType="INTEGER" property="id" />
-        <result column="product_name" jdbcType="VARCHAR" property="name" />
-        <result column="product_description" jdbcType="VARCHAR" property="description" />
-        <result column="product_weight" jdbcType="VARCHAR" property="weight" />
-        <result column="product_calories" jdbcType="VARCHAR" property="calories" />
-        <result column="product_metadata_id" jdbcType="VARCHAR" property="metadataId" />
-        <collection javaType="ArrayList" property="productsOrders" resultMap="ProductResultMap" />
+    <resultMap id="ProductResultMap" type="app.data.modeles.Order">
+        <id column="order_id" jdbcType="INTEGER" property="id"/>
+        <result column="order_status_id" jdbcType="INTEGER" property="orderStatusId"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="store_id" jdbcType="INTEGER" property="storeId"/>
+        <result column="common_price" jdbcType="INTEGER" property="commonPrice"/>
+        <result column="stock_price" jdbcType="INTEGER" property="stockPrice"/>
+        <result column="order_date" jdbcType="DATE" property="date"/>
+        <collection javaType="java.util.ArrayList" property="orderProducts"
+                    resultMap="OrderResultMap"/>
+    </resultMap>
+
+    <resultMap id="OrderResultMap" type="app.data.modeles.Product">
+        <id column="product_id" jdbcType="INTEGER" property="id"/>
+        <result column="product_name" jdbcType="VARCHAR" property="name"/>
+        <result column="product_description" jdbcType="VARCHAR" property="description"/>
+        <result column="product_weight" jdbcType="VARCHAR" property="weight"/>
+        <result column="product_calories" jdbcType="VARCHAR" property="calories"/>
+        <result column="product_metadata_id" jdbcType="VARCHAR" property="metadataId"/>
+        <collection javaType="java.util.ArrayList" property="productsOrders"
+                    resultMap="ProductResultMap"/>
     </resultMap>
 
     <insert id="addOrderProduct">
         INSERT INTO orders_products (order_id, product_id, count_of_products)
         VALUES (#{orderId}, #{productId}, #{countOfProducts})
     </insert>
-    <delete id="deleteOrderProduct" >
-        DELETE FROM orders_products
-        WHERE 1=1
-          AND order_id=#{orderId}
-          AND product_id=#{productId}
+    <delete id="deleteOrderProduct">
+        DELETE
+        FROM orders_products
+        WHERE 1 = 1
+          AND order_id = #{orderId}
+          AND product_id = #{productId}
     </delete>
 
     <select id="getOrderByProduct" resultMap="ProductResultMap">
-        SELECT
-            o.*
-        FROM products AS  p
-                 LEFT JOIN orders_products AS op ON p.product_id = op.product_id
-                 LEFT JOIN orders AS o ON o.order_id = op.order_id
-        WHERE 1=1
-          AND p.product_id = #{id}
+        SELECT o.*
+        FROM products AS p
+                 JOIN orders_products AS op ON p.product_id = op.product_id
+                 JOIN orders AS o ON o.order_id = op.order_id
+        WHERE p.product_id = #{id,jdbcType=BIGINT}
     </select>
 
     <select id="getProductByOrder" resultMap="OrderResultMap">
-        SELECT
-            p.*
-        FROM orders AS  o
-                 LEFT JOIN orders_products AS op ON o.order_id = op.order_id
-                 LEFT JOIN products AS p ON p.product_id = op.product_id
-        WHERE 1=1
-          AND o.order_id = #{id}
+        SELECT p.*
+        FROM orders AS o
+                 JOIN orders_products AS op ON o.order_id = op.order_id
+                 JOIN products AS p ON p.product_id = op.product_id
+        WHERE o.order_id = #{id,jdbcType=BIGINT}
+    </select>
+
+
+    <select id="getOrderProduct" resultType="app.data.modeles.OrderProduct" resultMap="OrderProductBeanMap">
+        SELECT *
+        FROM orders_products AS op
+        WHERE op.order_id = #{orderId}
+          AND op.product_id = #{productId}
     </select>
 </mapper>
