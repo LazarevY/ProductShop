@@ -2,5 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="app.data.mappers.PayMethodMapper">
-
+    <resultMap id="PayMethodResult" type="app.data.modeles.PayMethod">
+        <id column="pay_method_id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="card_number" property="cardNumber"/>
+        <result column="date_end" property="dateEnd"/>
+    </resultMap>
+    <insert id="addPayMethod">
+        INSERT INTO users_pay_methods (pay_method_id, user_id, card_number, date_end)
+        VALUES (#{id}, #{userId}, #{cardNumber}, #{dateEnd})
+    </insert>
+    <delete id="deleteById">
+        DELETE FROM users_pay_methods WHERE pay_method_id = #{id}
+    </delete>
+    <select id="getAllByUserId" resultType="app.data.modeles.PayMethod">
+        SELECT * FROM users_pay_methods WHERE user_id = #{userId}
+    </select>
 </mapper>
