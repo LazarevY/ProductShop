@@ -16,8 +16,7 @@ public interface GenderMapper {
     @ResultMap("GenderResultMap")
     List<Gender> getAll();
 
-    @Insert("INSERT INTO gender (gender_name) " +
-            "VALUES (#{name})")
+    @Insert("INSERT INTO gender (gender_name) VALUES (#{name})")
     void addGender(String name);
 
 }

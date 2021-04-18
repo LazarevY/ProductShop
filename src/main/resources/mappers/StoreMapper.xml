@@ -2,5 +2,37 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="app.data.mappers.StoreMapper">
+    <resultMap id="StoreResultMap" type="app.data.modeles.Store">
+        <id column="store_id" property="id"/>
+        <result column="store_address" property="address"/>
+    </resultMap>
+
+    <insert id="addStore">
+        INSERT INTO stores (store_address)
+        VALUES (#{address});
+    </insert>
+
+    <update id="updateStore">
+        UPDATE stores
+        SET store_address = #{address}
+        WHERE store_id = #{id};
+    </update>
+
+    <select id="getById" resultMap="StoreResultMap">
+        SELECT *
+        FROM stores
+        WHERE store_id = #{id};
+    </select>
+
+    <select id="findAll" resultMap="StoreResultMap">
+        SELECT *
+        FROM stores;
+    </select>
+
+    <delete id="deleteById">
+        DELETE
+        FROM stores
+        WHERE store_id = #{id};
+    </delete>
 
 </mapper>

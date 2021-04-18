@@ -2,5 +2,38 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="app.data.mappers.ProductMetadataMapper">
+    <resultMap id="ProductMetadataResult" type="app.data.modeles.ProductMetadata">
+        <id column="metadata_id" property="metadataId"/>
+        <result column="product_file_name" property="productFileName"/>
+    </resultMap>
+
+
+    <select id="getProductMetadataById" resultMap="ProductMetadataResult">
+        SELECT *
+        FROM product_metadata
+        WHERE metadata_id = #{id};
+    </select>
+
+    <select id="findAll" resultMap="ProductMetadataResult">
+        SELECT *
+        FROM product_metadata;
+    </select>
+
+    <insert id="addProductMetadata">
+        INSERT INTO product_metadata (product_file_name)
+        VALUES (#{fileName});
+    </insert>
+
+    <update id="updateProductMetadata">
+        UPDATE product_metadata
+        SET product_file_name = #{fileName}
+        WHERE metadata_id = #{id};
+    </update>
+
+    <delete id="deleteById">
+        DELETE
+        FROM product_metadata
+        WHERE metadata_id = #{id};
+    </delete>
 
 </mapper>

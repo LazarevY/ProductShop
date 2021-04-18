@@ -2,5 +2,33 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="app.data.mappers.StockClauseMapper">
-
+    <resultMap id="StockClauseMap" type="app.data.modeles.StockClause">
+        <id column="stock_clause_id" property="id"/>
+        <result column="stock_clause_item_id" property="clauseId"/>
+        <result column="value_clause_item" property="clauseValue"/>
+    </resultMap>
+    <insert id="addStockClause">
+        INSERT INTO stocks_clauses (stock_clause_item_id, value_clause_item)
+        VALUES (#{stockClauseId}, #{value});
+    </insert>
+    <update id="updateStockClause">
+        UPDATE stocks_clauses
+        SET stock_clause_item_id = #{stockClauseItemId},
+            value_clause_item    = #{value}
+        WHERE stock_clause_id = #{id};
+    </update>
+    <delete id="deleteById">
+        DELETE
+        FROM stocks_clauses
+        WHERE stock_clause_id = #{id};
+    </delete>
+    <select id="getById" resultMap="StockClauseMap">
+        SELECT *
+        FROM stocks_clauses
+        WHERE stock_clause_id = #{id};
+    </select>
+    <select id="findAll" resultMap="StockClauseMap">
+        SELECT *
+        FROM stocks_clauses;
+    </select>
 </mapper>
