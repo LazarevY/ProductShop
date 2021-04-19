@@ -23,7 +23,12 @@
     <select id="getById" resultMap="UserAddressResult">
         SELECT *
         FROM user_addresses
-        WHERE user_id = #{id};
+        WHERE address_id = #{id};
+    </select>
+    <select id="getAllByUserId" resultMap="UserAddressResult">
+        SELECT *
+        FROM user_addresses
+        WHERE user_id = #{userId};
     </select>
 
     <delete id="deleteById">

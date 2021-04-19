@@ -17,4 +17,6 @@ public interface UserAddressMapper {
 
     void deleteById(@Param("id") long id);
 
+    List<UserAddress> getAllByUserId(@Param("userId") long userId);
+
 }

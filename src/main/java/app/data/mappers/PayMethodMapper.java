@@ -14,5 +14,7 @@ public interface PayMethodMapper {
 
     List<PayMethod> getAllByUserId(@Param("userId") long userId);
 
+    PayMethod getById(@Param("id") long id);
+
     void deleteById(@Param("id") long id);
 }
