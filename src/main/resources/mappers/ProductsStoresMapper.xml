@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="app.data.mappers.ProductsStoresMapper">
+
+    <select id="getAllInStore" resultMap="app.data.mappers.ProductMapper.ProductResultMap">
+        SELECT p.*
+        FROM products p
+                 JOIN products_stores ps on p.product_id = ps.product_id
+        WHERE store_id = #{storeId};
+    </select>
+    <select id="getAllInStoreFilteredOnlyByPrice" resultMap="app.data.mappers.ProductMapper.ProductResultMap">
+        SELECT p.*
+        FROM products p
+                 JOIN products_stores ps
+                      on p.product_id = ps.product_id AND
+                         ps.count_of_products > 0 AND
+                         ps.product_price &gt;= #{priceHigh} AND
+                         ps.product_price >= #{priceLow}
+        WHERE store_id = #{storeId};
+    </select>
+    <select id="getAllInStoreFilteredByPriceAndName" resultMap="app.data.mappers.ProductMapper.ProductResultMap">
+        <bind name="productName" value="name.getTitle() + '%'"/>
+        SELECT p.*
+        FROM products p
+        JOIN products_stores ps
+        on p.product_id = ps.product_id AND
+        ps.count_of_products > 0 AND
+        ps.product_price &gt;= #{priceHigh} AND
+        ps.product_price >= #{priceLow}
+        WHERE ps.store_id = #{storeId} AND p.product_name = #{productName};
+    </select>
+    <select id="getAllInStoreFilteredOnlyByCategories" resultMap="app.data.mappers.ProductMapper.ProductResultMap">
+        SELECT p.*
+        FROM products p
+        JOIN products_stores ps
+        on p.product_id = ps.product_id
+        JOIN products_product_categories ppc on ps.product_id = ppc.product_id AND ppc.product_category_id IN
+        <foreach item="item" index="index" collection="categoriesId" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+
+    </select>
+    <select id="getAllInStoreFilteredByPriceAndNameAndCategory" resultType="app.data.modeles.Product">
+        <bind name="productName" value="name.getTitle() + '%'"/>
+        SELECT p.*
+        FROM products p
+
+        JOIN products_stores ps
+        on p.product_id = ps.product_id AND
+        ps.count_of_products > 0 AND
+        ps.product_price &gt;= #{priceHigh} AND
+        ps.product_price >= #{priceLow}
+
+        JOIN products_product_categories ppc on
+        ps.product_id = ppc.product_id AND
+        ppc.product_category_id IN
+        <foreach item="item" index="index" collection="categoriesId" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        WHERE ps.store_id = #{storeId} AND p.product_name = #{productName};
+    </select>
+</mapper>

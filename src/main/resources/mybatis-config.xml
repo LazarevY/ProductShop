@@ -31,6 +31,7 @@
         <mapper resource="mappers/StoreMapper.xml"/>
         <mapper resource="mappers/UserAddressMapper.xml"/>
         <mapper resource="mappers/UserCalorieDataMapper.xml"/>
+        <mapper resource="mappers/ProductsStoresMapper.xml"/>
     </mappers>
 
 </configuration>
