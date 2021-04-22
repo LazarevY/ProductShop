@@ -14,6 +14,6 @@ public class Product {
     private Long calories;
     private Long metadataId;
 
-    private List<Order> productsOrders= new ArrayList<>();
+    private List<Order> productsOrders = new ArrayList<>();
     private List<ProductCategory> categories = new ArrayList<>();
 }

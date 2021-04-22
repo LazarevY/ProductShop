@@ -8,22 +8,30 @@
     </resultMap>
 
     <insert id="addProductCategory">
-        INSERT INTO product_categories (category_name) VALUES(#{name});
+        INSERT INTO product_categories (category_name)
+        VALUES (#{name});
     </insert>
 
     <select id="getCategoryById" resultMap="ProductCategoryResult">
-        SELECT * FROM product_categories WHERE category_id = #{id};
+        SELECT *
+        FROM product_categories
+        WHERE category_id = #{id};
     </select>
     <select id="getAll" resultMap="ProductCategoryResult">
-        SELECT * FROM product_categories;
+        SELECT *
+        FROM product_categories;
     </select>
 
     <delete id="deleteCategoryById">
-        DELETE FROM product_categories WHERE category_id = #{id};
+        DELETE
+        FROM product_categories
+        WHERE category_id = #{id};
     </delete>
 
     <update id="updateCategory">
-        UPDATE product_categories SET category_name = #{name} WHERE category_id = #{id,jdbcType=BIGINT};
+        UPDATE product_categories
+        SET category_name = #{name}
+        WHERE category_id = #{id,jdbcType=BIGINT};
     </update>
 
 </mapper>

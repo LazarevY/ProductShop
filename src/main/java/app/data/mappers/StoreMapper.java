@@ -17,6 +17,6 @@ public interface StoreMapper {
 
     List<Store> findAll();
 
-    void  deleteById(@Param("id") long id);
+    void deleteById(@Param("id") long id);
 
 }

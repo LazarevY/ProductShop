@@ -16,5 +16,5 @@ public class Order {
     private Long stockPrice;
     private Date date;
 
-     private List<Product> orderProducts = new ArrayList<>();
+    private List<Product> orderProducts = new ArrayList<>();
 }

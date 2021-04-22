@@ -16,7 +16,12 @@ public interface OrderMapper {
     @ResultMap("OrderResultMap")
     List<Order> findAll();
 
-    void addOrder(long orderStatusId, long userId, long storeId, int commonPrice, int stockPrice, String date);
+    void addOrder(
+            @Param("orderStatusId") long orderStatusId,
+            @Param("userId") long userId, @Param("storeId") long storeId,
+            @Param("commonPrice") int commonPrice,
+            @Param("stockPrice") int stockPrice,
+            @Param("date") String date);
 
     @Delete("DELETE FROM orders WHERE order_id = #{id}")
     void deleteById(long id);

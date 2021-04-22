@@ -6,4 +6,22 @@
         <id column="gender_id" jdbcType="INTEGER" property="id"/>
         <result column="gender_name" jdbcType="VARCHAR" property="name"/>
     </resultMap>
+    <insert id="addGender">
+        INSERT INTO gender (gender_name)
+        VALUES (#{name});
+    </insert>
+    <delete id="deleteById">
+        DELETE
+        FROM gender
+        WHERE gender_id = #{id};
+    </delete>
+    <select id="getGender" resultMap="GenderResultMap">
+        SELECT *
+        FROM gender
+        WHERE gender_id = #{id};
+    </select>
+    <select id="getAll" resultMap="GenderResultMap">
+        SELECT *
+        FROM gender;
+    </select>
 </mapper>

@@ -1,9 +1,10 @@
 package app.data.mappers;
 
+import app.data.modeles.Order;
 import app.data.modeles.OrderProduct;
 import app.data.modeles.Product;
-import app.data.modeles.Order;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -15,7 +16,8 @@ public interface OrderProductMapper {
 
     List<Product> getProductByOrder(@Param("id") Long id);
 
-    void addOrderProduct(Long orderId, Long productId, int countOfProducts);
-    int deleteOrderProduct(Long orderId, Long productId);
+    void addOrderProduct(@Param("orderId") Long orderId, @Param("productId") Long productId, @Param("countOfProducts") int countOfProducts);
+
+    int deleteOrderProduct(@Param("orderId") Long orderId, @Param("productId") Long productId);
 
 }

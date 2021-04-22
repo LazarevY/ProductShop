@@ -1,7 +1,7 @@
 package app.data.mappers;
 
 import app.data.modeles.Product;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -9,12 +9,8 @@ import java.util.List;
 @Mapper
 public interface ProductMapper {
 
-    @Select("SELECT * FROM products WHERE product_id = #{id}")
-    @ResultMap("ProductResultMap")
     Product getProduct(@Param("id") Long id);
 
-    @Select("SELECT * FROM products")
-    @ResultMap("ProductResultMap")
     List<Product> findAll();
 
     void addProduct(

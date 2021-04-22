@@ -19,16 +19,27 @@
 
     <update id="updateProduct">
         UPDATE products
-        SET product_name = #{name},
+        SET product_name        = #{name},
             product_description = #{description},
-            product_weight = #{weight},
-            product_calories = #{calories},
+            product_weight      = #{weight},
+            product_calories    = #{calories},
             product_metadata_id = #{metadataId}
         WHERE product_id = #{id};
     </update>
 
     <delete id="deleteProductById">
-        DELETE FROM products WHERE product_id = #{id};
+        DELETE
+        FROM products
+        WHERE product_id = #{id};
     </delete>
+    <select id="getProduct" resultMap="ProductResultMap">
+        SELECT *
+        FROM products
+        WHERE product_id = #{id};
+    </select>
+    <select id="findAll" resultMap="ProductResultMap">
+        SELECT *
+        FROM products;
+    </select>
 
 </mapper>

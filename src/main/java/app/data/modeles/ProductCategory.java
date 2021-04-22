@@ -10,5 +10,5 @@ public class ProductCategory {
     private Long id;
     private String name;
 
-    private List<Product> products  = new ArrayList<>();
+    private List<Product> products = new ArrayList<>();
 }
