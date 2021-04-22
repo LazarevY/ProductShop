@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="app.data.mappers.StocksProductsMapper">
+    <insert id="addStockToProduct">
+        INSERT INTO stock_products (product_id, stock_id)
+        VALUES (#{productId}, #{productId});
+    </insert>
+    <select id="getAllStocksForProduct" resultMap="app.data.mappers.StockMapper.StockResultMap">
+        SELECT s.*
+        FROM stocks s
+                 JOIN stock_products sp on s.stock_id = sp.stock_id AND sp.product_id = #{productId};
+    </select>
+    <select id="getAllStocksForProductInStore" resultMap="app.data.mappers.StockMapper.StockResultMap">
+        SELECT s.*
+        FROM stocks s
+                 JOIN stocks_stores ss on s.stock_id = ss.stock_id AND ss.store_id = #{storeId}
+                 JOIN stock_products sp on ss.stock_id = sp.stock_id AND sp.product_id = #{productId};
+    </select>
+    <select id="getAllProductsForStock" resultMap="app.data.mappers.ProductMapper.ProductResultMap">
+        SELECT p.*
+        FROM products p
+                 JOIN stock_products sp on p.product_id = sp.product_id AND sp.stock_id = #{stockId};
+    </select>
+    <select id="getAllProductsForStockInStore" resultMap="app.data.mappers.ProductMapper.ProductResultMap">
+        SELECT p.*
+        FROM products p
+                 JOIN products_stores ps on p.product_id = ps.product_id AND ps.store_id = #{storeId}
+                 JOIN stock_products sp on ps.product_id = sp.product_id AND sp.stock_id = #{stockId};
+    </select>
+</mapper>
