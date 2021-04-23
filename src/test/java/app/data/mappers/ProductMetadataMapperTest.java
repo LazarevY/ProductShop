@@ -1,6 +1,5 @@
 package app.data.mappers;
 
-import app.data.modeles.Gender;
 import lombok.SneakyThrows;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -21,21 +20,22 @@ import java.util.stream.Collectors;
 
 
 @RunWith(SpringRunner.class)
-public class GenderMapperTest {
+public class ProductMetadataMapperTest {
+
 
     private static SqlSession session;
 
     @TestConfiguration
-    static class GenderMapperConf {
+    static class ProductMetadataMapperConf {
         @SneakyThrows
         @Bean
-        public GenderMapper create() {
-            return session.getMapper(GenderMapper.class);
+        public ProductMetadataMapper create() {
+            return session.getMapper(ProductMetadataMapper.class);
         }
     }
 
     @Autowired
-    GenderMapper mapper;
+    ProductMetadataMapper mapper;
 
     @SneakyThrows
     @BeforeClass
@@ -50,23 +50,22 @@ public class GenderMapperTest {
 
     @Test
     public void test000() {
-        mapper.addGender("TEST_GENDER");
-        var lst = mapper.getAll()
+        mapper.addProductMetadata("TEST_PRODUCT_PIC");
+        var lst = mapper.findAll()
                 .stream()
-                .filter(gender -> gender.getName().equals("TEST_GENDER"))
+                .filter(productMetadata -> productMetadata.getProductFileName().equals("TEST_PRODUCT_PIC"))
                 .collect(Collectors.toList());
         Assert.assertTrue(lst.size() > 0);
 
-        var a = mapper.getGender(lst.get(0).getId());
-        Assert.assertEquals(lst.get(0).getName(), a.getName());
+        var a = mapper.getProductMetadataById(lst.get(0).getMetadataId());
+        Assert.assertEquals(lst.get(0).getProductFileName(), a.getProductFileName());
 
         for (var t : lst)
-            mapper.deleteById(t.getId());
+            mapper.deleteById(t.getMetadataId());
 
-        var lst1 = mapper.getAll();
-        lst = lst1
+        lst = mapper.findAll()
                 .stream()
-                .filter(gender -> gender.getName().equals("TEST_GENDER"))
+                .filter(productMetadata -> productMetadata.getProductFileName().equals("TEST_PRODUCT_PIC"))
                 .collect(Collectors.toList());
         Assert.assertTrue(lst.isEmpty());
     }

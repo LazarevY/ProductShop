@@ -1,6 +1,5 @@
 package app.data.mappers;
 
-import app.data.modeles.Gender;
 import lombok.SneakyThrows;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -21,21 +20,22 @@ import java.util.stream.Collectors;
 
 
 @RunWith(SpringRunner.class)
-public class GenderMapperTest {
+public class UserMapperTest {
+
 
     private static SqlSession session;
 
     @TestConfiguration
-    static class GenderMapperConf {
+    static class UserMapperConf {
         @SneakyThrows
         @Bean
-        public GenderMapper create() {
-            return session.getMapper(GenderMapper.class);
+        public UserMapper create() {
+            return session.getMapper(UserMapper.class);
         }
     }
 
     @Autowired
-    GenderMapper mapper;
+    UserMapper mapper;
 
     @SneakyThrows
     @BeforeClass
@@ -50,23 +50,30 @@ public class GenderMapperTest {
 
     @Test
     public void test000() {
-        mapper.addGender("TEST_GENDER");
-        var lst = mapper.getAll()
+        mapper.addUser("TEST_NAME1","TEST_NAME2","111111111","test@gmail.com","123");
+        var lst = mapper.findAll()
                 .stream()
-                .filter(gender -> gender.getName().equals("TEST_GENDER"))
+                .filter(user -> user.getFirstName().equals("TEST_NAME1")
+                        && user.getLastName().equals("TEST_NAME2")
+                        && user.getPhone().equals("111111111")
+                        && user.getEmail().equals("test@gmail.com")
+                        && user.getPasswordHash().equals("123"))
                 .collect(Collectors.toList());
         Assert.assertTrue(lst.size() > 0);
 
-        var a = mapper.getGender(lst.get(0).getId());
-        Assert.assertEquals(lst.get(0).getName(), a.getName());
+        var a = mapper.getUser(lst.get(0).getId());
+        Assert.assertEquals(lst.get(0).getEmail(), a.getEmail());
 
         for (var t : lst)
             mapper.deleteById(t.getId());
 
-        var lst1 = mapper.getAll();
-        lst = lst1
+        lst = mapper.findAll()
                 .stream()
-                .filter(gender -> gender.getName().equals("TEST_GENDER"))
+                .filter(user -> user.getFirstName().equals("TEST_NAME1")
+                        && user.getLastName().equals("TEST_NAME2")
+                        && user.getPhone().equals("111111111")
+                        && user.getEmail().equals("test@gmail.com")
+                        && user.getPasswordHash().equals("123"))
                 .collect(Collectors.toList());
         Assert.assertTrue(lst.isEmpty());
     }

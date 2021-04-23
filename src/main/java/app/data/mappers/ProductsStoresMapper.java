@@ -4,6 +4,7 @@ import app.data.modeles.Product;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Mapper
@@ -32,6 +33,5 @@ public interface ProductsStoresMapper {
             @Param("priceHigh") int priceHigh,
             @Param("name") String name,
             @Param("categoriesId") int[] categoriesId);
-
 
 }

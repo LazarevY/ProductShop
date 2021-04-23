@@ -35,6 +35,10 @@
         <id column="category_id" jdbcType="BIGINT" property="id"/>
         <result column="category_name" jdbcType="BIGINT" property="name"/>
     </resultMap>
+    <insert id="addProductsCategories">
+        INSERT INTO gender (gender_name)
+        VALUES (#{name});
+    </insert>
 
     <select id="getProductsByCategory" resultMap="ProductResultMap">
         SELECT p.*

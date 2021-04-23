@@ -9,8 +9,8 @@
         <result column="date_end" property="dateEnd"/>
     </resultMap>
     <insert id="addPayMethod">
-        INSERT INTO users_pay_methods (pay_method_id, user_id, card_number, date_end)
-        VALUES (#{id}, #{userId}, #{cardNumber}, #{dateEnd})
+        INSERT INTO users_pay_methods (user_id, card_number, date_end)
+        VALUES (#{userId}, #{cardNumber}, #{dateEnd})
     </insert>
     <delete id="deleteById">
         DELETE
@@ -26,5 +26,9 @@
         SELECT *
         FROM users_pay_methods
         WHERE pay_method_id = #{id};
+    </select>
+    <select id="findAll" resultMap="PayMethodResult">
+        SELECT *
+        FROM users_pay_methods;
     </select>
 </mapper>

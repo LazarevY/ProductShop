@@ -23,6 +23,12 @@ public interface UserMapper {
     @ResultMap("UserResultMap")
     List<User> findAll();
 
-    void addUser(String firstName, String lastName, String phone, String email, String passwordHash);
+    void addUser(@Param("firstName") String firstName,
+                 @Param("lastName") String lastName,
+                 @Param("phone") String phone,
+                 @Param("email") String email,
+                 @Param("passwordHash") String passwordHash);
+
+    void deleteById(@Param("id") Long id);
 
 }

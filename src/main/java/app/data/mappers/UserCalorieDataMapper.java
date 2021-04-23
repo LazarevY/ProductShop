@@ -4,6 +4,8 @@ import app.data.modeles.UserCalorieData;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 @Mapper
 public interface UserCalorieDataMapper {
 
@@ -14,5 +16,7 @@ public interface UserCalorieDataMapper {
     UserCalorieData getByUserId(@Param("userId") long userId);
 
     void deleteByUserId(@Param("userId") long userId);
+
+    List<UserCalorieData> findAll();
 
 }

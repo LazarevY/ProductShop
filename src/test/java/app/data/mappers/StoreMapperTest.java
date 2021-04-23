@@ -1,6 +1,5 @@
 package app.data.mappers;
 
-import app.data.modeles.Gender;
 import lombok.SneakyThrows;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -17,25 +16,27 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.Reader;
+import java.util.Date;
 import java.util.stream.Collectors;
 
 
 @RunWith(SpringRunner.class)
-public class GenderMapperTest {
+public class StoreMapperTest {
+
 
     private static SqlSession session;
 
     @TestConfiguration
-    static class GenderMapperConf {
+    static class StoreMapperConf {
         @SneakyThrows
         @Bean
-        public GenderMapper create() {
-            return session.getMapper(GenderMapper.class);
+        public StoreMapper create() {
+            return session.getMapper(StoreMapper.class);
         }
     }
 
     @Autowired
-    GenderMapper mapper;
+    StoreMapper mapper;
 
     @SneakyThrows
     @BeforeClass
@@ -50,23 +51,22 @@ public class GenderMapperTest {
 
     @Test
     public void test000() {
-        mapper.addGender("TEST_GENDER");
-        var lst = mapper.getAll()
+        mapper.addStore("TEST_ADDRESS");
+        var lst = mapper.findAll()
                 .stream()
-                .filter(gender -> gender.getName().equals("TEST_GENDER"))
+                .filter(store -> store.getAddress().equals("TEST_ADDRESS"))
                 .collect(Collectors.toList());
         Assert.assertTrue(lst.size() > 0);
 
-        var a = mapper.getGender(lst.get(0).getId());
-        Assert.assertEquals(lst.get(0).getName(), a.getName());
+        var a = mapper.getById(lst.get(0).getId());
+        Assert.assertEquals(lst.get(0).getAddress(), a.getAddress());
 
         for (var t : lst)
             mapper.deleteById(t.getId());
 
-        var lst1 = mapper.getAll();
-        lst = lst1
+        lst = mapper.findAll()
                 .stream()
-                .filter(gender -> gender.getName().equals("TEST_GENDER"))
+                .filter(store -> store.getAddress().equals("TEST_ADDRESS"))
                 .collect(Collectors.toList());
         Assert.assertTrue(lst.isEmpty());
     }

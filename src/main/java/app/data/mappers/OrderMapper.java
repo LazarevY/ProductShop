@@ -3,6 +3,7 @@ package app.data.mappers;
 import app.data.modeles.Order;
 import org.apache.ibatis.annotations.*;
 
+import java.util.Date;
 import java.util.List;
 
 @Mapper
@@ -18,10 +19,11 @@ public interface OrderMapper {
 
     void addOrder(
             @Param("orderStatusId") long orderStatusId,
-            @Param("userId") long userId, @Param("storeId") long storeId,
+            @Param("userId") long userId,
+            @Param("storeId") long storeId,
             @Param("commonPrice") int commonPrice,
             @Param("stockPrice") int stockPrice,
-            @Param("date") String date);
+            @Param("date") Date date);
 
     @Delete("DELETE FROM orders WHERE order_id = #{id}")
     void deleteById(long id);

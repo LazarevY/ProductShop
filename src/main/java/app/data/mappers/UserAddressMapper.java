@@ -1,5 +1,6 @@
 package app.data.mappers;
 
+import app.data.modeles.Store;
 import app.data.modeles.UserAddress;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -18,5 +19,7 @@ public interface UserAddressMapper {
     void deleteById(@Param("id") long id);
 
     List<UserAddress> getAllByUserId(@Param("userId") long userId);
+
+    List<UserAddress> findAll();
 
 }

@@ -9,14 +9,15 @@ import java.util.List;
 
 @Mapper
 public interface PayMethodMapper {
-    void addPayMethod(@Param("id") long id,
-                      @Param("userId") long userId,
+    void addPayMethod(@Param("userId") long userId,
                       @Param("cardNumber") String cardNumber,
-                      @Param("dateEnd") Date dateEnd);
+                      @Param("dateEnd") String dateEnd);
 
     List<PayMethod> getAllByUserId(@Param("userId") long userId);
 
     PayMethod getById(@Param("id") long id);
+
+    List<PayMethod> findAll();
 
     void deleteById(@Param("id") long id);
 }

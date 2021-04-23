@@ -1,6 +1,5 @@
 package app.data.mappers;
 
-import app.data.modeles.Gender;
 import lombok.SneakyThrows;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -21,21 +20,22 @@ import java.util.stream.Collectors;
 
 
 @RunWith(SpringRunner.class)
-public class GenderMapperTest {
+public class StockClauseItemMapperTest {
+
 
     private static SqlSession session;
 
     @TestConfiguration
-    static class GenderMapperConf {
+    static class StockClauseItemMapperConf {
         @SneakyThrows
         @Bean
-        public GenderMapper create() {
-            return session.getMapper(GenderMapper.class);
+        public StockClauseItemMapper create() {
+            return session.getMapper(StockClauseItemMapper.class);
         }
     }
 
     @Autowired
-    GenderMapper mapper;
+    StockClauseItemMapper mapper;
 
     @SneakyThrows
     @BeforeClass
@@ -50,23 +50,22 @@ public class GenderMapperTest {
 
     @Test
     public void test000() {
-        mapper.addGender("TEST_GENDER");
-        var lst = mapper.getAll()
+        mapper.addStockClauseItem("TEST_ITEM");
+        var lst = mapper.findAll()
                 .stream()
-                .filter(gender -> gender.getName().equals("TEST_GENDER"))
+                .filter(stockClauseItem -> stockClauseItem.getName().equals("TEST_ITEM"))
                 .collect(Collectors.toList());
         Assert.assertTrue(lst.size() > 0);
 
-        var a = mapper.getGender(lst.get(0).getId());
+        var a = mapper.getStockClauseItemById(lst.get(0).getId());
         Assert.assertEquals(lst.get(0).getName(), a.getName());
 
         for (var t : lst)
             mapper.deleteById(t.getId());
 
-        var lst1 = mapper.getAll();
-        lst = lst1
+        lst = mapper.findAll()
                 .stream()
-                .filter(gender -> gender.getName().equals("TEST_GENDER"))
+                .filter(stockClauseItem -> stockClauseItem.getName().equals("TEST_ITEM"))
                 .collect(Collectors.toList());
         Assert.assertTrue(lst.isEmpty());
     }

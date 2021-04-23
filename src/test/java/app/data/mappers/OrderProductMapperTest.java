@@ -1,6 +1,5 @@
 package app.data.mappers;
 
-import app.data.modeles.Gender;
 import lombok.SneakyThrows;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -17,25 +16,27 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.Reader;
+import java.util.Date;
 import java.util.stream.Collectors;
 
 
 @RunWith(SpringRunner.class)
-public class GenderMapperTest {
+public class OrderProductMapperTest {
+
 
     private static SqlSession session;
 
     @TestConfiguration
-    static class GenderMapperConf {
+    static class OrderProductMapperConf {
         @SneakyThrows
         @Bean
-        public GenderMapper create() {
-            return session.getMapper(GenderMapper.class);
+        public OrderProductMapper create() {
+            return session.getMapper(OrderProductMapper.class);
         }
     }
 
     @Autowired
-    GenderMapper mapper;
+    OrderProductMapper mapper;
 
     @SneakyThrows
     @BeforeClass
@@ -50,23 +51,22 @@ public class GenderMapperTest {
 
     @Test
     public void test000() {
-        mapper.addGender("TEST_GENDER");
-        var lst = mapper.getAll()
+        mapper.addOrderProduct(1L,1L, 5);
+        var lst = mapper.getOrderProduct(1L, 1L)
                 .stream()
-                .filter(gender -> gender.getName().equals("TEST_GENDER"))
+                .filter(orderProduct -> orderProduct.getOrderId().equals(1L) && orderProduct.getProductId().equals(1L))
                 .collect(Collectors.toList());
         Assert.assertTrue(lst.size() > 0);
 
-        var a = mapper.getGender(lst.get(0).getId());
-        Assert.assertEquals(lst.get(0).getName(), a.getName());
+        var a = mapper.getOrderProduct(lst.get(0).getOrderId(), lst.get(0).getProductId());
+        Assert.assertEquals(lst.get(0).getCountOfProducts(), a.get(0).getCountOfProducts());
 
         for (var t : lst)
-            mapper.deleteById(t.getId());
+            mapper.deleteOrderProduct(t.getOrderId(), t.getProductId());
 
-        var lst1 = mapper.getAll();
-        lst = lst1
+        lst = mapper.getOrderProduct(1L, 1L)
                 .stream()
-                .filter(gender -> gender.getName().equals("TEST_GENDER"))
+                .filter(orderProduct -> orderProduct.getOrderId().equals(1L) && orderProduct.getProductId().equals(1L))
                 .collect(Collectors.toList());
         Assert.assertTrue(lst.isEmpty());
     }

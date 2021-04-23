@@ -1,6 +1,5 @@
 package app.data.mappers;
 
-import app.data.modeles.Gender;
 import lombok.SneakyThrows;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -21,21 +20,22 @@ import java.util.stream.Collectors;
 
 
 @RunWith(SpringRunner.class)
-public class GenderMapperTest {
+public class ProductCategoryMapperTest {
+
 
     private static SqlSession session;
 
     @TestConfiguration
-    static class GenderMapperConf {
+    static class ProductCategoryMapperConf {
         @SneakyThrows
         @Bean
-        public GenderMapper create() {
-            return session.getMapper(GenderMapper.class);
+        public ProductCategoryMapper create() {
+            return session.getMapper(ProductCategoryMapper.class);
         }
     }
 
     @Autowired
-    GenderMapper mapper;
+    ProductCategoryMapper mapper;
 
     @SneakyThrows
     @BeforeClass
@@ -50,23 +50,22 @@ public class GenderMapperTest {
 
     @Test
     public void test000() {
-        mapper.addGender("TEST_GENDER");
+        mapper.addProductCategory("Product_Category_Name");
         var lst = mapper.getAll()
                 .stream()
-                .filter(gender -> gender.getName().equals("TEST_GENDER"))
+                .filter(productCategory -> productCategory.getName().equals("Product_Category_Name"))
                 .collect(Collectors.toList());
         Assert.assertTrue(lst.size() > 0);
 
-        var a = mapper.getGender(lst.get(0).getId());
+        var a = mapper.getCategoryById(lst.get(0).getId());
         Assert.assertEquals(lst.get(0).getName(), a.getName());
 
         for (var t : lst)
-            mapper.deleteById(t.getId());
+            mapper.deleteCategoryById(t.getId());
 
-        var lst1 = mapper.getAll();
-        lst = lst1
+        lst = mapper.getAll()
                 .stream()
-                .filter(gender -> gender.getName().equals("TEST_GENDER"))
+                .filter(productCategory -> productCategory.getName().equals("Product_Category_Name"))
                 .collect(Collectors.toList());
         Assert.assertTrue(lst.isEmpty());
     }

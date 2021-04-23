@@ -9,5 +9,5 @@ public class PayMethod {
     private long id;
     private long userId;
     private String cardNumber;
-    private Date dateEnd;
+    private String dateEnd;
 }

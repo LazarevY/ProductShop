@@ -14,7 +14,7 @@
     <insert id="addCalorieData">
         INSERT INTO users_calorie_data (user_id, data_weight, data_growth, data_gender_id, data_current_norm)
         VALUES (#{userId}, #{weight}, #{growth}, #{genderId}, #{currentNorm});
-        `
+
     </insert>
     <update id="updateCalorieData">
         UPDATE users_calorie_data
@@ -28,6 +28,10 @@
         SELECT *
         FROM users_calorie_data
         WHERE user_id = #{userId};
+    </select>
+    <select id="findAll" resultMap="UserCalorieDataResult">
+        SELECT *
+        FROM users_calorie_data;
     </select>
     <delete id="deleteByUserId">
         DELETE

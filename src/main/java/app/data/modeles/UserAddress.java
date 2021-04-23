@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class UserAddress {
     private long id;
-    private long userId;
+    private Long userId;
     private String address;
 }

@@ -30,10 +30,14 @@
         FROM user_addresses
         WHERE user_id = #{userId};
     </select>
-
+    <select id="findAll" resultMap="UserAddressResult">
+        SELECT *
+        FROM user_addresses;
+    </select>
     <delete id="deleteById">
         DELETE
         FROM user_addresses
         WHERE user_id = #{id};
     </delete>
+
 </mapper>
