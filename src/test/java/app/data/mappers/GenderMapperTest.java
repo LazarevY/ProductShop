@@ -58,7 +58,7 @@ public class GenderMapperTest {
         Assert.assertTrue(lst.size() > 0);
 
         var a = mapper.getGender(lst.get(0).getId());
-        Assert.assertEquals(a.getName(), lst.get(0).getName());
+        Assert.assertEquals(lst.get(0).getName(), a.getName());
 
         for (var t : lst)
             mapper.deleteById(t.getId());
