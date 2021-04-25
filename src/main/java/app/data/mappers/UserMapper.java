@@ -29,7 +29,8 @@ public interface UserMapper {
                  @Param("lastName") String lastName,
                  @Param("phone") String phone,
                  @Param("email") String email,
-                 @Param("passwordHash") String passwordHash);
+                 @Param("passwordHash") String passwordHash,
+                 @Param("passwordSalt") String passwordSalt);
 
     void deleteById(@Param("id") Long id);
 

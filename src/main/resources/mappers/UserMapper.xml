@@ -9,10 +9,11 @@
         <result column="user_phone" jdbcType="VARCHAR" property="phone"/>
         <result column="user_email" jdbcType="VARCHAR" property="email"/>
         <result column="user_password_hash" jdbcType="VARCHAR" property="passwordHash"/>
+        <result column="user_salt" jdbcType="VARCHAR" property="passwordSalt"/>
     </resultMap>
     <insert id="addUser">
-        INSERT INTO users (user_first_name, user_last_name, user_phone, user_email, user_password_hash)
-        VALUES (#{firstName}, #{lastName}, #{phone}, #{email}, #{passwordHash});
+        INSERT INTO users (user_first_name, user_last_name, user_phone, user_email, user_password_hash, user_salt)
+        VALUES (#{firstName}, #{lastName}, #{phone}, #{email}, #{passwordHash}, #{passwordSalt});
     </insert>
     <delete id="deleteById">
         DELETE
