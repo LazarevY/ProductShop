@@ -25,7 +25,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     public Response registerUser(String firstName, String lastName, String phone, String email, String password){
 
         String hashed = hashService.hashPassword(password);
-        userMapper.addUser(firstName, lastName, phone, email, hashed, "");
+        userMapper.addUser(firstName, lastName, phone, email, hashed);
         return new Response();
 
     }
