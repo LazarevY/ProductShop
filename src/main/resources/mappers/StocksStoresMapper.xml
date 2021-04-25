@@ -5,6 +5,12 @@
         INSERT INTO stocks_stores (store_id, stock_id)
         VALUES (#{stockId}, #{storeId});
     </insert>
+    <delete id="deleteStockFromStore">
+        DELETE
+        FROM stocks_stores
+        WHERE store_id = #{storeId}
+          AND stock_id = #{stockId};
+    </delete>
     <select id="getStockFromStore" resultMap="app.data.mappers.StockMapper.StockResultMap">
         SELECT *
         FROM stocks_stores

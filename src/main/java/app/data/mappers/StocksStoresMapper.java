@@ -15,4 +15,6 @@ public interface StocksStoresMapper {
 
     List<Stock> getAllStockFromStore(@Param("storeId") long storeId);
 
+    void deleteStockFromStore(@Param("stockId") long stockId, @Param("storeId") long storeId);
+
 }

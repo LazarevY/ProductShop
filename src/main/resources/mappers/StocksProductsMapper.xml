@@ -5,6 +5,13 @@
         INSERT INTO stock_products (product_id, stock_id)
         VALUES (#{productId}, #{productId});
     </insert>
+    <delete id="deleteProductStock">
+        DELETE
+        FROM stock_products
+        WHERE product_id = #{productId}
+          AND stock_id = #{stockId};
+
+    </delete>
     <select id="getAllStocksForProduct" resultMap="app.data.mappers.StockMapper.StockResultMap">
         SELECT s.*
         FROM stocks s
@@ -21,8 +28,8 @@
         FROM products p
                  JOIN stock_products sp on p.product_id = sp.product_id AND sp.stock_id = #{stockId};
     </select>
-    <select id="getAllProductsForStockInStore" resultMap="app.data.mappers.ProductMapper.ProductResultMap">
-        SELECT p.*
+    <select id="getAllProductsForStockInStore" resultMap="app.data.mappers.ProductsStoresMapper.ProductInStoreMap">
+        SELECT ps.*
         FROM products p
                  JOIN products_stores ps on p.product_id = ps.product_id AND ps.store_id = #{storeId}
                  JOIN stock_products sp on ps.product_id = sp.product_id AND sp.stock_id = #{stockId};
