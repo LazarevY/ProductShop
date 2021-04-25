@@ -44,6 +44,9 @@ public class LoginServiceImpl implements LoginService {
         r.addParameter("login", correctPassword);
         r.setMessage(correctPassword? "" : "Incorrect password or login");
         r.setCode(correctPassword? ResponseCode.OK: ResponseCode.ERROR);
+        if (correctPassword){
+            r.addParameter("userData", user);
+        }
         return r;
 
     }
