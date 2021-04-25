@@ -33,4 +33,10 @@ public interface UserMapper {
 
     void deleteById(@Param("id") Long id);
 
+    void updateUser(@Param("id") long id,
+                 @Param("firstName") String firstName,
+                 @Param("lastName") String lastName,
+                 @Param("phone") String phone,
+                 @Param("email") String email,
+                 @Param("passwordHash") String passwordHash);
 }

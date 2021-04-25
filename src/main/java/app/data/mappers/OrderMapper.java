@@ -2,6 +2,7 @@ package app.data.mappers;
 
 import app.data.modeles.Order;
 import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
 import java.util.List;
@@ -28,4 +29,5 @@ public interface OrderMapper {
     @Delete("DELETE FROM orders WHERE order_id = #{id}")
     void deleteById(long id);
 
+    List<Order> getByUserId(@Param("userId") long userId);
 }
