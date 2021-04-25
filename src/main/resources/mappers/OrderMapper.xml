@@ -15,4 +15,9 @@
         INSERT INTO orders (order_status_id, user_id, store_id, common_price, stock_price, order_date)
         VALUES (#{orderStatusId}, #{userId}, #{storeId}, #{commonPrice}, #{stockPrice}, #{date})
     </insert>
+    <select id="getByUserId" resultMap="OrderResultMap">
+        SELECT *
+        FROM orders
+        WHERE user_id = #{userId};
+    </select>
 </mapper>

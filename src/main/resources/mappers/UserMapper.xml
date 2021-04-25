@@ -14,6 +14,15 @@
         INSERT INTO users (user_first_name, user_last_name, user_phone, user_email, user_password_hash)
         VALUES (#{firstName}, #{lastName}, #{phone}, #{email}, #{passwordHash});
     </insert>
+    <update id="updateUser">
+        UPDATE users
+        SET user_first_name    = #{firstName},
+            user_last_name     = #{lastName},
+            user_phone         = #{phone},
+            user_email         = #{email},
+            user_password_hash = #{passwordHash}
+        WHERE user_id = #{id};
+    </update>
     <delete id="deleteById">
         DELETE
         FROM users
