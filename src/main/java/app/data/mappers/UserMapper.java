@@ -19,6 +19,8 @@ public interface UserMapper {
     @ResultMap("UserResultMap")
     User getUser(@Param("id") Long id);
 
+    User getByEmail(@Param("email") String email);
+
     @Select("SELECT * FROM users")
     @ResultMap("UserResultMap")
     List<User> findAll();
