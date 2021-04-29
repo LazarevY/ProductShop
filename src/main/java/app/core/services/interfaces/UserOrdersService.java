@@ -4,6 +4,6 @@ import app.core.response.Response;
 import org.springframework.stereotype.Service;
 
 @Service
-public interface OrdersService {
-    Response getOrders(String email);
+public interface UserOrdersService {
+    Response getOrders(long userId);
 }

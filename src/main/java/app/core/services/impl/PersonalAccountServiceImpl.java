@@ -26,8 +26,8 @@ public class PersonalAccountServiceImpl implements PersonalAccountService {
     private PayMethodMapper payMethodMapper;
 
     @Override
-    public Response getAccountData(String email) {
-        var user = userMapper.getByEmail(email);
+    public Response getAccountData(long userId) {
+        var user = userMapper.getUser(userId);
         Response r = new Response();
         r.setCode(ResponseCode.OK);
         r.addParameter("userData", user);
@@ -35,9 +35,9 @@ public class PersonalAccountServiceImpl implements PersonalAccountService {
     }
 
     @Override
-    public Response setAccountData(long id, String firstName, String lastName, String phone, String email, String password) {
+    public Response setAccountData(long userId, String firstName, String lastName, String phone, String email, String password) {
         String hashed = hashService.hashPassword(password);
-        userMapper.updateUser(id, firstName, lastName, phone, email, hashed);
+        userMapper.updateUser(userId, firstName, lastName, phone, email, hashed);
         return new Response();
     }
 

@@ -18,9 +18,8 @@ public class UserCaloriesDataServiceImpl implements UserCaloriesDataService {
     private UserCalorieDataMapper userCalorieDataMapper;
 
     @Override
-    public Response getDataCalories(String email) {
-        var user = userMapper.getByEmail(email);
-        var calorie = userCalorieDataMapper.getByUserId(user.getId());
+    public Response getDataCalories(long userId) {
+        var calorie = userCalorieDataMapper.getByUserId(userId);
         Response r = new Response();
         r.setCode(ResponseCode.OK);
         r.addParameter("calorieData", calorie);
@@ -28,10 +27,9 @@ public class UserCaloriesDataServiceImpl implements UserCaloriesDataService {
     }
 
     @Override
-    public Response setDataCalories(String email, int weight, int growth, Long gender) {
-        var user = userMapper.getByEmail(email);
+    public Response setDataCalories(long userId, int weight, int growth, Long gender) {
         int currentNorm = 0; //TODO:need calculate this parameter
-        userCalorieDataMapper.updateCalorieData(user.getId(), weight, growth, gender, currentNorm);
+        userCalorieDataMapper.updateCalorieData(userId, weight, growth, gender, currentNorm);
         return new Response();
     }
 }

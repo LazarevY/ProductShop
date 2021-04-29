@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface PersonalAccountService {
-    Response getAccountData(String email);
+    Response getAccountData(long userId);
 
-    Response setAccountData(long id, String firstName, String lastName, String phone, String email, String password);
+    Response setAccountData(long userId, String firstName, String lastName, String phone, String email, String password);
 }
 

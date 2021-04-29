@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface UserCaloriesDataService {
-    Response getDataCalories(String email);
+    Response getDataCalories(long userId);
 
-    Response setDataCalories(String email, int weight, int growth, Long gender);
+    Response setDataCalories(long userId, int weight, int growth, Long gender);
 }
