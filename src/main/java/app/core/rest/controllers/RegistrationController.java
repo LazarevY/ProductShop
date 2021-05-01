@@ -1,8 +1,13 @@
 package app.core.rest.controllers;
 
+import app.core.response.Response;
+import app.core.rest.front.models.RegistrationUser;
+import app.core.services.interfaces.RegistrationService;
 import app.data.mappers.UserMapper;
 import app.data.modeles.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,14 +17,17 @@ import java.util.List;
 public class RegistrationController {
 
     @Autowired
-    private UserMapper userMapper;
+    private RegistrationService registrationService;
 
-    @RequestMapping("/reg")
-    public List<User> getUsers(){
-        System.out.println("Proccess get users");
-        var users = userMapper.findAll();
-        users.forEach(System.out::println);
-        return userMapper.findAll();
+    @PostMapping("/reg")
+    public Response registerUser(@RequestBody RegistrationUser user){
+        return registrationService.registerUser(
+                user.getFirstName(),
+                user.getLastName(),
+                user.getPhone(),
+                user.getEmail(),
+                user.getPassword()
+        );
     }
 
 }
