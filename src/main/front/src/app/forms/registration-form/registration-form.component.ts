@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
-import {RegistrationService} from "../../registration.service";
+import {RegistrationService} from "../../services/reg/registration.service";
 
 
 @Component({
@@ -24,6 +24,12 @@ export class RegistrationFormComponent{
 
   onSubmit() {
     //console.log(this.registrationForm.value);
-    this.registrationService.registerUser(this.registrationForm.value);
+    this.registrationService.registerUser(this.registrationForm.value).subscribe(
+      {
+        error: (error: any) => {
+          console.error('There was an error!', error);
+        }
+      }
+    );
   }
 }
