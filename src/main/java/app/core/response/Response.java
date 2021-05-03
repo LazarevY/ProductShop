@@ -1,11 +1,13 @@
 package app.core.response;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @Data
+@AllArgsConstructor
 public class Response {
 
     public Response() {
@@ -13,6 +15,12 @@ public class Response {
         message = "";
         parameters = new HashMap<>();
     }
+    public Response(ResponseCode code, String message) {
+        this.code = code;
+        this.message = message;
+        parameters = new HashMap<>();
+    }
+
 
     private ResponseCode code;
     private String message;
