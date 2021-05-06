@@ -1,1 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background: #FBF9F1;
+}
+
+.nav-link {
+  color: #2B6049;
+}
+
+.goodfood-footer {
+  background: #2B6049;
+}
+
+.gf-bg-main {
+  background: #FBF9F1;
+}
+
+.gf-bg-cmp {
+  background: #2B6049;
+}
+
