@@ -3,7 +3,7 @@
 <main class="gf-bg-main">
   <div style="height: 15vh;"></div>
   <section class="py-5 text-center container">
-    <div class="row py-lg-5" >
+    <div class="row py-lg-5">
 
       <div class="col-lg-6 col-md-8">
         <img alt="Cloth produce bag with vegetables"
@@ -11,33 +11,84 @@
              style="width:1112px;height:601px">
         <div class="carousel-caption" style="color: #2B6049">
           Магазин «GoodFood» поможет вам с легкостью приобрести любимые продукты, не выходя из дома.
-          Наш супермаркет с радостью поможет всем, кто тщательно следит за количеством калорий, употребляемых в сутки. Механизм работы сайта высчитывает вашу суточную норму, и после добавления товаров в корзину выводит сообщение о превышении или нехватке калорий.
+          Наш супермаркет с радостью поможет всем, кто тщательно следит за количеством калорий, употребляемых в сутки.
+          Механизм работы сайта высчитывает вашу суточную норму, и после добавления товаров в корзину выводит сообщение
+          о превышении или нехватке калорий.
         </div>
       </div>
     </div>
   </section>
 
   <section class="py-5 text-center container">
-    <div class="row py-lg-5" >
+    <div class="row py-lg-5">
       <div class="col-lg-6 col-md-8 mx-auto">
-      <button class="btn-lg gf-bg-cmp">К каталогу</button>
-        </div>
+        <a routerLink="/products" class="btn-lg btn-success">К каталогу</a>
+      </div>
     </div>
   </section>
 
   <section class="py-5 text-center container">
-    <div class="row py-lg-5" >
-      <div class="col-lg-6 col-md-8">
+    <h1 class="pl-3">Популярные товары</h1>
+    <div class="row py-lg-5">
+      <div class="col">
         <div id="carouselExampleControls" class="carousel slide" data-ride="">
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <img src="https://calorizator.ru/sites/default/files/imagecache/product_512/product/potato-1.jpg" class="d-block w-50" alt="...">
+              <img src="https://lenta.gcdn.co/globalassets/1/-/01/12/30/292498.png?preset=fulllossywhite" alt=""
+                   width="200px" height="200px">
+              <h6>Бананы 1кг</h6>
+              <h6>Калории на 100г: 100ккал</h6>
+              <h6>Цена: 65р</h6>
+              <div class="row">
+                <div class="col-sm">
+                  <input type="button" class="btn btn-success" value="-">
+                </div>
+                <div class="col-sm">
+                  1
+                </div>
+                <div class="col-sm">
+                  <input type="button" class="btn btn-success" value="+">
+                </div>
+              </div>
+              <input type="button" class="btn btn-success" value="Купить">
             </div>
             <div class="carousel-item">
-              <img src="https://calorizator.ru/sites/default/files/imagecache/product_512/product/potato-1.jpg" class="d-block w-50" alt="...">
+              <img src="https://flower-nalchik.ru/uploads/products/view-shokolad-alpen-gold-1.jpg" alt="" width="200px"
+                   height="200px">
+              <h6>Шоколад Alpen Gold, Молочный</h6>
+              <h6>Калории на 100г: 522ккал</h6>
+              <h6>Цена: 70</h6>
+              <div class="row">
+                <div class="col-sm">
+                  <input type="button" class="btn btn-success" value="-">
+                </div>
+                <div class="col-sm">
+                  1
+                </div>
+                <div class="col-sm">
+                  <input type="button" class="btn btn-success" value="+">
+                </div>
+              </div>
+              <input type="button" class="btn btn-success" value="Купить">
             </div>
             <div class="carousel-item">
-              <img src="https://calorizator.ru/sites/default/files/imagecache/product_512/product/potato-1.jpg" class="d-block w-50" alt="...">
+              <img src="https://images.aif.by/007/645/abd0a9c390a92692126fb313980eebe9.jpg" alt="" width="200px"
+                   height="200px">
+              <h6>Яйца, 10 шт</h6>
+              <h6>Калории на 100г: 160ккал</h6>
+              <h6>Цена: 70р</h6>
+              <div class="row">
+                <div class="col-sm">
+                  <input type="button" class="btn btn-success" value="-">
+                </div>
+                <div class="col-sm">
+                  1
+                </div>
+                <div class="col-sm">
+                  <input type="button" class="btn btn-success" value="+">
+                </div>
+              </div>
+              <input type="button" class="btn btn-success" value="Купить">
             </div>
           </div>
           <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -52,8 +103,6 @@
       </div>
     </div>
   </section>
-
-
 
 
 </main>
