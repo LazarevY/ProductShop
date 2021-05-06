@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="app.data.mappers.UserMapper">
+    <resultMap id="UserResultMap" type="app.data.modeles.User">
+        <result column="user_id" jdbcType="INTEGER" property="id"/>
+        <result column="user_first_name" jdbcType="VARCHAR" property="firstName"/>
+        <result column="user_last_name" jdbcType="VARCHAR" property="lastName"/>
+        <result column="user_phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="user_email" jdbcType="VARCHAR" property="email"/>
+        <result column="user_password_hash" jdbcType="VARCHAR" property="passwordHash"/>
+    </resultMap>
+    <insert id="addUser">
+        INSERT INTO users (user_first_name, user_last_name, user_phone, user_email, user_password_hash)
+        VALUES (#{firstName}, #{lastName}, #{phone}, #{email}, #{passwordHash});
+    </insert>
+    <update id="updateUser">
+        UPDATE users
+        SET user_first_name    = #{firstName},
+            user_last_name     = #{lastName},
+            user_phone         = #{phone},
+            user_email         = #{email},
+            user_password_hash = #{passwordHash}
+        WHERE user_id = #{id};
+    </update>
+    <delete id="deleteById">
+        DELETE
+        FROM users
+        WHERE user_id = #{id};
+    </delete>
+    <select id="getByEmail" resultMap="UserResultMap">
+        SELECT *
+        FROM users
+        WHERE user_email = #{email};
+    </select>
+</mapper>

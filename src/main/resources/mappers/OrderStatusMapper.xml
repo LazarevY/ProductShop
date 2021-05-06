@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="app.data.mappers.OrderStatusMapper">
+    <resultMap id="OrderStatusResultMap" type="app.data.modeles.OrderStatus">
+        <result column="order_status_id" jdbcType="INTEGER" property="id"/>
+        <result column="order_status_name" jdbcType="VARCHAR" property="name"/>
+    </resultMap>
+    <insert id="addOrderStatus">
+        INSERT INTO order_status (order_status_name)
+        VALUES (#{name});
+    </insert>
+    <delete id="deleteById">
+        DELETE
+        FROM order_status
+        WHERE order_status_id = #{id};
+    </delete>
+    <select id="getOrderStatus" resultMap="OrderStatusResultMap">
+        SELECT *
+        FROM order_status
+        WHERE order_status_id = #{id};
+    </select>
+    <select id="findAll" resultMap="OrderStatusResultMap">
+        SELECT *
+        FROM order_status;
+    </select>
+</mapper>

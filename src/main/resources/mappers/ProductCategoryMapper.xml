@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="app.data.mappers.ProductCategoryMapper">
+    <resultMap id="ProductCategoryResult" type="app.data.modeles.ProductCategory">
+        <id column="category_id" property="id"/>
+        <result column="category_name" property="name"/>
+    </resultMap>
+
+    <insert id="addProductCategory">
+        INSERT INTO product_categories (category_name)
+        VALUES (#{name});
+    </insert>
+
+    <select id="getCategoryById" resultMap="ProductCategoryResult">
+        SELECT *
+        FROM product_categories
+        WHERE category_id = #{id};
+    </select>
+    <select id="getAll" resultMap="ProductCategoryResult">
+        SELECT *
+        FROM product_categories;
+    </select>
+
+    <delete id="deleteCategoryById">
+        DELETE
+        FROM product_categories
+        WHERE category_id = #{id};
+    </delete>
+
+    <update id="updateCategory">
+        UPDATE product_categories
+        SET category_name = #{name}
+        WHERE category_id = #{id,jdbcType=BIGINT};
+    </update>
+
+</mapper>

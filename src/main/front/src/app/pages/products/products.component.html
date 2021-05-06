@@ -1,0 +1,125 @@
+<body>
+<app-header></app-header>
+<main class="bg-light" style="height: 100vh">
+  <div style="height: 15vh;"></div>
+
+
+  <section class="py-5 text-center container ">
+    <h1 class="gf-text-color-main font-weight-bold">Товары</h1>
+    <div class=""></div>
+    <div class="row my-5 bg-light">
+
+      <div class="col-4">
+        <h2 class="py-3">Фильтры</h2>
+        <p>
+          <button class="btn" type="button" data-toggle="collapse" data-target="#categoryCollapse" aria-expanded="false"
+                  aria-controls="categoryCollapse">
+            Категории
+          </button>
+        </p>
+        <div class="collapse" id="categoryCollapse">
+          <div class="card card-body">
+            <input class="form-check-input" type="checkbox" value="" id="">
+            <label class="form-check-label" for="">
+              Категория 1
+            </label>
+          </div>
+          <div class="card card-body">
+            <input class="form-check-input" type="checkbox" value="" id="">
+            <label class="form-check-label" for="">
+              Категория 2
+            </label>
+          </div>
+          <div class="card card-body">
+            <input class="form-check-input" type="checkbox" value="" id="">
+            <label class="form-check-label" for="">
+              Категория 3
+            </label>
+          </div>
+        </div>
+        <p>
+          <button class="btn" type="button" data-toggle="collapse" data-target="#priceCollapse" aria-expanded="false"
+                  aria-controls="priceCollapse">
+            Цена
+          </button>
+        </p>
+        <div class="collapse" id="priceCollapse">
+          <b>10р</b> <input
+          type="text"
+          name="somename"
+          data-provide="slider"
+          data-slider-min="1"
+          data-slider-max="1000"
+          data-slider-step="1"
+          data-slider-value="3"
+          data-slider-tooltip="hide"> <b>1000р</b>
+        </div>
+      </div>
+      <div class="col-8">
+        <div class="row py-1">
+          <div class="col">
+            <img src="https://lenta.gcdn.co/globalassets/1/-/01/12/30/292498.png?preset=fulllossywhite" alt="" width="200px" height="200px">
+            <h6>Бананы 1кг</h6>
+            <h6>Калории на 100г: 100ккал</h6>
+            <h6>Цена: 65р</h6>
+            <div class="row">
+              <div class="col-sm">
+                <input type="button" class="btn btn-success" value="-">
+              </div>
+              <div class="col-sm">
+                1
+              </div>
+              <div class="col-sm">
+                <input type="button" class="btn btn-success" value="+">
+              </div>
+            </div>
+            <input type="button" class="btn btn-success" value="Купить">
+          </div> <div class="col">
+          <img src="https://flower-nalchik.ru/uploads/products/view-shokolad-alpen-gold-1.jpg" alt="" width="200px" height="200px">
+          <h6>Шоколад Alpen Gold, Молочный</h6>
+          <h6>Калории на 100г: 522ккал</h6>
+          <h6>Цена: 70</h6>
+          <div class="row">
+            <div class="col-sm">
+              <input type="button" class="btn btn-success" value="-">
+            </div>
+            <div class="col-sm">
+              1
+            </div>
+            <div class="col-sm">
+              <input type="button" class="btn btn-success" value="+">
+            </div>
+          </div>
+          <input type="button" class="btn btn-success" value="Купить">
+          </div> <div class="col">
+          <img src="https://images.aif.by/007/645/abd0a9c390a92692126fb313980eebe9.jpg" alt="" width="200px" height="200px">
+          <h6>Яйца, 10 шт</h6>
+          <h6>Калории на 100г: 160ккал</h6>
+          <h6>Цена: 70р</h6>
+          <div class="row">
+            <div class="col-sm">
+              <input type="button" class="btn btn-success" value="-">
+            </div>
+            <div class="col-sm">
+              1
+            </div>
+            <div class="col-sm">
+              <input type="button" class="btn btn-success" value="+">
+            </div>
+          </div>
+          <input type="button" class="btn btn-success" value="Купить">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+</main>
+
+<app-footer></app-footer>
+</body>
+<script>
+  $("#ex2").slider({});
+</script>
+
