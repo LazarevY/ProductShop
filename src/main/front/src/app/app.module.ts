@@ -21,6 +21,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { FooterComponent } from './pages/components/footer/footer.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ArticleComponent } from './pages/article/article.component';
+import { AccountInfoComponent } from './pages/account/account-info/account-info.component';
+import { AccountComponent } from './pages/account/account/account.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     LoginComponent,
     StartComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    ArticleComponent,
+    AccountInfoComponent,
+    AccountComponent
   ],
   imports: [
     AppRoutingModule,
@@ -40,7 +46,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
       [
         {path: 'reg', component: RegistrationComponent},
         {path: 'login', component: LoginComponent},
-        {path: '', component: StartComponent}
+        {path: '', component: StartComponent},
+        {path: 'account/info', component: AccountInfoComponent}
       ]
     ),
     HttpClientModule,

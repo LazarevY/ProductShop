@@ -27,3 +27,12 @@ body {
   background: #2B6049;
 }
 
+.list-inline {
+  display: flex;
+}
+
+.list-inline li {
+  flex: 1;
+
+  text-align: center;
+}
