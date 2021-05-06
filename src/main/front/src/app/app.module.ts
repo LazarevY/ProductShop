@@ -24,6 +24,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ArticleComponent } from './pages/article/article.component';
 import { AccountInfoComponent } from './pages/account/account-info/account-info.component';
 import { AccountComponent } from './pages/account/account/account.component';
+import { ProductsComponent } from './pages/products/products.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { AccountComponent } from './pages/account/account/account.component';
     FooterComponent,
     ArticleComponent,
     AccountInfoComponent,
-    AccountComponent
+    AccountComponent,
+    ProductsComponent
   ],
   imports: [
     AppRoutingModule,
@@ -47,7 +49,8 @@ import { AccountComponent } from './pages/account/account/account.component';
         {path: 'reg', component: RegistrationComponent},
         {path: 'login', component: LoginComponent},
         {path: '', component: StartComponent},
-        {path: 'account/info', component: AccountInfoComponent}
+        {path: 'account/info', component: AccountInfoComponent},
+        {path: 'products', component: ProductsComponent}
       ]
     ),
     HttpClientModule,
