@@ -25,6 +25,10 @@ import { ArticleComponent } from './pages/article/article.component';
 import { AccountInfoComponent } from './pages/account/account-info/account-info.component';
 import { AccountComponent } from './pages/account/account/account.component';
 import { ProductsComponent } from './pages/products/products.component';
+import { CaloriesDataComponent } from './pages/account/calories-data/calories-data.component';
+import { AccountOrdersComponent } from './pages/account/account-orders/account-orders.component';
+import { AccountAddressesComponent } from './pages/account/account-addresses/account-addresses.component';
+import { AccountCardsComponent } from './pages/account/account-cards/account-cards.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +43,11 @@ import { ProductsComponent } from './pages/products/products.component';
     ArticleComponent,
     AccountInfoComponent,
     AccountComponent,
-    ProductsComponent
+    ProductsComponent,
+    CaloriesDataComponent,
+    AccountOrdersComponent,
+    AccountAddressesComponent,
+    AccountCardsComponent
   ],
   imports: [
     AppRoutingModule,
@@ -50,6 +58,10 @@ import { ProductsComponent } from './pages/products/products.component';
         {path: 'login', component: LoginComponent},
         {path: '', component: StartComponent},
         {path: 'account/info', component: AccountInfoComponent},
+        {path: 'account/calorie-data', component: CaloriesDataComponent},
+        {path: 'account/orders', component: AccountOrdersComponent},
+        {path: 'account/addresses', component: AccountAddressesComponent},
+        {path: 'account/cards', component: AccountCardsComponent},
         {path: 'products', component: ProductsComponent}
       ]
     ),

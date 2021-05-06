@@ -1,10 +1,10 @@
 <body class="gf-bg-main">
 <app-header></app-header>
-<main class="flex-shrink-0  gf-bg-main">
+<main class="gf-bg-main" style="height: 100vh">
   <div style="height: 15vh;"></div>
   <app-account></app-account>
     <section class="container border">
-      <form>
+      <form class="py-2">
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="inputEmail4">Имя</label>
@@ -19,7 +19,7 @@
           <label for="inputAddress">Телефон</label>
           <input type="text" class="form-control" id="inputAddress" placeholder="Телефон">
         </div>
-        <button type="submit" class="btn btn-primary" (click)="submitInfo()">Sign in</button>
+        <button type="submit" class="btn btn-primary" (click)="submitInfo()">Обновить</button>
       </form>
     </section>
 </main>
