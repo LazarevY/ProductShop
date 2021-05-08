@@ -25,7 +25,8 @@
             "aot": true,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/resources/icons/shopping-cart.svg"
             ],
             "styles": [
               "src/styles.css",
@@ -35,6 +36,7 @@
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
+              "src/app/pages/components/header/cart.js",
               "node_modules/bootstrap-slider/dist/bootstrap-slider.js"
             ]
           },

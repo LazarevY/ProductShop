@@ -29,6 +29,7 @@ import { CaloriesDataComponent } from './pages/account/calories-data/calories-da
 import { AccountOrdersComponent } from './pages/account/account-orders/account-orders.component';
 import { AccountAddressesComponent } from './pages/account/account-addresses/account-addresses.component';
 import { AccountCardsComponent } from './pages/account/account-cards/account-cards.component';
+import { CartComponent } from './pages/components/cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { AccountCardsComponent } from './pages/account/account-cards/account-car
     CaloriesDataComponent,
     AccountOrdersComponent,
     AccountAddressesComponent,
-    AccountCardsComponent
+    AccountCardsComponent,
+    CartComponent
   ],
   imports: [
     AppRoutingModule,
@@ -62,7 +64,8 @@ import { AccountCardsComponent } from './pages/account/account-cards/account-car
         {path: 'account/orders', component: AccountOrdersComponent},
         {path: 'account/addresses', component: AccountAddressesComponent},
         {path: 'account/cards', component: AccountCardsComponent},
-        {path: 'products', component: ProductsComponent}
+        {path: 'products', component: ProductsComponent},
+        {path: 'article', component: ArticleComponent}
       ]
     ),
     HttpClientModule,
