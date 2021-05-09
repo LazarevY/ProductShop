@@ -58,56 +58,55 @@
       <div class="col-8">
         <div class="row py-1">
           <div class="col">
-            <img src="https://lenta.gcdn.co/globalassets/1/-/01/12/30/292498.png?preset=fulllossywhite" alt="" width="200px" height="200px">
-            <h6>Бананы 1кг</h6>
-            <h6>Калории на 100г: 100ккал</h6>
-            <h6>Цена: 65р</h6>
-            <div class="row">
-              <div class="col-sm">
-                <input type="button" class="btn btn-success" value="-">
-              </div>
-              <div class="col-sm">
-                1
-              </div>
-              <div class="col-sm">
-                <input type="button" class="btn btn-success" value="+">
-              </div>
-            </div>
-            <input type="button" class="btn btn-success" value="Купить">
-          </div> <div class="col">
-          <img src="https://flower-nalchik.ru/uploads/products/view-shokolad-alpen-gold-1.jpg" alt="" width="200px" height="200px">
-          <h6>Шоколад Alpen Gold, Молочный</h6>
-          <h6>Калории на 100г: 522ккал</h6>
-          <h6>Цена: 70</h6>
-          <div class="row">
-            <div class="col-sm">
-              <input type="button" class="btn btn-success" value="-">
-            </div>
-            <div class="col-sm">
-              1
-            </div>
-            <div class="col-sm">
-              <input type="button" class="btn btn-success" value="+">
-            </div>
+            <app-product-card [product]="{
+                  product: {
+                    id: 1,
+                    metadata: {
+                      filename: 'https://images.aif.by/007/645/abd0a9c390a92692126fb313980eebe9.jpg'
+                    },
+                    name: 'Яйца, 10 шт',
+                    description: 'desd',
+                    weight: 100,
+                    calories: 160
+                  },
+                  countOfProduct: 100,
+                  price: 70,
+                  stockStore: null
+                }"></app-product-card>
           </div>
-          <input type="button" class="btn btn-success" value="Купить">
-          </div> <div class="col">
-          <img src="https://images.aif.by/007/645/abd0a9c390a92692126fb313980eebe9.jpg" alt="" width="200px" height="200px">
-          <h6>Яйца, 10 шт</h6>
-          <h6>Калории на 100г: 160ккал</h6>
-          <h6>Цена: 70р</h6>
-          <div class="row">
-            <div class="col-sm">
-              <input type="button" class="btn btn-success" value="-">
-            </div>
-            <div class="col-sm">
-              1
-            </div>
-            <div class="col-sm">
-              <input type="button" class="btn btn-success" value="+">
-            </div>
+          <div class="col">
+            <app-product-card [product]="{
+                  product: {
+                    id: 1,
+                    metadata: {
+                      filename: 'https://images.aif.by/007/645/abd0a9c390a92692126fb313980eebe9.jpg'
+                    },
+                    name: 'Яйца, 10 шт',
+                    description: 'desd',
+                    weight: 100,
+                    calories: 160
+                  },
+                  countOfProduct: 100,
+                  price: 70,
+                  stockStore: null
+                }"></app-product-card>
           </div>
-          <input type="button" class="btn btn-success" value="Купить">
+          <div class="col">
+            <app-product-card [product]="{
+                  product: {
+                    id: 1,
+                    metadata: {
+                      filename: 'https://images.aif.by/007/645/abd0a9c390a92692126fb313980eebe9.jpg'
+                    },
+                    name: 'Яйца, 10 шт',
+                    description: 'desd',
+                    weight: 100,
+                    calories: 160
+                  },
+                  countOfProduct: 100,
+                  price: 70,
+                  stockStore: null
+                }"></app-product-card>
           </div>
         </div>
       </div>

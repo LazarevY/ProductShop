@@ -1,9 +1,7 @@
-export interface ParameterMap{
-  [key: string]: any;
-}
+import {ParameterMap} from "./map";
 
 export interface ServiceResponse{
   code: number;
   message: string;
-  params: ParameterMap;
+  params: ParameterMap<any>;
 }

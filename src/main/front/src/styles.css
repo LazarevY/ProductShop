@@ -101,8 +101,6 @@ input::-webkit-inner-spin-button {
   padding-right: 0;
 }
 
-
-
 @media (max-width: 768px) {
   .carousel-inner .carousel-item > div {
     display: none;
