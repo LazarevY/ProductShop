@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row" style="width: 100%; height: 80%;">
+    <div class="col">
+      <img src="{{imageUrl}}" alt="" style="width: 70%; height: 70%">
+      <h6>{{name}}</h6>
+      <h6>Калории на 100г: {{calories}}</h6>
+      <h6>Масса нетто на 100г: {{weight}}</h6>
+      <h6>Цена: {{price}}р</h6>
+    </div>
+  </div>
+  <div class="row mt-5" style="width: 100%; height: 20%;">
+    <div class="col wth-px" style="width: 33%;">
+      <button style="width: 100%; height: 100%" (click)="decrement()">-</button>
+    </div>
+    <div class="col wth-px" style="width: 33%;">
+      <input class="form-control text-center" type="number" value="{{count}}">
+    </div>
+    <div class="col wth-px" style="width: 33%;">
+      <button style="width: 100%; height: 100%" (click)="increment()">+</button>
+    </div>
+  </div>
+  <div class="row" style="width: 100%;">
+    <div class="col align-content-center wth-px">
+      <button style="width: 100%; height: 100%">Купить</button>
+    </div>
+  </div>
+</div>
