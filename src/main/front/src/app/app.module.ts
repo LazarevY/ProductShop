@@ -30,6 +30,7 @@ import { AccountOrdersComponent } from './pages/account/account-orders/account-o
 import { AccountAddressesComponent } from './pages/account/account-addresses/account-addresses.component';
 import { AccountCardsComponent } from './pages/account/account-cards/account-cards.component';
 import { CartComponent } from './pages/components/cart/cart.component';
+import { ProductCardComponent } from './pages/components/product-card/product-card.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { CartComponent } from './pages/components/cart/cart.component';
     AccountOrdersComponent,
     AccountAddressesComponent,
     AccountCardsComponent,
-    CartComponent
+    CartComponent,
+    ProductCardComponent
   ],
   imports: [
     AppRoutingModule,
