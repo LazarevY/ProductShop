@@ -26,7 +26,14 @@ export interface UserAddress{
 }
 
 export interface UserPayMethod{
-  cartLastDigits: number;
+  id: number;
+  cardLastDigits: string;
+  cardEndDate: string;
+}
+
+export interface UserPayMethodFull{
+  id: number;
+  card: string;
   cardEndDate: string;
 }
 
@@ -36,6 +43,7 @@ export interface Gender{
 }
 
 export interface UserCalorieData{
+  age: number;
   weight: number;
   growth: number;
   gender: Gender;

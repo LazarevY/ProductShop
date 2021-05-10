@@ -1,8 +1,9 @@
 <body class="gf-bg-main">
 <app-header></app-header>
 <main class="gf-bg-main" style="height: 100vh">
-  <div style="height: 15vh;"></div>
-  <app-account></app-account>
+  <div class="container">
+    <div style="height: 15vh;"></div>
+    <app-account></app-account>
     <section class="container border">
       <form class="py-2">
         <div class="form-row">
@@ -22,6 +23,7 @@
         <button type="submit" class="btn btn-primary" (click)="submitInfo()">Обновить</button>
       </form>
     </section>
+  </div>
 </main>
 <app-footer></app-footer>
 </body>

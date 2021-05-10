@@ -1,4 +1,4 @@
-import {ParameterMap} from "./map";
+import {ParameterMap} from "./types";
 
 export interface ServiceResponse{
   code: number;

@@ -1,25 +1,39 @@
 <body class="gf-bg-main">
 <app-header></app-header>
 <main class="gf-bg-main" style="height: 100vh">
-  <div style="height: 15vh;"></div>
-  <app-account></app-account>
-  <section class="container border">
-    <form class="py-3">
-      <div class="form-group">
-        <label >Ваш вес</label>
-        <input type="email" class="form-control"  aria-describedby="emailHelp">
-      </div>
-      <div class="form-group">
-        <label>Ваш возраст</label>
-        <input type="password" class="form-control" >
-      </div>
-      <div class="form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">Включить функцию подсчета калорий</label>
-      </div>
-      <button type="submit" class="btn btn-primary my-5">Submit</button>
-    </form>
-  </section>
+  <div class="container">
+    <div style="height: 15vh;"></div>
+    <app-account></app-account>
+    <section class="container border">
+      <form class="py-3" [formGroup]="userCalorieFormControl">
+        <div class="form-group">
+          <label >Ваш вес</label>
+          <input type="number" class="form-control" formControlName="weight">
+        </div>
+        <div class="form-group">
+          <label >Ваш рост</label>
+          <input type="number" class="form-control" formControlName="growth">
+        </div>
+        <div class="form-group">
+          <label>Ваш возраст</label>
+          <input type="number" class="form-control" formControlName="age">
+        </div>
+        <div class="form-group">
+          <div *ngFor="let g of genders" class="custom-control custom-radio" formGroupName="gender">
+            <input class="custom-control-input" type="radio" id="flexRadioDefault{{g.id}}" formControlName="id" name="id" value="{{g.id}}">
+            <label class="custom-control-label" for="flexRadioDefault{{g.id}}">
+              {{g.name}}
+            </label>
+          </div>
+        </div>
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1">
+          <label class="form-check-label" for="exampleCheck1">Включить функцию подсчета калорий</label>
+        </div>
+        <button type="button" class="btn btn-primary my-5" (click)="update()">Submit</button>
+      </form>
+    </section>
+  </div>
 </main>
 <app-footer></app-footer>
 </body>
