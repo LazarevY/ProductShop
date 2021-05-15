@@ -60,14 +60,15 @@ import { ProductCardComponent } from './pages/components/product-card/product-ca
       [
         {path: 'reg', component: RegistrationComponent},
         {path: 'login', component: LoginComponent},
-        {path: '', component: StartComponent},
+        {path: 'start', component: StartComponent},
         {path: 'account/info', component: AccountInfoComponent},
         {path: 'account/calorie-data', component: CaloriesDataComponent},
         {path: 'account/orders', component: AccountOrdersComponent},
         {path: 'account/addresses', component: AccountAddressesComponent},
         {path: 'account/cards', component: AccountCardsComponent},
         {path: 'products', component: ProductsComponent},
-        {path: 'article', component: ArticleComponent}
+        {path: 'article', component: ArticleComponent},
+        {path: '', redirectTo: '/start', pathMatch: 'full'}
       ]
     ),
     HttpClientModule,
@@ -82,6 +83,6 @@ import { ProductCardComponent } from './pages/components/product-card/product-ca
     NgbModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent, HeaderComponent, FooterComponent]
 })
 export class AppModule { }
