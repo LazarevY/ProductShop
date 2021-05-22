@@ -1,5 +1,6 @@
 package app.data.mappers;
 
+import app.data.modeles.Role;
 import app.data.modeles.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -32,5 +33,9 @@ public interface UserMapper {
                  @Param("passwordHash") String passwordHash);
 
     void deleteById(@Param("id") Long id);
+
+    void addUserRole(@Param("user_id") long user_id, @Param("role_id") long role_id);
+
+    List<Role> findRolesByUserId(@Param("user_id") long user_id);
 
 }
