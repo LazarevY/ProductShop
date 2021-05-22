@@ -18,6 +18,15 @@
     <insert id="addUserRole">
         INSERT INTO users_roles (user_id, role_id) VALUES (#{user_id}, #{role_id}) ON CONFLICT DO NOTHING;
     </insert>
+    <update id="updateUser">
+        UPDATE users
+        SET user_first_name    = #{firstName},
+            user_last_name     = #{lastName},
+            user_phone         = #{phone},
+            user_email         = #{email},
+            user_password_hash = #{passwordHash}
+        WHERE user_id = #{id};
+    </update>
     <delete id="deleteById">
         DELETE
         FROM users

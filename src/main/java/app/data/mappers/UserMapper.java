@@ -38,4 +38,11 @@ public interface UserMapper {
 
     List<Role> findRolesByUserId(@Param("user_id") long user_id);
 
+    void updateUser(@Param("id") long id,
+                 @Param("firstName") String firstName,
+                 @Param("lastName") String lastName,
+                 @Param("phone") String phone,
+                 @Param("email") String email,
+                 @Param("passwordHash") String passwordHash);
+
 }
