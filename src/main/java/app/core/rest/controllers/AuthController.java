@@ -25,48 +25,48 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
 public class AuthController {
-    @Autowired
-    private AuthenticationManager authenticationManager;
-    @Autowired
-    private AuthorizationService userService;
-    @Autowired
-    private FindByIndexNameSessionRepository sessionRepository;
-
-
-    @PostMapping(value = "/login", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Response> login(
-            @CookieValue(name = "accessToken", required = false) String accessToken,
-            @CookieValue(name = "refreshToken", required = false) String refreshToken,
-            @RequestBody LoginUser loginRequest
-    ) {
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
-        if(isAlreadyLoggedIn(loginRequest.getEmail())){
-            Response loginResponse = new Response(ResponseCode.ERROR, "User already loggined");
-            return ResponseEntity.ok(loginResponse);
-        }
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        String decryptedAccessToken = SecurityCipher.decrypt(accessToken);
-        String decryptedRefreshToken = SecurityCipher.decrypt(refreshToken);
-        return userService.login(loginRequest, decryptedAccessToken, decryptedRefreshToken);
-    }
-
-    @PostMapping(value = "/refresh", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Response> refreshToken(@CookieValue(name = "accessToken", required = false) String accessToken,
-                                                      @CookieValue(name = "refreshToken", required = false) String refreshToken) {
-        String decryptedAccessToken = SecurityCipher.decrypt(accessToken);
-        String decryptedRefreshToken = SecurityCipher.decrypt(refreshToken);
-        return userService.refresh(decryptedAccessToken, decryptedRefreshToken);
-    }
-    @GetMapping("/logout")
-    public ResponseEntity<Response> logOut(HttpServletRequest request, HttpServletResponse response){
-        Response r = new Response(ResponseCode.OK, "OK");
-        r.addParameter("APIResponse", new ApiResponseMessage(true, userService.logout(request, response)));
-        return ResponseEntity.ok(r);
-
-    }
-    private Boolean isAlreadyLoggedIn(String pricipalName) {
-
-        Map user = sessionRepository.findByIndexNameAndIndexValue(FindByIndexNameSessionRepository.PRINCIPAL_NAME_INDEX_NAME,pricipalName);
-        return user.size()>0;
-    }
+//    @Autowired
+//    private AuthenticationManager authenticationManager;
+//    @Autowired
+//    private AuthorizationService userService;
+//    @Autowired
+//    private FindByIndexNameSessionRepository sessionRepository;
+//
+//
+//    @PostMapping(value = "/login", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+//    public ResponseEntity<Response> login(
+//            @CookieValue(name = "accessToken", required = false) String accessToken,
+//            @CookieValue(name = "refreshToken", required = false) String refreshToken,
+//            @RequestBody LoginUser loginRequest
+//    ) {
+//        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
+//        if(isAlreadyLoggedIn(loginRequest.getEmail())){
+//            Response loginResponse = new Response(ResponseCode.ERROR, "User already loggined");
+//            return ResponseEntity.ok(loginResponse);
+//        }
+//        SecurityContextHolder.getContext().setAuthentication(authentication);
+//        String decryptedAccessToken = SecurityCipher.decrypt(accessToken);
+//        String decryptedRefreshToken = SecurityCipher.decrypt(refreshToken);
+//        return userService.login(loginRequest, decryptedAccessToken, decryptedRefreshToken);
+//    }
+//
+//    @PostMapping(value = "/refresh", produces = MediaType.APPLICATION_JSON_VALUE)
+//    public ResponseEntity<Response> refreshToken(@CookieValue(name = "accessToken", required = false) String accessToken,
+//                                                      @CookieValue(name = "refreshToken", required = false) String refreshToken) {
+//        String decryptedAccessToken = SecurityCipher.decrypt(accessToken);
+//        String decryptedRefreshToken = SecurityCipher.decrypt(refreshToken);
+//        return userService.refresh(decryptedAccessToken, decryptedRefreshToken);
+//    }
+//    @GetMapping("/logout")
+//    public ResponseEntity<Response> logOut(HttpServletRequest request, HttpServletResponse response){
+//        Response r = new Response(ResponseCode.OK, "OK");
+//        r.addParameter("APIResponse", new ApiResponseMessage(true, userService.logout(request, response)));
+//        return ResponseEntity.ok(r);
+//
+//    }
+//    private Boolean isAlreadyLoggedIn(String pricipalName) {
+//
+//        Map user = sessionRepository.findByIndexNameAndIndexValue(FindByIndexNameSessionRepository.PRINCIPAL_NAME_INDEX_NAME,pricipalName);
+//        return user.size()>0;
+//    }
 }
