@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import { RegistrationUser} from "../../models/user";
-import {AppConfig} from "../../app.component";
+import { RegistrationUser} from '../../models/user';
+import {AppConfig} from '../../app.component';
 
 @Injectable({
   providedIn: 'root'
@@ -19,13 +19,13 @@ export class RegistrationService {
         'Access-Control-Allow-Credentials': 'true',
         'Access-Control-Allow-Headers': 'Content-Type',
         'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
-        'key': 'x-api-key',
-        'value': 'NNctr6Tjrw9794gFXf3fi6zWBZ78j6Gv3UCb3y0x',
+        key: 'x-api-key',
+        value: 'NNctr6Tjrw9794gFXf3fi6zWBZ78j6Gv3UCb3y0x',
       })
     };
 
     return this.http.post(
-      this.conf.createBackendUrl("api/reg"),
+      this.conf.createBackendUrl('api/reg'),
       data,
       httpOptions
     );

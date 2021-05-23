@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup} from "@angular/forms";
-import {LoginService} from "../../services/login/login.service";
+import {FormControl, FormGroup} from '@angular/forms';
+import {LoginService} from '../../services/login/login.service';
 
 @Component({
   selector: 'app-login-form',
@@ -20,13 +20,11 @@ export class LoginFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSubmit() {
+  onSubmit(): void {
+    console.log("Login...");
+    console.log(this.loginForm.value);
     this.loginService.loginUser(this.loginForm.value).subscribe(
-      {
-        error: (error: any) => {
-          console.error('There was an error!', error);
-        }
-      }
-    );
+      (data: any) => console.log(data)
+      );
   }
 }

@@ -22,8 +22,7 @@ export class RegistrationFormComponent{
   });
 
 
-  onSubmit() {
-    //console.log(this.registrationForm.value);
+  onSubmit(): void {
     this.registrationService.registerUser(this.registrationForm.value).subscribe(
       {
         error: (error: any) => {
