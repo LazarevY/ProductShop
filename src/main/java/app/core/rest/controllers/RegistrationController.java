@@ -1,34 +1,44 @@
 package app.core.rest.controllers;
 
+import app.core.requests.CreateUserRequest;
 import app.core.response.Response;
-import app.core.rest.front.models.RegistrationUser;
-import app.core.services.interfaces.RegistrationService;
+import app.core.response.ResponseCode;
+import app.core.services.interfaces.UserService;
+import app.data.modeles.User;
+import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.logging.Level;
+
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200/**")
+@Log
 public class RegistrationController {
 
     @Autowired
-    private RegistrationService registrationService;
+    private UserService userService;
 
     @PostMapping("/reg")
-    public Response registerUser(@RequestBody RegistrationUser user){
+    public Response registerUser(@RequestBody CreateUserRequest user){
 
         System.out.println(user.toString());
 
-        return new Response();
-//        return registrationService.registerUser(
-//                user.getFirstName(),
-//                user.getLastName(),
-//                user.getPhone(),
-//                user.getEmail(),
-//                user.getPassword()
-//        );
+        try {
+            User registered = userService.createUser(user);
+            System.out.println(registered);
+        } catch (Exception e) {
+            log.log(Level.WARNING, "Can't user reg");
+        }
+
+
+        return new Response(ResponseCode.OK, "Ok");
+
+
     }
 
 }
+

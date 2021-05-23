@@ -2,6 +2,8 @@ package app.data.modeles;
 
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * @author Lazarev Yaroslav
  */
@@ -14,4 +16,6 @@ public class User {
     private String phone;
     private String email;
     private String passwordHash;
+
+    private List<Role> roles;
 }
