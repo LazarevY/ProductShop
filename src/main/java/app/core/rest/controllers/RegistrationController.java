@@ -15,14 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.logging.Level;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200/**")
 @Log
 public class RegistrationController {
 
     @Autowired
     private UserService userService;
 
-    @PostMapping("/reg")
+    @PostMapping("/api/reg")
     public Response registerUser(@RequestBody CreateUserRequest user){
 
         System.out.println(user.toString());
@@ -31,6 +30,7 @@ public class RegistrationController {
             User registered = userService.createUser(user);
             System.out.println(registered);
         } catch (Exception e) {
+            e.printStackTrace();
             log.log(Level.WARNING, "Can't user reg");
         }
 

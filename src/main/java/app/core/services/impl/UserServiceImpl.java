@@ -4,6 +4,7 @@ import app.core.requests.CreateUserRequest;
 import app.core.services.interfaces.AuthorizationService;
 import app.core.services.interfaces.UserService;
 import app.data.mappers.UserMapper;
+import app.data.modeles.Role;
 import app.data.modeles.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -30,10 +31,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User createUser(CreateUserRequest request) throws Exception {
-        if (userMapper.getByEmail(request.getEmail()) != null)
+        User u = userMapper.getByEmail(request.getEmail());
+        if (u != null)
             throw new Exception(String.format("User with email %s already exist", request.getEmail()));
         request.setPassword(authorizationService.encode(request.getPassword()));
         userMapper.addUser(request.getFirstName(), request.getLastName(), request.getPhone(), request.getEmail(), request.getPassword());
-        return userMapper.getByEmail(request.getEmail());
+        var usr =  userMapper.getByEmail(request.getEmail());
+        userMapper.addUserRole(usr.getId(), Role.USER.getId());
+        return usr;
     }
 }
