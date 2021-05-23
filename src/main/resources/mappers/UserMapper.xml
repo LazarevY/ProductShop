@@ -9,10 +9,14 @@
         <result column="user_phone" jdbcType="VARCHAR" property="phone"/>
         <result column="user_email" jdbcType="VARCHAR" property="email"/>
         <result column="user_password_hash" jdbcType="VARCHAR" property="passwordHash"/>
+        <collection property="roles" column="user_id" javaType="java.util.ArrayList" select="findRolesByUserId"/>
     </resultMap>
     <insert id="addUser">
         INSERT INTO users (user_first_name, user_last_name, user_phone, user_email, user_password_hash)
         VALUES (#{firstName}, #{lastName}, #{phone}, #{email}, #{passwordHash});
+    </insert>
+    <insert id="addUserRole">
+        INSERT INTO users_roles (user_id, role_id) VALUES (#{user_id}, #{role_id}) ON CONFLICT DO NOTHING;
     </insert>
     <update id="updateUser">
         UPDATE users
@@ -32,5 +36,8 @@
         SELECT *
         FROM users
         WHERE user_email = #{email};
+    </select>
+    <select id="findRolesByUserId" resultType="app.data.modeles.Role">
+        SELECT r.* from roles r join users_roles ur on r.role_id = ur.role_id WHERE ur.user_id = #{user_id};
     </select>
 </mapper>
