@@ -12,9 +12,22 @@ export class RegistrationService {
 
   public registerUser(data: RegistrationUser): any{
 
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': 'true',
+        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
+        'key': 'x-api-key',
+        'value': 'NNctr6Tjrw9794gFXf3fi6zWBZ78j6Gv3UCb3y0x',
+      })
+    };
+
     return this.http.post(
-      this.conf.createBackendUrl("reg"),
-      data
+      this.conf.createBackendUrl("api/reg"),
+      data,
+      httpOptions
     );
 
   }
