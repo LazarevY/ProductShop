@@ -1,5 +1,6 @@
 package app.core.services.impl;
 
+import app.core.exceptions.UserAlwaysRegisteredException;
 import app.core.requests.CreateUserRequest;
 import app.core.services.interfaces.AuthorizationService;
 import app.core.services.interfaces.UserService;
@@ -30,10 +31,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User createUser(CreateUserRequest request) throws Exception {
+    public User createUser(CreateUserRequest request) throws UserAlwaysRegisteredException {
         User u = userMapper.getByEmail(request.getEmail());
         if (u != null)
-            throw new Exception(String.format("User with email %s already exist", request.getEmail()));
+            throw new UserAlwaysRegisteredException(request.getEmail(),
+                    String.format("User with email %s already exist", request.getEmail()));
         request.setPassword(authorizationService.encode(request.getPassword()));
         userMapper.addUser(request.getFirstName(), request.getLastName(), request.getPhone(), request.getEmail(), request.getPassword());
         var usr =  userMapper.getByEmail(request.getEmail());
