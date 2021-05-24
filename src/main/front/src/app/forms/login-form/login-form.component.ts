@@ -3,6 +3,7 @@ import {FormControl, FormGroup} from '@angular/forms';
 import {LoginService} from '../../services/login/login.service';
 import {DataStorageService} from '../../services/storage/data-storage.service';
 import {ApiResponse} from '../../models/api-response';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-login-form',
@@ -11,7 +12,8 @@ import {ApiResponse} from '../../models/api-response';
 })
 export class LoginFormComponent implements OnInit {
 
-  constructor(private loginService: LoginService, private storageService: DataStorageService) {
+  constructor(private loginService: LoginService, private storageService: DataStorageService,
+              private route: ActivatedRoute, private router: Router) {
   }
 
   loginForm = new FormGroup({
@@ -27,8 +29,13 @@ export class LoginFormComponent implements OnInit {
     console.log(this.loginForm.value);
     this.loginService.loginUser(this.loginForm.value).subscribe(
       (data: ApiResponse) => {
-        console.log(data);
-        this.storageService.setParameter('authToken', data.parameters.token);
+        if (data.parameters.authSuccess) {
+          this.storageService.setParameter('authToken', data.parameters.token);
+          const booleanPromise = this.router.navigate(['/']);
+        }
+        else {
+          console.log('Auth failed');
+        }
       }
     );
   }
