@@ -46,6 +46,15 @@ public interface ProductsStoresMapper {
             @Param("name") String name,
             @Param("categoriesId") int[] categoriesId);
 
+    List<ProductInStore> getUserOrientedList(
+            @Param("storeId") long storeId,
+            @Param("userId") long userId,
+            @Param("priceLow") int priceLow,
+            @Param("priceHigh") int priceHigh,
+            @Param("name") String name,
+            @Param("categoriesId") int[] categoriesId
+    );
+
     void deleteByProductAndStoreId(@Param("productId") long productId, @Param("storeId") long storeId);
 
 }
