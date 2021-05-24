@@ -1,3 +1,4 @@
+<app-header></app-header>
 <main class="bg-light" style="height: 100vh">
   <div style="height: 15vh;"></div>
 
@@ -41,73 +42,27 @@
             Цена
           </button>
         </p>
-        <div class="collapse" id="priceCollapse">
-          <b>10р</b> <input
-          type="text"
-          name="somename"
-          data-provide="slider"
-          data-slider-min="1"
-          data-slider-max="1000"
-          data-slider-step="1"
-          data-slider-value="3"
-          data-slider-tooltip="hide"> <b>1000р</b>
+        <div class="collapse" id="priceCollapse" [formGroup]="productFilterForm">
+          <div>
+            <label for="customRange2" class="form-label">Price low: {{productFilterForm.value.priceLow}}</label>
+            <br>
+            <input type="range" class="form-range" min="0" [max]="productFilterForm.value.priceHigh" id="customRange2" formControlName="priceLow">
+          </div>
+          <div>
+            <label for="customRange" class="form-label">Price high: {{productFilterForm.value.priceHigh}}</label>
+            <br>
+            <input type="range" class="form-range" [min]="productFilterForm.value.priceLow" max="10000" id="customRange" formControlName="priceHigh">
+          </div>
         </div>
       </div>
       <div class="col-8">
         <div class="row py-1">
-          <div class="col">
-            <app-product-card [product]="{
-                  product: {
-                    id: 1,
-                    metadata: {
-                      filename: 'https://images.aif.by/007/645/abd0a9c390a92692126fb313980eebe9.jpg'
-                    },
-                    name: 'Яйца, 10 шт',
-                    description: 'desd',
-                    weight: 100,
-                    calories: 160
-                  },
-                  countOfProduct: 100,
-                  price: 70,
-                  stockStore: null
-                }"></app-product-card>
-          </div>
-          <div class="col">
-            <app-product-card [product]="{
-                  product: {
-                    id: 1,
-                    metadata: {
-                      filename: 'https://images.aif.by/007/645/abd0a9c390a92692126fb313980eebe9.jpg'
-                    },
-                    name: 'Яйца, 10 шт',
-                    description: 'desd',
-                    weight: 100,
-                    calories: 160
-                  },
-                  countOfProduct: 100,
-                  price: 70,
-                  stockStore: null
-                }"></app-product-card>
-          </div>
-          <div class="col">
-            <app-product-card [product]="{
-                  product: {
-                    id: 1,
-                    metadata: {
-                      filename: 'https://images.aif.by/007/645/abd0a9c390a92692126fb313980eebe9.jpg'
-                    },
-                    name: 'Яйца, 10 шт',
-                    description: 'desd',
-                    weight: 100,
-                    calories: 160
-                  },
-                  countOfProduct: 100,
-                  price: 70,
-                  stockStore: null
-                }"></app-product-card>
+          <div class="col" *ngFor="let pr of products">
+            <app-product-card [product]="pr"></app-product-card>
           </div>
         </div>
       </div>
     </div>
   </section>
 </main>
+<app-footer></app-footer>

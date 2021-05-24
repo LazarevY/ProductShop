@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
@@ -53,35 +53,36 @@ import { ProductCardComponent } from './pages/components/product-card/product-ca
     CartComponent,
     ProductCardComponent
   ],
-  imports: [
-    AppRoutingModule,
-    BrowserModule,
-    RouterModule.forRoot(
-      [
-        {path: 'reg', component: RegistrationComponent},
-        {path: 'login', component: LoginComponent},
-        {path: 'start', component: StartComponent},
-        {path: 'account/info', component: AccountInfoComponent},
-        {path: 'account/calorie-data', component: CaloriesDataComponent},
-        {path: 'account/orders', component: AccountOrdersComponent},
-        {path: 'account/addresses', component: AccountAddressesComponent},
-        {path: 'account/cards', component: AccountCardsComponent},
-        {path: 'products', component: ProductsComponent},
-        {path: 'article', component: ArticleComponent},
-        {path: '', redirectTo: '/start', pathMatch: 'full'}
-      ]
-    ),
-    HttpClientModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
-    LayoutModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule,
-    NgbModule
-  ],
+    imports: [
+        AppRoutingModule,
+        BrowserModule,
+        RouterModule.forRoot(
+            [
+                {path: 'reg', component: RegistrationComponent},
+                {path: 'login', component: LoginComponent},
+                {path: 'start', component: StartComponent},
+                {path: 'account/info', component: AccountInfoComponent},
+                {path: 'account/calorie-data', component: CaloriesDataComponent},
+                {path: 'account/orders', component: AccountOrdersComponent},
+                {path: 'account/addresses', component: AccountAddressesComponent},
+                {path: 'account/cards', component: AccountCardsComponent},
+                {path: 'products', component: ProductsComponent},
+                {path: 'article', component: ArticleComponent},
+                {path: '', redirectTo: '/start', pathMatch: 'full'}
+            ]
+        ),
+        HttpClientModule,
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        LayoutModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatSidenavModule,
+        MatIconModule,
+        MatListModule,
+        NgbModule,
+        FormsModule
+    ],
   providers: [],
   bootstrap: [AppComponent, HeaderComponent, FooterComponent]
 })

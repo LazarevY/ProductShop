@@ -32,17 +32,19 @@ export class AppConfig {
     return 'http://' + this.backendAddress + '/' + address;
   }
 
-  getHeadersWithCorsAndJWTToken(token: string): HttpHeaders {
-    return new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Credentials': 'true',
-      'Access-Control-Allow-Headers': 'Content-Type',
-      'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
-      key: 'x-api-key',
-      value: 'NNctr6Tjrw9794gFXf3fi6zWBZ78j6Gv3UCb3y0x',
-      Authorization: 'Bearer ' + token,
-    });
+  getHeadersWithCorsAndJWTToken(token: string): object {
+    return {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': 'true',
+        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
+        key: 'x-api-key',
+        value: 'NNctr6Tjrw9794gFXf3fi6zWBZ78j6Gv3UCb3y0x',
+        Authorization: 'Bearer ' + token,
+      })
+    };
   }
 
 
