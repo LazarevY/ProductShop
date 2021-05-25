@@ -1,5 +1,6 @@
 package app.core.security;
 import lombok.extern.java.Log;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -22,6 +23,7 @@ public class JwtFilter extends GenericFilterBean {
     private final JwtProvider jwtProvider;
     private final CustomUserDetailsService customUserDetailsService;
 
+    @Autowired
     public JwtFilter(JwtProvider jwtProvider, CustomUserDetailsService customUserDetailsService) {
         this.jwtProvider = jwtProvider;
         this.customUserDetailsService = customUserDetailsService;

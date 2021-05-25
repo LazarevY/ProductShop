@@ -50,10 +50,10 @@ public class AuthController {
             log.log(Level.FINE, String.format("New user created: %s", registered.toString()));
         } catch (UserAlwaysRegisteredException e) {
             log.log(Level.WARNING, "Can't reg user with email " + e.getEmail());
-            return new Response(ResponseCode.ERROR, "Email is busy");
+            return new Response(ResponseCode.ERROR, "Email is busy", Map.of("regSuccess", false));
         }
 
-        return new Response(ResponseCode.OK, "Ok");
+        return new Response(ResponseCode.OK, "Ok", Map.of("regSuccess", true));
 
     }
 
@@ -61,17 +61,17 @@ public class AuthController {
     public Response loginUser(@RequestBody LoginRequest request){
         User byEmail = userService.findByEmail(request.getEmail());
         if (byEmail == null){
-            return new Response(ResponseCode.ERROR, "Not registered email or incorrect password");
+            return new Response(ResponseCode.ERROR, "Not registered email or incorrect password", Map.of("authSuccess", false));
         }
 
         boolean successfulAuth = authorizationService.auth(byEmail, request.getPassword());
 
         if (successfulAuth){
             String token = jwtProvider.generateToken(byEmail);
-            return new Response(ResponseCode.OK, "", Map.of("token", token));
+            return new Response(ResponseCode.OK, "", Map.of("token", token, "authSuccess", true));
         }
         else {
-            return new Response(ResponseCode.ERROR, "Not registered email or incorrect password");
+            return new Response(ResponseCode.ERROR, "Not registered email or incorrect password", Map.of("authSuccess", false));
         }
 
     }
