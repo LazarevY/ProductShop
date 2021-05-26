@@ -1,5 +1,6 @@
 import {Component, Injectable} from '@angular/core';
 import {HttpHeaders} from '@angular/common/http';
+import {DataStorageService} from './services/storage/data-storage.service';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,19 @@ export class AppComponent {
   providedIn: 'root'
 })
 export class AppConfig {
+
+  constructor(private dataStorage: DataStorageService) {
+    this.setStoreId(1);
+  }
+
+  setStoreId(id: number): void {
+    this.dataStorage.setParameter('store', id);
+  }
+
+  getStoreId(): number {
+    return this.dataStorage.getParameter('store');
+  }
+
   backendAddress = 'localhost:8080';
 
   httpCorsOptions = {

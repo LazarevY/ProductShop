@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {CartService} from '../../../services/cart/cart.service';
+import {StoreProduct} from '../../../models/products';
 
 @Component({
   selector: 'app-cart',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CartComponent implements OnInit {
 
-  constructor() { }
+  constructor(public cartService: CartService) { }
+
+  products: Map<number, StoreProduct> = new Map();
 
   ngOnInit(): void {
+    this.cartService.loadCartAction();
   }
 
 }

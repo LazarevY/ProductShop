@@ -1,12 +1,11 @@
 import {ParameterMap} from "./types";
 
 export interface ProductMetadata{
-  filename: string;
+  productFileName: string;
 }
 
 export interface Product{
   id: number;
-  metadata: ProductMetadata;
   name: string;
   description: string;
   weight: number;
@@ -35,8 +34,11 @@ export interface Stock{
 }
 
 export interface StoreProduct{
+  product_id: number;
+  store_id: number;
   product: Product;
-  countOfProduct: number;
+  metadata: ProductMetadata;
+  count: number;
   price: number;
   stockStore: Stock | null;
 }

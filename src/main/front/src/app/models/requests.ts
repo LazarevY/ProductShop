@@ -7,3 +7,14 @@ export interface CatalogRequest {
   categories: Array<number>;
   userId: number;
 }
+
+
+export interface ProductDataRequest{
+  storeId: number;
+  productId: number;
+}
+
+export interface ProductsDataRequest{
+  storeId: number;
+  productIds: Array<number>;
+}

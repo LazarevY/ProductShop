@@ -1,5 +1,5 @@
 <app-header></app-header>
-<main class="bg-light" style="height: 100vh">
+<main class="bg-light" style="height: auto">
   <div style="height: 15vh;"></div>
 
 
@@ -56,9 +56,13 @@
         </div>
       </div>
       <div class="col-8">
-        <div class="row py-1">
-          <div class="col" *ngFor="let pr of products">
-            <app-product-card [product]="pr"></app-product-card>
+        <div class="container bootstrap snipets">
+          <div class="row flow-offset-1">
+            <div class="col-xs-6 col-md-4 py-1" *ngFor="let pr of products">
+              <div class="card">
+                <app-product-card [product]="pr"></app-product-card>
+              </div>
+            </div>
           </div>
         </div>
       </div>

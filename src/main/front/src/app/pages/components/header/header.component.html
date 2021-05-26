@@ -54,11 +54,11 @@
                 Корзина
               </a>
             </div>
-            <div class="row bg-light" style="height: 93%">
-
+            <div class="row bg-light ml-1" style="height: 93%">
+              <app-cart></app-cart>
             </div>
           </div>
-          <a class="openbtn" onclick="openNav()">
+          <a class="openbtn" (click)="cartService.loadCartAction()" onclick="openNav()">
             <img src="assets/icons/shopping-cart.svg" alt=""  style="width: 50px; height: 50px">
           </a>
         </li>

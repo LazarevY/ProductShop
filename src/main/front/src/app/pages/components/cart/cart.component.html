@@ -1,1 +1,9 @@
-<p>cart works!</p>
+<div class="container">
+  <div *ngFor="let kv of cartService.cart | keyvalue" class="row">
+    <div class="card">
+      <div class="card-body">
+        <app-product-mini-card [product]="kv.value"></app-product-mini-card>
+      </div>
+    </div>
+  </div>
+</div>

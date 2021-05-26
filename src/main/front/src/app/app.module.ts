@@ -31,6 +31,7 @@ import { AccountAddressesComponent } from './pages/account/account-addresses/acc
 import { AccountCardsComponent } from './pages/account/account-cards/account-cards.component';
 import { CartComponent } from './pages/components/cart/cart.component';
 import { ProductCardComponent } from './pages/components/product-card/product-card.component';
+import { ProductMiniCardComponent } from './pages/components/product-card-mini/product-mini-card/product-mini-card.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { ProductCardComponent } from './pages/components/product-card/product-ca
     AccountAddressesComponent,
     AccountCardsComponent,
     CartComponent,
-    ProductCardComponent
+    ProductCardComponent,
+    ProductMiniCardComponent
   ],
     imports: [
         AppRoutingModule,

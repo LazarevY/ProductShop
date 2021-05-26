@@ -1,7 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {min} from "rxjs/operators";
-import {StoreProduct} from "../../../models/products";
-import {colors} from "@angular/cli/utilities/color";
+import {map, min, tap} from 'rxjs/operators';
+import {StoreProduct} from '../../../models/products';
+import {colors} from '@angular/cli/utilities/color';
+import {ProductsService} from '../../../services/products/products.service';
+import {CartService} from '../../../services/cart/cart.service';
 
 @Component({
   selector: 'app-product-card',
@@ -10,36 +12,48 @@ import {colors} from "@angular/cli/utilities/color";
 })
 export class ProductCardComponent implements OnInit {
 
-  constructor() { }
+  constructor(public productService: ProductsService, private cartService: CartService) {
+  }
 
   @Input('product')
   product: StoreProduct = {
+    product_id: 0,
+    store_id: 0,
     product: {
-      id: 1,
-      metadata: {
-        filename: 'https://images.aif.by/007/645/abd0a9c390a92692126fb313980eebe9.jpg'
-      },
-      name: 'Яйца, 20 шт',
-      description: 'desd',
-      weight: 100,
-      calories: 160
+      id: 0,
+      name: '',
+      description: '',
+      weight: 0,
+      calories: 0
     },
-    countOfProduct: 100,
-    price: 70,
+    metadata: {
+      productFileName: ''
+    },
+    count: 0,
+    price: 0,
     stockStore: null
   };
 
-  count =  1;
+  count = 1;
+  productMax = 0;
 
   ngOnInit(): void {
-    console.log(this.product)
+    this.productMax = this.product.count;
   }
 
-  decrement() {
-    this.count = Math.max(this.count - 1, 1)
+  decrement(): void {
+    this.count = Math.max(this.count - 1, 1);
   }
 
-  increment() {
-    this.count = Math.min(this.count + 1, 10)
+  increment(): void {
+    this.count = Math.min(this.count + 1, this.productMax);
+  }
+
+  addToCart(): void {
+    this.count = 1;
+    this.cartService.loadCartAction();
+    this.cartService.addProduct(this.product.product.id, this.count);
+    this.cartService.loadCartAction();
+
   }
 }

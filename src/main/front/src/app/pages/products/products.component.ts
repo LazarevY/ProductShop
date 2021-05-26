@@ -36,7 +36,6 @@ export class ProductsComponent implements OnInit {
     ).subscribe(
       (data: ApiResponse) => {
         this.products = data.parameters.catalog;
-        console.log(this.products);
       }
     );
   }
