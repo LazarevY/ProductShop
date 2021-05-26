@@ -55,6 +55,10 @@ public interface ProductsStoresMapper {
             @Param("categoriesId") int[] categoriesId
     );
 
+    ProductInStore getProductData(@Param("storeId") long storeId, @Param("productId") long productId);
+
+    List<ProductInStore> getProductsData(@Param("storeId") long storeId, @Param("productIds") List<Long> productIds);
+
     void deleteByProductAndStoreId(@Param("productId") long productId, @Param("storeId") long storeId);
 
 }

@@ -2,6 +2,8 @@ package app.core.rest.controllers;
 
 
 import app.core.requests.CatalogRequest;
+import app.core.requests.MultipleProductRequest;
+import app.core.requests.ProductDataRequest;
 import app.core.response.Response;
 import app.core.response.ResponseCode;
 import app.core.security.JwtProvider;
@@ -46,6 +48,26 @@ public class ProductCatalogController {
         return r;
 
     }
+
+    @PostMapping("/api/catalog/product/info")
+    public Response getProductData(@RequestBody ProductDataRequest request){
+        Response r = new Response();
+        r.addParameter("product",
+                productService.getProductData(request));
+        r.setCode(ResponseCode.OK);
+        return r;
+
+    }
+    @PostMapping("/api/catalog/products/info")
+    public Response getProductsData(@RequestBody MultipleProductRequest request){
+        Response r = new Response();
+        r.addParameter("products",
+                productService.getProductsData(request));
+        r.setCode(ResponseCode.OK);
+        return r;
+
+    }
+
 
     private List<ProductInStore> getUserOrientedCatalog(CatalogRequest request){
         return productService.getUserOrientedCatalog(request);

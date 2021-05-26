@@ -115,4 +115,18 @@
         ORDER BY sum(CASE WHEN o.user_id IS NULL OR user_id != #{userId} THEN 0 ELSE op.count_of_products END) DESC,
         coalesce(sum(op.count_of_products), 0) DESC, ps.product_id;
     </select>
+    <select id="getProductData" resultMap="ProductInStoreMap">
+        SELECT ps.*, p.product_metadata_id FROM products_stores ps
+                         LEFT JOIN products p on p.product_id = ps.product_id
+        WHERE ps.product_id = #{productId} AND store_id = #{storeId};
+    </select>
+    <select id="getProductsData" resultMap="ProductInStoreMap">
+        SELECT ps.*, p.product_metadata_id FROM products_stores ps
+        LEFT JOIN products p on p.product_id = ps.product_id
+        WHERE ps.store_id = #{storeId}  AND
+              ps.product_id IN
+        <foreach item="item" index="index" collection="productIds" open="(" separator="," close=")">
+            #{item}
+        </foreach>;
+    </select>
 </mapper>
