@@ -6,7 +6,8 @@ import lombok.Data;
 public class ProductInStore {
     private Product product;
     private ProductMetadata metadata;
+    private Stock stock = null;
     private long storeId;
-    private int price;
+    private double price;
     private int count;
 }

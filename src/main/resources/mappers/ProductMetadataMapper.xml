@@ -19,10 +19,10 @@
         FROM product_metadata;
     </select>
 
-    <insert id="addProductMetadata">
+    <select resultType="int" id="addProductMetadata">
         INSERT INTO product_metadata (product_file_name)
-        VALUES (#{fileName});
-    </insert>
+        VALUES (#{fileName}) RETURNING metadata_id;
+    </select>
 
     <update id="updateProductMetadata">
         UPDATE product_metadata

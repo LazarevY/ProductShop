@@ -12,8 +12,8 @@
     </resultMap>
 
     <insert id="addCalorieData">
-        INSERT INTO users_calorie_data (user_id, data_weight, data_growth, data_gender_id, data_current_norm)
-        VALUES (#{userId}, #{weight}, #{growth}, #{genderId}, #{currentNorm});
+        INSERT INTO users_calorie_data (user_id, data_weight, data_growth, data_gender_id, data_current_norm, func_enable)
+        VALUES (#{userId}, #{weight}, #{growth}, #{genderId}, #{currentNorm}, #{enable});
 
     </insert>
     <update id="updateCalorieData">
@@ -21,7 +21,8 @@
         SET data_weight       = #{weight},
             data_growth       = #{growth},
             data_gender_id    = #{genderId},
-            data_current_norm = #{currentNorm}
+            data_current_norm = #{currentNorm},
+            func_enable       = #{enable}
         WHERE user_id = #{userId};
     </update>
     <select id="getByUserId" resultMap="UserCalorieDataResult">

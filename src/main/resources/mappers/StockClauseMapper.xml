@@ -4,12 +4,13 @@
 <mapper namespace="app.data.mappers.StockClauseMapper">
     <resultMap id="StockClauseMap" type="app.data.modeles.StockClause">
         <id column="stock_clause_id" property="id"/>
-        <result column="stock_clause_item_id" property="clauseId"/>
         <result column="value_clause_item" property="clauseValue"/>
+        <association column="stock_clause_item_id" property="stockClauseItem"
+                        select="app.data.mappers.StockClauseItemMapper.getStockClauseItemById"/>
     </resultMap>
     <insert id="addStockClause">
         INSERT INTO stocks_clauses (stock_clause_item_id, value_clause_item)
-        VALUES (#{stockClauseId}, #{value});
+        VALUES (#{stockClauseItemId}, #{value});
     </insert>
     <update id="updateStockClause">
         UPDATE stocks_clauses
@@ -30,5 +31,10 @@
     <select id="findAll" resultMap="StockClauseMap">
         SELECT *
         FROM stocks_clauses;
+    </select>
+    <select id="getClausesForStock" resultMap="StockClauseMap">
+        SELECT sc.*
+        FROM stocks_stock_clauses ssc
+        JOIN stocks_clauses sc on sc.stock_clause_id = ssc.stock_clause_id AND ssc.stock_id = #{stockId}
     </select>
 </mapper>

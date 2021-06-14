@@ -11,10 +11,11 @@
         <result column="stock_price" jdbcType="INTEGER" property="stockPrice"/>
         <result column="order_date" jdbcType="DATE" property="date"/>
     </resultMap>
-    <insert id="addOrder">
+    <select id="addOrder" resultType="int">
         INSERT INTO orders (order_status_id, user_id, store_id, common_price, stock_price, order_date)
         VALUES (#{orderStatusId}, #{userId}, #{storeId}, #{commonPrice}, #{stockPrice}, #{date})
-    </insert>
+        RETURNING order_id;
+    </select>
     <select id="getByUserId" resultMap="OrderResultMap">
         SELECT *
         FROM orders

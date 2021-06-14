@@ -10,6 +10,8 @@
                      select="app.data.mappers.ProductMetadataMapper.getProductMetadataById"/>
         <association property="product" column="product_id"
                      select="app.data.mappers.ProductMapper.getProduct"/>
+        <association property="stock" column="{productId=product_id,storeId=store_id}" javaType="arraylist"
+        select="app.data.mappers.StocksProductsMapper"/>
     </resultMap>
     <insert id="addProductToStore">
         INSERT INTO products_stores (product_id, store_id, count_of_products, product_price)
@@ -20,6 +22,12 @@
         SET store_id          = #{newStoreId},
             count_of_products = #{count},
             product_price     = #{price}
+        WHERE product_id = #{productId}
+          AND store_id = #{storeId};
+    </update>
+    <update id="updateProductCount">
+        UPDATE products_stores
+        SET count_of_products = #{newCount}
         WHERE product_id = #{productId}
           AND store_id = #{storeId};
     </update>
@@ -116,15 +124,17 @@
         coalesce(sum(op.count_of_products), 0) DESC, ps.product_id;
     </select>
     <select id="getProductData" resultMap="ProductInStoreMap">
-        SELECT ps.*, p.product_metadata_id FROM products_stores ps
-                         LEFT JOIN products p on p.product_id = ps.product_id
-        WHERE ps.product_id = #{productId} AND store_id = #{storeId};
+        SELECT ps.*, p.product_metadata_id
+        FROM products_stores ps
+                 LEFT JOIN products p on p.product_id = ps.product_id
+        WHERE ps.product_id = #{productId}
+          AND store_id = #{storeId};
     </select>
     <select id="getProductsData" resultMap="ProductInStoreMap">
         SELECT ps.*, p.product_metadata_id FROM products_stores ps
         LEFT JOIN products p on p.product_id = ps.product_id
-        WHERE ps.store_id = #{storeId}  AND
-              ps.product_id IN
+        WHERE ps.store_id = #{storeId} AND
+        ps.product_id IN
         <foreach item="item" index="index" collection="productIds" open="(" separator="," close=")">
             #{item}
         </foreach>;

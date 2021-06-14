@@ -12,8 +12,8 @@ public class Order {
     private Long orderStatusId;
     private Long userId;
     private Long storeId;
-    private Long commonPrice;
-    private Long stockPrice;
+    private double commonPrice;
+    private double stockPrice;
     private Date date;
 
     private List<Product> orderProducts = new ArrayList<>();

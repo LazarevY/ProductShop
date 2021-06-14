@@ -8,6 +8,8 @@
         <result column="stock_name" property="name"/>
         <result column="stock_start_date" property="startDate"/>
         <result column="stock_end_date" property="endDate"/>
+        <collection property="stockClauses" javaType="java.util.List" column="stock_id"
+                    select="app.data.mappers.StockClauseMapper.getClausesForStock"/>
     </resultMap>
     <insert id="addStock">
         INSERT INTO stocks (stock_name, stock_start_date, stock_end_date)

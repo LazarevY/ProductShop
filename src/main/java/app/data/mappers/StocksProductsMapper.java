@@ -15,7 +15,7 @@ public interface StocksProductsMapper {
 
     List<Stock> getAllStocksForProduct(@Param("productId") long productId);
 
-    List<Stock> getAllStocksForProductInStore(@Param("productId") long productId, @Param("storeId") long storeId);
+    Stock getStockForProductInStore(@Param("productId") long productId, @Param("storeId") long storeId);
 
     List<Product> getAllProductsForStock(@Param("stockId") long stockId);
 

@@ -22,6 +22,10 @@ public interface ProductsStoresMapper {
                            @Param("count") int count,
                            @Param("price") int price);
 
+    void updateProductCount(@Param("storeId") long storeId,
+                            @Param("productId") long productId,
+                            @Param("newCount") int newCount);
+
     List<ProductInStore> getAllInStore(@Param("storeId") long storeId);
 
     List<ProductInStore> getAllInStoreFilteredOnlyByPrice(
