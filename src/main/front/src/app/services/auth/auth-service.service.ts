@@ -6,8 +6,6 @@ import {HttpClient} from "@angular/common/http";
 import { Store } from '@ngxs/store';
 import {LoginUser} from "../../models/user";
 import {AppConfig} from "../../app.component";
-import {Reset} from "../../models/action";
-
 
 @Injectable({
   providedIn: 'root'
@@ -35,7 +33,6 @@ export class AuthService {
     return this.httpClient.get(this.conf.createBackendUrl('auth/logout'),{withCredentials: true}).pipe(
       tap(res => {
         console.log(res);
-        this.store.dispatch(new Reset());
         localStorage.clear();
         this.router.navigate(['']);
 
