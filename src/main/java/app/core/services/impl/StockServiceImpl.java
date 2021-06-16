@@ -18,9 +18,9 @@ public class StockServiceImpl implements StockService {
     @Override
     public double calculateStock(long productId, long storeId, int productCount) {
         ProductInStore productData = productsStoresMapper.getProductData(storeId, productId);
-        if (productData.getStock() == null)
+        if (productData.getStock() == null || productData.getStock().getId() == 0)
             return 0;
-        if (productData.getStock().getEndDate().after(new Date()))
+        if (productData.getStock().getEndDate().before(new Date()))
             return 0;
 
         StockClause stockClause = productData.getStock().getStockClauses().get(0);
@@ -41,7 +41,7 @@ public class StockServiceImpl implements StockService {
     }
 
     private double calculateByPercent(int count, double price, int percent){
-        double factor = (100.0 - percent) / 100;
+        double factor = percent / 100.0;
         return count * (price * factor);
     }
 

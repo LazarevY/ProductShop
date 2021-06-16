@@ -6,10 +6,11 @@ import lombok.Data;
 public class UserCalorieData {
 
     private long userId;
-    private long weight;
-    private long growth;
+    private int age;
+    private double weight;
+    private double growth;
     private long genderId;
-    private long currentNorm;
+    private int currentNorm;
     private boolean funcEnable;
 
 }

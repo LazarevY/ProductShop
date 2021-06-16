@@ -90,7 +90,7 @@ public class UserOrdersServiceImpl implements UserOrdersService {
             double v = stockService.calculateStock(p.getProductId(), order.getStoreId(), p.getCount());
             ProductInStore productData = productsStoresMapper.getProductData(order.getStoreId(), p.getProductId());
             stock += v;
-            price += p.getCount() + productData.getPrice();
+            price += p.getCount() * productData.getPrice();
         }
         r.addParameter("price", price);
         r.addParameter("stock", stock);

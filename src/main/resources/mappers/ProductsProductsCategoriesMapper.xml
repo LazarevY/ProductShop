@@ -4,32 +4,10 @@
 
 <mapper namespace="app.data.mappers.ProductsProductsCategoriesMapper">
 
-    <resultMap id="ProductResultMap" type="app.data.modeles.Product">
-        <result column="product_id" jdbcType="INTEGER" property="id"/>
-        <result column="product_name" jdbcType="VARCHAR" property="name"/>
-        <result column="product_description" jdbcType="VARCHAR" property="description"/>
-        <result column="product_weight" jdbcType="VARCHAR" property="weight"/>
-        <result column="product_calories" jdbcType="VARCHAR" property="calories"/>
-        <result column="product_metadata_id" jdbcType="VARCHAR" property="metadataId"/>
-        <collection property="categories" javaType="ArrayList" column="product_id" select="getCategoryListOfProduct"/>
-    </resultMap>
-
-
     <resultMap id="CategoryResultMap" type="app.data.modeles.ProductCategory">
         <id column="category_id" jdbcType="BIGINT" property="id"/>
         <result column="category_name" jdbcType="BIGINT" property="name"/>
-        <collection property="products" javaType="ArrayList" column="category_id" select="getProductListByCategory"/>
     </resultMap>
-
-    <resultMap id="ProductListResultMap" type="app.data.modeles.Product">
-        <result column="product_id" jdbcType="INTEGER" property="id"/>
-        <result column="product_name" jdbcType="VARCHAR" property="name"/>
-        <result column="product_description" jdbcType="VARCHAR" property="description"/>
-        <result column="product_weight" jdbcType="VARCHAR" property="weight"/>
-        <result column="product_calories" jdbcType="VARCHAR" property="calories"/>
-        <result column="product_metadata_id" jdbcType="VARCHAR" property="metadataId"/>
-    </resultMap>
-
 
     <resultMap id="CategoryListResultMap" type="app.data.modeles.ProductCategory">
         <id column="category_id" jdbcType="BIGINT" property="id"/>
@@ -40,7 +18,7 @@
         VALUES (#{name});
     </insert>
 
-    <select id="getProductsByCategory" resultMap="ProductResultMap">
+    <select id="getProductsByCategory" resultMap="app.data.mappers.ProductMapper.ProductResultMap">
         SELECT p.*
         FROM products p
                  JOIN products_product_categories ppc on p.product_id = ppc.product_id
@@ -54,7 +32,7 @@
                  JOIN products p on p.product_id = ppc.product_id
         WHERE p.product_id = #{id,jdbcType=BIGINT}
     </select>
-    <select id="getProductListByCategory" resultMap="ProductListResultMap">
+    <select id="getProductListByCategory" resultMap="app.data.mappers.ProductMapper.ProductResultMap">
         SELECT p.*
         FROM products p
                  JOIN products_product_categories ppc on p.product_id = ppc.product_id

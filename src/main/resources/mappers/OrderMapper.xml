@@ -10,6 +10,8 @@
         <result column="common_price" jdbcType="INTEGER" property="commonPrice"/>
         <result column="stock_price" jdbcType="INTEGER" property="stockPrice"/>
         <result column="order_date" jdbcType="DATE" property="date"/>
+        <collection javaType="java.util.ArrayList" property="orderProducts"
+                    column="order_id" select="app.data.mappers.OrderProductMapper.getOrderProduct"/>
     </resultMap>
     <select id="addOrder" resultType="int">
         INSERT INTO orders (order_status_id, user_id, store_id, common_price, stock_price, order_date)

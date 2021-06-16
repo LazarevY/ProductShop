@@ -7,13 +7,12 @@ import java.util.List;
 
 @Data
 public class Product {
-    private Long id;
+    private long id;
     private String name;
     private String description;
-    private Long weight;
-    private Long calories;
-    private Long metadataId;
-
-    private List<Order> productsOrders = new ArrayList<>();
+    private long weight;
+    private long calories;
+    private long metadataId;
+    private ProductMetadata metadata;
     private List<ProductCategory> categories = new ArrayList<>();
 }

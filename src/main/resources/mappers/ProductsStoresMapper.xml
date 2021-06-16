@@ -6,12 +6,10 @@
         <result column="store_id" property="storeId"/>
         <result column="count_of_products" property="count"/>
         <result column="product_price" property="price"/>
-        <association property="metadata" column="product_metadata_id"
-                     select="app.data.mappers.ProductMetadataMapper.getProductMetadataById"/>
         <association property="product" column="product_id"
                      select="app.data.mappers.ProductMapper.getProduct"/>
-        <association property="stock" column="{productId=product_id,storeId=store_id}" javaType="arraylist"
-        select="app.data.mappers.StocksProductsMapper"/>
+        <association property="stock" column="stock_id"
+                     select="app.data.mappers.StockMapper.getById"/>
     </resultMap>
     <insert id="addProductToStore">
         INSERT INTO products_stores (product_id, store_id, count_of_products, product_price)
@@ -96,7 +94,7 @@
         LEFT JOIN orders_products op on ps.product_id = op.product_id
         LEFT JOIN orders o on o.order_id = op.order_id
         WHERE ps.store_id = #{storeId} AND p.product_name LIKE #{productName}
-        GROUP BY ps.product_id, ps.store_id, ps.count_of_products, ps.product_price, p.product_metadata_id
+        GROUP BY ps.product_id, ps.store_id, ps.count_of_products, ps.product_price, p.product_metadata_id, ps.stock_id
         ORDER BY coalesce(sum(op.count_of_products), 0) DESC, ps.product_id;
     </select>
     <select id="getUserOrientedList" resultMap="ProductInStoreMap">
@@ -119,7 +117,7 @@
         LEFT JOIN orders_products op on ps.product_id = op.product_id
         LEFT JOIN orders o on o.order_id = op.order_id
         WHERE ps.store_id = #{storeId} AND p.product_name LIKE #{productName}
-        GROUP BY ps.product_id, ps.store_id, ps.count_of_products, ps.product_price, p.product_metadata_id
+        GROUP BY ps.product_id, ps.store_id, ps.count_of_products, ps.product_price, p.product_metadata_id, ps.stock_id
         ORDER BY sum(CASE WHEN o.user_id IS NULL OR user_id != #{userId} THEN 0 ELSE op.count_of_products END) DESC,
         coalesce(sum(op.count_of_products), 0) DESC, ps.product_id;
     </select>

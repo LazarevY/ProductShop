@@ -10,11 +10,7 @@ import java.util.List;
 
 @Mapper
 public interface OrderProductMapper {
-    List<OrderProduct> getOrderProduct(@Param("orderId") long orderId, @Param("productId") long productId);
-
-    List<Order> getOrderByProduct(@Param("id") long id);
-
-    List<Product> getProductByOrder(@Param("id") long id);
+    List<OrderProduct> getOrderProduct(@Param("orderId") long orderId);
 
     void addOrderProduct(@Param("orderId") long orderId, @Param("productId") long productId, @Param("countOfProducts") int countOfProducts);
 

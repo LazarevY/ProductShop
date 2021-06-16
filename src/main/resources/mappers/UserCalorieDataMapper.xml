@@ -8,18 +8,21 @@
         <result column="data_weight" property="weight"/>
         <result column="data_growth" property="growth"/>
         <result column="data_gender_id" property="genderId"/>
+        <result column="data_age" property="age"/>
+        <result column="func_enable" property="funcEnable"/>
         <result column="data_current_norm" property="currentNorm"/>
     </resultMap>
 
     <insert id="addCalorieData">
-        INSERT INTO users_calorie_data (user_id, data_weight, data_growth, data_gender_id, data_current_norm, func_enable)
-        VALUES (#{userId}, #{weight}, #{growth}, #{genderId}, #{currentNorm}, #{enable});
+        INSERT INTO users_calorie_data (user_id, data_weight, data_growth,data_age, data_gender_id, data_current_norm, func_enable)
+        VALUES (#{userId}, #{weight}, #{growth},#{age}, #{genderId}, #{currentNorm}, #{enable});
 
     </insert>
     <update id="updateCalorieData">
         UPDATE users_calorie_data
         SET data_weight       = #{weight},
             data_growth       = #{growth},
+            data_age          = #{age},
             data_gender_id    = #{genderId},
             data_current_norm = #{currentNorm},
             func_enable       = #{enable}
