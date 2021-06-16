@@ -32,6 +32,8 @@ import { AccountCardsComponent } from './pages/account/account-cards/account-car
 import { CartComponent } from './pages/components/cart/cart.component';
 import { ProductCardComponent } from './pages/components/product-card/product-card.component';
 import { ProductMiniCardComponent } from './pages/components/product-card-mini/product-mini-card/product-mini-card.component';
+import { OrderComponent } from './pages/order/order.component';
+import { PayComponent } from './pages/pay/pay.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,9 @@ import { ProductMiniCardComponent } from './pages/components/product-card-mini/p
     AccountCardsComponent,
     CartComponent,
     ProductCardComponent,
-    ProductMiniCardComponent
+    ProductMiniCardComponent,
+    OrderComponent,
+    PayComponent
   ],
     imports: [
         AppRoutingModule,
@@ -70,6 +74,8 @@ import { ProductMiniCardComponent } from './pages/components/product-card-mini/p
                 {path: 'account/cards', component: AccountCardsComponent},
                 {path: 'products', component: ProductsComponent},
                 {path: 'article', component: ArticleComponent},
+                {path: 'order', component: OrderComponent},
+                {path: 'order/pay', component: PayComponent},
                 {path: '', redirectTo: '/start', pathMatch: 'full'}
             ]
         ),
@@ -86,6 +92,6 @@ import { ProductMiniCardComponent } from './pages/components/product-card-mini/p
         FormsModule
     ],
   providers: [],
-  bootstrap: [AppComponent, HeaderComponent, FooterComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

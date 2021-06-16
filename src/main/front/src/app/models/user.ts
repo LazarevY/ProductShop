@@ -1,9 +1,11 @@
-export interface User {
-  id: number;
-  firstName: string;
-  lastName: string;
-  phone: string;
-  email: string;
+import {Product} from './products';
+
+export class User {
+  id = 0;
+  firstName = '';
+  lastName = '';
+  phone = '';
+  email = '';
 }
 
 export interface RegistrationUser {
@@ -48,5 +50,24 @@ export interface UserCalorieData{
   growth: number;
   gender: Gender;
   currentNorm: number;
+  funcEnable: boolean;
+  token: string;
+}
+
+export interface UserOrderItem{
+  orderId: number;
+  productId: number;
+  countOfProducts: number;
+  product: Product;
+}
+
+export interface UserOrder{
+  id: number;
+  orderStatusId: number;
+  storeId: number;
+  commonPrice: number;
+  stockPrice: number;
+  date: string;
+  orderProducts: Array<UserOrderItem>;
 }
 

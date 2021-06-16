@@ -24,20 +24,22 @@ export class ProductCardComponent implements OnInit {
       name: '',
       description: '',
       weight: 0,
-      calories: 0
-    },
-    metadata: {
-      productFileName: ''
+      calories: 0,
+      metadata: {
+        productFileName: ''
+      },
     },
     count: 0,
     price: 0,
-    stockStore: null
+    actualPrice: 0,
+    stock: null
   };
 
   count = 1;
   productMax = 0;
 
   ngOnInit(): void {
+    this.product.actualPrice = this.product.price - this.productService.tryCalcStock(this.product);
     this.productMax = this.product.count;
   }
 
@@ -50,10 +52,10 @@ export class ProductCardComponent implements OnInit {
   }
 
   addToCart(): void {
-    this.count = 1;
     this.cartService.loadCartAction();
     this.cartService.addProduct(this.product.product.id, this.count);
     this.cartService.loadCartAction();
+    this.count = 1;
 
   }
 }

@@ -10,6 +10,7 @@ export interface Product{
   description: string;
   weight: number;
   calories: number;
+  metadata: ProductMetadata;
 }
 
 export interface StockType{
@@ -19,26 +20,38 @@ export interface StockType{
 
 export interface StockClauseItem{
   id: number;
-  value: string;
+  name: string;
+
 }
 
 export interface StockClause{
   id: number;
-  item: StockClauseItem;
+  stockClauseItem: StockClauseItem;
+  clauseValue: string;
 }
 
 export interface Stock{
   id: number;
   type: StockType;
-  values: ParameterMap<StockClause>;
+  stockClauses: Array<StockClause>;
 }
 
 export interface StoreProduct{
   product_id: number;
   store_id: number;
   product: Product;
-  metadata: ProductMetadata;
   count: number;
   price: number;
-  stockStore: Stock | null;
+  actualPrice: number;
+  stock: Stock | null;
+}
+
+export interface ProductOrderItem{
+  productId: number;
+  count: number;
+}
+
+export interface  ProductOrder{
+  storeId: number;
+  products: Array<ProductOrderItem>;
 }

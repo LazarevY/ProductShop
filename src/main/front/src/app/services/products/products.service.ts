@@ -39,6 +39,20 @@ export class ProductsService {
     );
   }
 
+  tryCalcStock(p: StoreProduct): number {
+    if (p.stock == null || p.stock.stockClauses.length === 0) {
+      return 0;
+    }
+    let stock = 0;
+    p.stock.stockClauses.forEach(value => {
+      if (value.stockClauseItem.name === 'percent') {
+        const percent = parseInt(value.clauseValue, 10);
+        stock =  percent / 100 * p.price;
+      }
+    });
+    return stock;
+  }
+
 
   getCatalog(req: CatalogRequest): Observable<any> {
     return this.http.post(

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {ProductsService} from '../products/products.service';
 import {DataStorageService} from '../storage/data-storage.service';
-import {StoreProduct} from '../../models/products';
+import {ProductOrder, ProductOrderItem, StoreProduct} from '../../models/products';
 import {AppConfig} from '../../app.component';
 import {tap} from 'rxjs/operators';
 
@@ -13,6 +13,12 @@ export class CartService {
   cartChoose: Map<number, number> = new Map();
 
   cart: Map<number, StoreProduct> = new Map();
+
+  price = 0;
+
+  calories = 0;
+
+  caloriesSave = 0;
 
   constructor(private productService: ProductsService, private dataStorage: DataStorageService, private conf: AppConfig) {
 
@@ -39,9 +45,13 @@ export class CartService {
       (data: Array<StoreProduct>) => {
         this.cart.clear();
         this.loadCartChoose();
+        this.price = 0;
+        this.calories = 0;
         for (const p of data) {
           // @ts-ignore
           p.count = this.cartChoose.get(p.product.id);
+          this.price += p.count * (p.price - this.productService.tryCalcStock(p));
+          this.calories += p.count * (p.product.weight / 100) * p.product.calories; // mass /100g * calories on 100g
           this.cart.set(p.product.id, p);
         }
       }
@@ -75,5 +85,21 @@ export class CartService {
       this.cartChoose.set(id, n);
     }
     this.updateCartChoose();
+    this.loadCartAction();
+  }
+
+  getProductOrder(): ProductOrder {
+    const orderItems: Array<ProductOrderItem> = [];
+    this.cart.forEach((value, key) => {
+      orderItems.push({productId: key, count: value.count});
+    });
+    return {
+      storeId: this.conf.getStoreId(),
+      products: orderItems
+    };
+  }
+
+  saveCurrentCalories(): void {
+    this.caloriesSave = this.calories;
   }
 }

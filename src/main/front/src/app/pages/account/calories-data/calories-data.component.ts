@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import {Gender, UserCalorieData} from "../../../models/user";
-import {FormControl, FormGroup} from "@angular/forms";
+import {Component, OnInit} from '@angular/core';
+import {Gender, UserCalorieData} from '../../../models/user';
+import {FormControl, FormGroup} from '@angular/forms';
+import {UserControlService} from '../../../services/user-control/user-control.service';
+import {ApiResponse} from '../../../models/api-response';
 
 @Component({
   selector: 'app-calories-data',
@@ -9,9 +11,9 @@ import {FormControl, FormGroup} from "@angular/forms";
 })
 export class CaloriesDataComponent implements OnInit {
 
-  constructor() { }
+  constructor(private userControl: UserControlService) {
+  }
 
-  userCalorieForm: UserCalorieData = {age: 0, weight: 0, currentNorm: 0, gender: {id: 0, name:''}, growth: 0}
   userCalorieFormControl: FormGroup =
     new FormGroup({
       age: new FormControl(''),
@@ -20,25 +22,44 @@ export class CaloriesDataComponent implements OnInit {
         id: new FormControl(''),
         name: new FormControl('')
       }),
-      growth: new FormControl('')
+      growth: new FormControl(''),
+      funcEnable: new FormControl('')
     });
 
-  genders: Array<Gender> =
-    [
-      {
-        id: 1,
-        name: 'Male'
-      },
-      {
-        id: 2,
-        name: 'Female'
-      }
-    ]
+  genders: Array<Gender> = [];
+
+  calorieData: any;
 
   ngOnInit(): void {
+    this.userControl.getGenders().subscribe(
+      (data: ApiResponse) => {
+        this.genders = data.parameters.genders;
+        this.userCalorieFormControl.value.gender = this.genders[0];
+      }
+    );
+    this.loadCalorieData();
+  }
+
+  loadCalorieData(): void {
+    this.userControl.getUserCalorieData().subscribe(
+      (data: ApiResponse) => {
+        const c = data.parameters.calorie;
+        this.userCalorieFormControl.setValue({
+          age: c.age,
+          weight: c.weight,
+          growth: c.growth,
+          gender: {id: c.genderId, name: ''},
+          funcEnable: c.funcEnable
+        });
+        this.calorieData = data.parameters.calorie;
+      }
+    );
   }
 
   update() {
-    console.log(this.userCalorieFormControl.value)
+    console.log(this.userCalorieFormControl.value);
+    this.userControl.updateUserCalorieData(this.userCalorieFormControl.value).subscribe(
+      (_ => this.loadCalorieData())
+    );
   }
 }

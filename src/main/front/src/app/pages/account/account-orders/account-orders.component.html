@@ -4,6 +4,11 @@
     <app-account></app-account>
     <section class="container border">
       <h2>Информация о заказах</h2>
+      <div class="row" *ngFor="let o of orders">
+        <div class="col">
+          <h3>Заказ №{{o.id}}, общая сумма - {{o.commonPrice - o.stockPrice}}р</h3>
+        </div>
+      </div>
     </section>
   </div>
 </main>

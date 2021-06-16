@@ -23,14 +23,15 @@ export class ProductMiniCardComponent implements OnInit {
       name: '',
       description: '',
       weight: 0,
-      calories: 0
-    },
-    metadata: {
-      productFileName: ''
+      calories: 0,
+      metadata: {
+        productFileName: ''
+      },
     },
     count: 0,
     price: 0,
-    stockStore: null
+    actualPrice: 0,
+    stock: null
   };
 
   count = 1;
@@ -43,6 +44,7 @@ export class ProductMiniCardComponent implements OnInit {
     }).subscribe(
       (data: StoreProduct) => {this.productMax = data.count; }
     );
+    this.product.actualPrice = this.product.price - this.productService.tryCalcStock(this.product);
   }
 
   decrement() {

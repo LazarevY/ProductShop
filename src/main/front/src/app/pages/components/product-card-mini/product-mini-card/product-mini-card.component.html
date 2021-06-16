@@ -1,13 +1,16 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <img class="w-100 h-100" src="{{product.metadata.productFileName}}" alt="">
+      <img class="w-100 h-100" src="{{product.product.metadata.productFileName}}" alt="">
     </div>
     <div class="w-100"></div>
     <div class="col">
       <div class="gf-product-card-text">
         <p class="p-no-m-p">{{product.product.name}}</p>
-        <p class="p-no-m-p">Цена: {{product.price}}р</p>
+        <p class="p-no-m-p" *ngIf="product.actualPrice == product.price; else elseBlock">{{product.price}}р</p>
+        <ng-template #elseBlock>
+          <p class="p-no-m-p"><del>{{product.price}}р  </del>{{product.actualPrice}}р</p>
+        </ng-template>
       </div>
     </div>
   </div>

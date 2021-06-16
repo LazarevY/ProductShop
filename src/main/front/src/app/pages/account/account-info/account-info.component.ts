@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {colors} from "@angular/cli/utilities/color";
+import {Component, OnInit} from '@angular/core';
+import {User} from '../../../models/user';
+import {UserControlService} from '../../../services/user-control/user-control.service';
 
 @Component({
   selector: 'app-account-info',
@@ -8,13 +9,15 @@ import {colors} from "@angular/cli/utilities/color";
 })
 export class AccountInfoComponent implements OnInit {
 
-  constructor() { }
+  constructor(public userService: UserControlService) {
+  }
 
-  submitInfo(){
+  submitInfo() {
     console.log('ffffffffffff');
   }
 
   ngOnInit(): void {
+    this.userService.loadUserData();
   }
 
 }
