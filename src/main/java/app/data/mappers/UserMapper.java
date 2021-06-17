@@ -45,4 +45,9 @@ public interface UserMapper {
                  @Param("email") String email,
                  @Param("passwordHash") String passwordHash);
 
+    void updateUserMain(@Param("id") long id,
+                    @Param("firstName") String firstName,
+                    @Param("lastName") String lastName,
+                    @Param("phone") String phone);
+
 }

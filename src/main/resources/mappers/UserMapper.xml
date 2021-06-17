@@ -27,6 +27,13 @@
             user_password_hash = #{passwordHash}
         WHERE user_id = #{id};
     </update>
+    <update id="updateUserMain">
+        UPDATE users
+        SET user_first_name    = #{firstName},
+            user_last_name     = #{lastName},
+            user_phone         = #{phone}
+        WHERE user_id = #{id};
+    </update>
     <delete id="deleteById">
         DELETE
         FROM users

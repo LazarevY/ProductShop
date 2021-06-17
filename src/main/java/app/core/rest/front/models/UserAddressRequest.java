@@ -5,9 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class UserAddAddressRequest {
-    private long userId;
+public class UserAddressRequest {
     private long id;
-    private String address;
     private String token;
 }

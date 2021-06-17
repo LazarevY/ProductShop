@@ -5,9 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class UserAddAddressRequest {
-    private long userId;
-    private long id;
-    private String address;
+public class DeleteUserAddress {
     private String token;
+    private long id;
 }

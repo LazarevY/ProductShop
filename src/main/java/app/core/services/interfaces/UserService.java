@@ -2,11 +2,13 @@ package app.core.services.interfaces;
 
 import app.core.exceptions.UserAlwaysRegisteredException;
 import app.core.requests.CreateUserRequest;
-import app.core.rest.front.models.UpdateUserData;
-import app.core.rest.front.models.UserAddCalorieDataRequest;
+import app.core.rest.front.models.*;
 import app.data.modeles.User;
+import app.data.modeles.UserAddress;
 import app.data.modeles.UserCalorieData;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public interface UserService {
@@ -18,4 +20,8 @@ public interface UserService {
     void addUserCalorieData(UserAddCalorieDataRequest request);
     void updateUserCalorieData(UserAddCalorieDataRequest request);
     void removeUser(long id);
+    List<UserAddress> getUserAddressList(UserAddressRequest req);
+    void addUserAddress(UserAddAddressRequest req);
+    void updateUserAddress(UserAddAddressRequest req);
+    void deleteUserAddress(DeleteUserAddress req);
 }

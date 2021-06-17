@@ -2,20 +2,19 @@ package app.core.services.impl;
 
 import app.core.exceptions.UserAlwaysRegisteredException;
 import app.core.requests.CreateUserRequest;
-import app.core.rest.front.models.UpdateUserData;
-import app.core.rest.front.models.UserAddCalorieDataRequest;
+import app.core.rest.front.models.*;
 import app.core.services.interfaces.AuthorizationService;
 import app.core.services.interfaces.UserService;
 import app.data.mappers.GenderMapper;
+import app.data.mappers.UserAddressMapper;
 import app.data.mappers.UserCalorieDataMapper;
 import app.data.mappers.UserMapper;
-import app.data.modeles.Gender;
-import app.data.modeles.Role;
-import app.data.modeles.User;
-import app.data.modeles.UserCalorieData;
+import app.data.modeles.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -28,6 +27,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserCalorieDataMapper userCalorieDataMapper;
+
+    @Autowired
+    private UserAddressMapper userAddressMapper;
 
     @Autowired
     private GenderMapper genderMapper;
@@ -62,7 +64,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateUserData(UpdateUserData request) {
-
+        userMapper.updateUserMain(request.getId(), request.getFirstName(), request.getLastName(), request.getPhone());
     }
 
     @Override
@@ -98,6 +100,26 @@ public class UserServiceImpl implements UserService {
     @Override
     public void removeUser(long id) {
 
+    }
+
+    @Override
+    public List<UserAddress> getUserAddressList(UserAddressRequest req) {
+        return userAddressMapper.getAllByUserId(req.getId());
+    }
+
+    @Override
+    public void addUserAddress(UserAddAddressRequest req) {
+        userAddressMapper.addUserAddress(req.getUserId(), req.getAddress());
+    }
+
+    @Override
+    public void updateUserAddress(UserAddAddressRequest req) {
+        userAddressMapper.updateAddress(req.getId(), req.getUserId(), req.getAddress());
+    }
+
+    @Override
+    public void deleteUserAddress(DeleteUserAddress req) {
+        userAddressMapper.deleteById(req.getId());
     }
 
     int getCurrentNorm(UserAddCalorieDataRequest req) {

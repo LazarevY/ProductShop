@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -36,11 +38,15 @@ public class ProductCatalogController {
         if (request.getToken() != null  && jwtProvider.validateToken(request.getToken())){
             User u = userService.findByEmail(jwtProvider.getNicknameFromToken(request.getToken()));
             request.setUserId(u.getId());
-            r.addParameter("catalog", getUserOrientedCatalog(request));
+            var c = getUserOrientedCatalog(request);
+            validateStocks(c);
+            r.addParameter("catalog", c);
             r.addParameter("tokenValid", true);
         }
         else {
-            r.addParameter("catalog", getGuestCatalog(request));
+            var c = getGuestCatalog(request);
+            validateStocks(c);
+            r.addParameter("catalog", c);
             r.addParameter("tokenValid", false);
         }
 
@@ -74,6 +80,15 @@ public class ProductCatalogController {
     }
     private List<ProductInStore> getGuestCatalog(CatalogRequest request){
         return productService.getGuestCatalog(request);
+    }
+
+    private void validateStocks(List<ProductInStore> lst){
+        Date now = new Date();
+        for (var p :
+                lst) {
+            if (p.getStock() != null && (p.getStock().getStartDate().after(now) || p.getStock().getEndDate().before(now)))
+                p.setStock(null);
+        }
     }
 
 }
