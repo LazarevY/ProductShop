@@ -9,12 +9,17 @@ export interface CatalogRequest {
 }
 
 
-export interface ProductDataRequest{
+export interface ProductDataRequest {
   storeId: number;
   productId: number;
 }
 
-export interface ProductsDataRequest{
+export interface ProductsDataRequest {
   storeId: number;
   productIds: Array<number>;
+}
+
+
+export interface UserAddressRequest {
+  token: string;
 }

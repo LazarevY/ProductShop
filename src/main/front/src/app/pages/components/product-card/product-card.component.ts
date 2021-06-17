@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {map, min, tap} from 'rxjs/operators';
-import {StoreProduct} from '../../../models/products';
+import {Stock, StoreProduct} from '../../../models/products';
 import {colors} from '@angular/cli/utilities/color';
 import {ProductsService} from '../../../services/products/products.service';
 import {CartService} from '../../../services/cart/cart.service';
@@ -37,9 +37,11 @@ export class ProductCardComponent implements OnInit {
 
   count = 1;
   productMax = 0;
+  stockText = '';
 
   ngOnInit(): void {
     this.product.actualPrice = this.product.price - this.productService.tryCalcStock(this.product);
+    this.stockText = this.productService.getStockTextRepr(this.product.stock);
     this.productMax = this.product.count;
   }
 

@@ -36,6 +36,7 @@ export class ProductMiniCardComponent implements OnInit {
 
   count = 1;
   productMax = 0;
+  stockText = '';
 
   ngOnInit(): void {
     this.productService.getProductData({
@@ -45,6 +46,7 @@ export class ProductMiniCardComponent implements OnInit {
       (data: StoreProduct) => {this.productMax = data.count; }
     );
     this.product.actualPrice = this.product.price - this.productService.tryCalcStock(this.product);
+    this.stockText = this.productService.getStockTextRepr(this.product.stock);
   }
 
   decrement() {

@@ -10,49 +10,49 @@
 
       <div class="col-4">
         <h2 class="py-3">Фильтры</h2>
-        <p>
+        <div>
+          <input type="text" placeholder="Название">
+        </div>
+        <div>
           <button class="btn" type="button" data-toggle="collapse" data-target="#categoryCollapse" aria-expanded="false"
                   aria-controls="categoryCollapse">
             Категории
           </button>
-        </p>
+        </div>
         <div class="collapse" id="categoryCollapse">
           <div class="card card-body">
             <input class="form-check-input" type="checkbox" value="" id="">
             <label class="form-check-label" for="">
-              Категория 1
+              Хлебобулочные
             </label>
           </div>
           <div class="card card-body">
             <input class="form-check-input" type="checkbox" value="" id="">
             <label class="form-check-label" for="">
-              Категория 2
-            </label>
-          </div>
-          <div class="card card-body">
-            <input class="form-check-input" type="checkbox" value="" id="">
-            <label class="form-check-label" for="">
-              Категория 3
+              Крупы
             </label>
           </div>
         </div>
-        <p>
+        <div>
           <button class="btn" type="button" data-toggle="collapse" data-target="#priceCollapse" aria-expanded="false"
                   aria-controls="priceCollapse">
             Цена
           </button>
-        </p>
+        </div>
         <div class="collapse" id="priceCollapse" [formGroup]="productFilterForm">
           <div>
-            <label for="customRange2" class="form-label">Price low: {{productFilterForm.value.priceLow}}</label>
+            <label for="customRange2" class="form-label">От: {{productFilterForm.value.priceLow}}р</label>
             <br>
             <input type="range" class="form-range" min="0" [max]="productFilterForm.value.priceHigh" id="customRange2" formControlName="priceLow">
           </div>
           <div>
-            <label for="customRange" class="form-label">Price high: {{productFilterForm.value.priceHigh}}</label>
+            <label for="customRange" class="form-label">До: {{productFilterForm.value.priceHigh}}р</label>
             <br>
             <input type="range" class="form-range" [min]="productFilterForm.value.priceLow" max="10000" id="customRange" formControlName="priceHigh">
           </div>
+        </div>
+        <div>
+          <button class="btn gf-bg-cmp text-light">Применить</button>
         </div>
       </div>
       <div class="col-8">

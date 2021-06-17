@@ -3,17 +3,15 @@
   <div style="height: 15vh;"></div>
 
   <section class="py-5 text-center container ">
-    <h1 class="gf-text-color-main font-weight-bold">Товары</h1>
+    <h1 class="gf-text-color-main font-weight-bold">Заказ</h1>
     <div class=""></div>
     <div class="row my-5 bg-light">
 
 
       <div class="col-4">
         <div *ngFor="let kv of cartService.cart | keyvalue" class="row">
-          <div class="card">
-            <div class="card-body">
+          <div class="card w-75">
               <app-product-mini-card [product]="kv.value"></app-product-mini-card>
-            </div>
           </div>
         </div>
       </div>
@@ -23,11 +21,11 @@
       <div class="col-6 text-left">
         <h2>Оформить заказ</h2>
         <h4>Некоторые скидки учитываются после перехода к оплате заказа</h4>
-        <h4>Преварительная сумма заказа: {{cartService.price}}</h4>
-        <h4>Общая калорийность: {{cartService.calories}}</h4>
+        <h4>Преварительная сумма заказа: {{cartService.price}}р</h4>
+        <h4>Общая калорийность: {{cartService.calories}} ккал</h4>
         <h4>Адрес доставки</h4>
         <select class="form-control" aria-label="Default select example">
-          <option value="1">Воронеж</option>
+          <option value="1">Воронеж, ул Домостроителей, д 17</option>
         </select>
         <br>
         <input routerLink="/order/pay" type="button" class="btn gf-bg-cmp" value="Перейти к оплате">

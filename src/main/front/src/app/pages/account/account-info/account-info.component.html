@@ -1,25 +1,28 @@
+<app-header></app-header>
 <main class="gf-bg-main" style="height: 100vh">
+  <div style="height: 15vh"></div>
   <div class="container">
     <div style="height: 15vh;"></div>
     <app-account></app-account>
     <section class="container border">
-      <form class="py-2">
+      <form class="py-2" [formGroup]="userInfoForm">
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="inputEmail4">Имя</label>
-            <input type="email" class="form-control" id="inputEmail4" placeholder="Имя">
+            <input type="text" class="form-control" id="inputEmail4" placeholder="Имя" formControlName="firstName">
           </div>
           <div class="form-group col-md-6">
             <label for="inputPassword4">Фамилия</label>
-            <input type="password" class="form-control" id="inputPassword4" placeholder="Фамилия">
+            <input type="text" class="form-control" id="inputPassword4" placeholder="Фамилия" formControlName="lastName">
           </div>
         </div>
         <div class="form-group">
           <label for="inputAddress">Телефон</label>
-          <input type="text" class="form-control" id="inputAddress" placeholder="Телефон">
+          <input type="tel" class="form-control" id="inputAddress" placeholder="Телефон" formControlName="phone">
         </div>
         <button type="submit" class="btn btn-primary" (click)="submitInfo()">Обновить</button>
       </form>
     </section>
   </div>
 </main>
+<app-footer></app-footer>

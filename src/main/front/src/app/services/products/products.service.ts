@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {AppConfig} from '../../app.component';
 import {CatalogRequest, ProductDataRequest, ProductsDataRequest} from '../../models/requests';
 import {Observable} from 'rxjs';
-import {StoreProduct} from '../../models/products';
+import {Stock, StoreProduct} from '../../models/products';
 import {HttpClient} from '@angular/common/http';
 import {ApiResponse} from '../../models/api-response';
 import {DataStorageService} from '../storage/data-storage.service';
@@ -47,10 +47,26 @@ export class ProductsService {
     p.stock.stockClauses.forEach(value => {
       if (value.stockClauseItem.name === 'percent') {
         const percent = parseInt(value.clauseValue, 10);
-        stock =  percent / 100 * p.price;
+        stock = percent / 100 * p.price;
       }
     });
     return stock;
+  }
+
+  getStockTextRepr(stock: Stock| null): string {
+    if (stock == null || stock.stockClauses.length !== 1) {
+      return '';
+    }
+    let text = '';
+    stock.stockClauses.forEach(value => {
+      if (value.stockClauseItem.name === 'percent') {
+        text = '-' + value.clauseValue + '%';
+      } else {
+        const t = value.clauseValue.split('t');
+        text = t[0] + '+' + t[1];
+      }
+    });
+    return text;
   }
 
 

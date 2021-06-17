@@ -8,6 +8,13 @@ export class User {
   email = '';
 }
 
+export class UserUpdateData {
+  firstName = '';
+  lastName = '';
+  phone = '';
+  token = '';
+}
+
 export interface RegistrationUser {
   id: number;
   firstName: string;
@@ -23,8 +30,19 @@ export interface LoginUser {
 }
 
 export interface UserAddress{
-  addressId: number;
+  id: number;
   address: string;
+}
+
+export interface UserAddAddress{
+  id: number;
+  address: string;
+  token: string;
+}
+
+export interface DeleteUserAddress{
+  id: number;
+  token: string;
 }
 
 export interface UserPayMethod{

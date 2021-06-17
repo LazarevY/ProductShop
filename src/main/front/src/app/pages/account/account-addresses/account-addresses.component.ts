@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import {UserAddress, UserPayMethodFull} from "../../../models/user";
-import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {colors} from "@angular/cli/utilities/color";
+import {Component, OnInit} from '@angular/core';
+import {UserAddAddress, UserAddress, UserPayMethodFull} from '../../../models/user';
+import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {UserControlService} from '../../../services/user-control/user-control.service';
+import {ApiResponse} from '../../../models/api-response';
+import {DataStorageService} from '../../../services/storage/data-storage.service';
+import {FormControl, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-account-addresses',
@@ -12,11 +15,26 @@ export class AccountAddressesComponent implements OnInit {
 
   closeResult = '';
 
-  addressFormValue: UserAddress = {addressId: 0, address: ''};
+  addressForm = new FormGroup({
+    id: new FormControl(''),
+    address: new FormControl(''),
+    token: new FormControl('')
+  });
 
-  constructor(private modalService: NgbModal) {}
+  constructor(private modalService: NgbModal, private userControl: UserControlService, private dataStorage: DataStorageService) {
+  }
 
-  open(content: any) {
+  addresses: Array<UserAddress> = [];
+
+
+  ngOnInit(): void {
+    this.userControl.getAddressList({token: this.dataStorage.getParameter('authToken')}).subscribe(
+      (data: ApiResponse) => this.addresses = data.parameters.addresses
+    );
+  }
+
+  addNewAddressOpen(content: any): void {
+    this.addressForm.patchValue({id: 0, address: ''});
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
@@ -24,22 +42,49 @@ export class AccountAddressesComponent implements OnInit {
     });
   }
 
-  addAddress(){
-    console.log(this.addressFormValue)
+  open(content: any): void {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
   }
 
-  onUpdateOpen(address: UserAddress){
-    this.addressFormValue = address;
-  }
-
-  onDelete(address: UserAddress){
-    if(confirm("Are you sure to delete address " + address.address + "?")) {
-      this.deleteAddress(address)
+  addAddress(): void {
+    this.addressForm.patchValue({token: this.dataStorage.getParameter('authToken')});
+    const addr: UserAddAddress = this.addressForm.value;
+    console.log(addr);
+    if (addr.id === 0){
+      this.userControl.addUserAddress(addr).subscribe(
+        _ => this.ngOnInit()
+      );
+    }
+    else {
+      this.userControl.updateUserAddress(addr).subscribe(
+        _ => this.ngOnInit()
+      );
     }
   }
 
-  deleteAddress(address: UserAddress){
-    console.log("delete address")
+  onUpdateOpen(address: UserAddress, content: any): void {
+    this.addressForm.patchValue({address: address.address, id: address.id});
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  onDelete(address: UserAddress): void {
+    if (confirm('Are you sure to delete address ' + address.address + '?')) {
+      this.deleteAddress(address);
+    }
+  }
+
+  deleteAddress(address: UserAddress): void {
+    this.userControl.deleteUserAddress({id: address.id, token: this.dataStorage.getParameter('authToken')}).subscribe(
+      _ => this.ngOnInit()
+    );
   }
 
   private getDismissReason(reason: any): string {
@@ -52,15 +97,5 @@ export class AccountAddressesComponent implements OnInit {
     }
   }
 
-  addresses: Array<UserAddress> =
-    [
-      {
-        addressId: 1,
-        address: "dfdfdfdfdf"
-      }
-    ];
-
-  ngOnInit(): void {
-  }
 
 }
