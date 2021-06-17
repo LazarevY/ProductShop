@@ -1,0 +1,22 @@
+<main class="gf-bg-main" style="height: 100vh">
+  <meta charset="utf-8">
+  <div class="container">
+    <div style="height: 15vh;"></div>
+    <app-account></app-account>
+    <section class="container border">
+      <form class="py-2">
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="product">Продукт</label>
+            <input type="product" class="form-control" id="product" placeholder="Продукт">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="stock">Акция</label>
+            <input type="stock" class="form-control" id="stock" placeholder="Акция">
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" (click)="addInfo()">Добавить</button>
+      </form>
+    </section>
+  </div>
+</main>
