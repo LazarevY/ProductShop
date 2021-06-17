@@ -5,7 +5,7 @@ import {ParameterMap} from "../../../models/types";
 import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({
-  selector: 'app-account-info',
+  selector: 'app-stock-add',
   templateUrl: './stock-create.component.html',
   styleUrls: ['./stock-create.component.css']
 })

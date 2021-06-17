@@ -2,7 +2,7 @@
   <meta charset="utf-8">
   <div class="container">
     <div style="height: 15vh;"></div>
-    <app-account></app-account>
+    <app-admin></app-admin>
     <section class="container border">
       <form class="py-2">
         <div class="form-row">
@@ -13,6 +13,18 @@
           <div class="form-group col-md-6">
             <label for="stock">Акция</label>
             <input type="stock" class="form-control" id="stock" placeholder="Акция">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="store">Магазин</label>
+            <input type="store" class="form-control" id="store" placeholder="Магазин">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="count">Количество товаров</label>
+            <input type="count" class="form-control" id="count" placeholder="Количество товаров">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="price">Цена</label>
+            <input type="price" class="form-control" id="price" placeholder="Цена">
           </div>
         </div>
         <button type="submit" class="btn btn-primary" (click)="addInfo()">Добавить</button>

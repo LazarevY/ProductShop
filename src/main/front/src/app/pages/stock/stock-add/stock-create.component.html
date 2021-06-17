@@ -2,7 +2,7 @@
   <meta charset="utf-8">
   <div class="container">
     <div style="height: 15vh;"></div>
-    <app-account></app-account>
+    <app-admin></app-admin>
     <section class="container border">
       <form class="py-2">
         <div class="form-row">
@@ -11,13 +11,13 @@
             <input type="name" class="form-control" id="inputName" placeholder="Название">
           </div>
           <div class="form-group col-md-6">
-            <label for="inputStartDate">Дата начала акции</label>
-            <input type="startDate" class="form-control" id="inputStartDate" placeholder="YYYY-MM-DD">
+            <label for="type">Тип акции</label>
+            <input type="type" class="form-control" id="type" placeholder="Тип акции">
           </div>
         </div>
         <div class="form-group">
-          <label for="inputEndDate">Дата окончания акции</label>
-          <input type="endDate" class="form-control" id="inputEndDate" placeholder="YYYY-MM-DD">
+          <label for="stockClause">StockClause</label>
+          <input type="stockClause" class="form-control" id="stockClause" placeholder="stockClause">
         </div>
         <button type="submit" class="btn btn-primary" (click)="addInfo()">Добавить</button>
       </form>

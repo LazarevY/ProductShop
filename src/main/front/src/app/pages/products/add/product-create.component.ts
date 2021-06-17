@@ -4,7 +4,7 @@ import {FormControl, FormGroup} from "@angular/forms";
 import {Product} from "../../../models/products";
 
 @Component({
-  selector: 'app-account-info',
+  selector: 'app-product-add',
   templateUrl: './product-create.component.html',
   styleUrls: ['./product-create.component.css']
 })
