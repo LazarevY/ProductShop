@@ -1,0 +1,30 @@
+<main class="gf-bg-main" style="height: 100vh">
+  <meta charset="utf-8">
+  <div class="container">
+    <div style="height: 15vh;"></div>
+    <app-account></app-account>
+    <section class="container border">
+      <form class="py-2">
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputName">Название</label>
+            <input type="name" class="form-control" id="inputName" placeholder="Название">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputDescription">Описание</label>
+            <input type="description" class="form-control" id="inputDescription" placeholder="Описание">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputWeight">Масса</label>
+          <input type="weight" class="form-control" id="inputWeight" placeholder="Масса">
+        </div>
+        <div class="form-group">
+          <label for="inputCalories">Количество каллорий</label>
+          <input type="calories" class="form-control" id="inputCalories" placeholder="Количество каллорий">
+        </div>
+        <button type="submit" class="btn btn-primary" (click)="addInfo()">Добавить</button>
+      </form>
+    </section>
+  </div>
+</main>

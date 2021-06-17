@@ -32,6 +32,10 @@ import { AccountCardsComponent } from './pages/account/account-cards/account-car
 import { CartComponent } from './pages/components/cart/cart.component';
 import { ProductCardComponent } from './pages/components/product-card/product-card.component';
 import { ProductMiniCardComponent } from './pages/components/product-card-mini/product-mini-card/product-mini-card.component';
+import { ProductCreateComponent} from "./pages/products/add/product-create.component";
+import {StockCreateComponent} from "./pages/stock/stock-add/stock-create.component";
+import {StockProductComponent} from "./pages/stock/stock-product/stock-product.component";
+import {AdminComponent} from "./pages/admin/admin.component";
 
 @NgModule({
   declarations: [
@@ -53,7 +57,11 @@ import { ProductMiniCardComponent } from './pages/components/product-card-mini/p
     AccountCardsComponent,
     CartComponent,
     ProductCardComponent,
-    ProductMiniCardComponent
+    ProductMiniCardComponent,
+    ProductCreateComponent,
+    StockCreateComponent,
+    StockProductComponent,
+    AdminComponent
   ],
     imports: [
         AppRoutingModule,
@@ -69,7 +77,11 @@ import { ProductMiniCardComponent } from './pages/components/product-card-mini/p
                 {path: 'account/addresses', component: AccountAddressesComponent},
                 {path: 'account/cards', component: AccountCardsComponent},
                 {path: 'products', component: ProductsComponent},
+                {path: 'products/add', component: ProductCreateComponent},
                 {path: 'article', component: ArticleComponent},
+                {path: 'stock/add', component: StockCreateComponent},
+                {path: 'stock/product', component: StockProductComponent},
+                {path: 'admin', component: AdminComponent},
                 {path: '', redirectTo: '/start', pathMatch: 'full'}
             ]
         ),

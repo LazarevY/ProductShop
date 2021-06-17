@@ -8,9 +8,10 @@ import {colors} from "@angular/cli/utilities/color";
 })
 export class AccountInfoComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
 
-  submitInfo(){
+  submitInfo() {
     console.log('ffffffffffff');
   }
 
