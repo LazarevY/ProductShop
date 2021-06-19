@@ -58,6 +58,15 @@ export class CartService {
     );
   }
 
+  clearCart(): void {
+    this.dataStorage.deleteParameter('cart');
+    this.cartChoose = new Map<number, number>();
+    this.cart = new Map<number, StoreProduct>();
+    this.price = 0;
+    this.calories = 0;
+    this.caloriesSave = 0;
+  }
+
   updateCartChoose(): void {
     this.dataStorage.setParameter('cart', JSON.stringify(Array.from(this.cartChoose.entries())));
   }

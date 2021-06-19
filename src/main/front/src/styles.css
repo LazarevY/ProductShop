@@ -11,6 +11,11 @@ body {
   background: #FBF9F1;
 }
 
+.gf-main-container{
+  min-height: 100vh;
+  height: auto;
+}
+
 .p-no-m-p {
   margin: 0;
   padding: 0;

@@ -26,7 +26,7 @@
     </div>
     <ng-template #content let-modal>
       <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+        <h4 class="modal-title" id="modal-basic-title">Добавить новый адрес</h4>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -34,7 +34,7 @@
       <div class="modal-body">
         <form [formGroup]="addressForm">
           <div class="mb-3">
-            <label for="addressInput" class="form-label">Address</label>
+            <label for="addressInput" class="form-label">Адрес</label>
             <input type="text" class="form-control" id="addressInput" formControlName="address">
           </div>
         </form>

@@ -55,3 +55,8 @@ export interface  ProductOrder{
   storeId: number;
   products: Array<ProductOrderItem>;
 }
+
+export interface ProductCategory{
+  id: number;
+  name: string;
+}

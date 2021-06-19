@@ -53,7 +53,7 @@ export class ProductsService {
     return stock;
   }
 
-  getStockTextRepr(stock: Stock| null): string {
+  getStockTextRepr(stock: Stock | null): string {
     if (stock == null || stock.stockClauses.length !== 1) {
       return '';
     }
@@ -75,6 +75,37 @@ export class ProductsService {
       this.conf.createBackendUrl('api/catalog/main'),
       req,
       this.conf.getHeadersWithCorsAndJWTToken(this.storage.getParameter('authToken'))
+    );
+  }
+
+  getProductCategories(): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(
+      this.conf.createBackendUrl('api/products/categories'),
+      this.conf.httpCorsOptions
+    );
+  }
+
+  getProductsWithStocks(storeId: number): Observable<ApiResponse>{
+    return this.http.post<ApiResponse>(
+      this.conf.createBackendUrl('api/products/stocks/get'),
+      storeId,
+      this.conf.httpCorsOptions
+    );
+  }
+
+  getMostPopularProducts(storeId: number): Observable<ApiResponse>{
+    return this.http.post<ApiResponse>(
+      this.conf.createBackendUrl('api/catalog/popular'),
+      storeId,
+      this.conf.httpCorsOptions
+    );
+  }
+
+  getMostPopularProductsForProduct(storeId: number, productId: number): Observable<ApiResponse>{
+    return this.http.post<ApiResponse>(
+      this.conf.createBackendUrl('api/catalog/product-detail/popular'),
+      {storeId, productId},
+      this.conf.httpCorsOptions
     );
   }
 

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import {UserControlService} from '../../../services/user-control/user-control.service';
@@ -12,13 +11,8 @@ import {CartService} from '../../../services/cart/cart.service';
 })
 export class HeaderComponent {
 
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
-    .pipe(
-      map(result => result.matches),
-      shareReplay()
-    );
 
-  constructor(private breakpointObserver: BreakpointObserver, public userControl: UserControlService,
+  constructor(public userControl: UserControlService,
               public cartService: CartService) {}
 
 }

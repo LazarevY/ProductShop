@@ -1,0 +1,25 @@
+<app-header></app-header>
+<main class="bg-light gf-main-container" style="height: auto">
+  <div style="height: 15vh;"></div>
+
+
+  <section class="py-5 container align-content-center">
+    <h1 class="gf-text-color-main font-weight-bold text-center">Акции <a href="" routerLink="/products"><h1
+      class="gf-text-color-main font-weight-bold">К каталогу</h1></a></h1>
+    <div class=""></div>
+    <div class="row my-5 bg-light">
+      <div class="col-8">
+        <div class="container bootstrap snipets">
+          <div class="row flow-offset-1">
+            <div class="col-xs-6 col-md-4 py-1" *ngFor="let pr of products">
+              <div class="card">
+                <app-product-card [product]="pr"></app-product-card>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<app-footer></app-footer>

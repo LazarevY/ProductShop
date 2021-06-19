@@ -1,0 +1,38 @@
+<div class="container position-relative">
+  <div class="row">
+    <div class="col-lg-5">
+      <img class="w-100 h-100" src="{{product.product.metadata.productFileName}}" alt="">
+      <div class="row gf-product-card-text border border-dark ">
+        <div class="col-sm wth-px">
+          <button class="btn btn-light gf-product-card-text w-100 h-100 border-0" (click)="decrement()">-</button>
+        </div>
+        <div class="col-sm wth-px">
+          <input class="form-control text-center gf-product-card-text bg-light w-100 h-100  border-0" type="number"
+                 value="{{count}}">
+        </div>
+        <div class="col-sm wth-px">
+          <button class="btn btn-light gf-product-card-text w-100 h-100 bg-light border-0" (click)="increment()">+</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col align-content-center wth-px">
+          <button class="gf-product-card-text w-100 h-100 btn btn-dark" style="border-radius: 0 !important;"
+                  (click)="addToCart()">Купить
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-7`">
+      <div class="gf-product-card-text text-lg-left h2">
+        <p class="p-no-m-p">{{product.product.name}}</p>
+        <p class="p-no-m-p">Калории на 100г: {{product.product.calories}}</p>
+        <p class="p-no-m-p">Масса нетто: {{product.product.weight}}г</p>
+        <p class="p-no-m-p" *ngIf="product.actualPrice == product.price; else elseBlock">Цена: {{product.price.toFixed(2)}}р</p>
+        <ng-template #elseBlock>
+          <p class="p-no-m-p">Цена: <del>{{product.price.toFixed(2)}}р  </del>{{product.actualPrice.toFixed(2)}}р</p>
+        </ng-template>
+        <p class="p-no-m-p">{{product.product.description}}</p>
+      </div>
+    </div>
+  </div>
+</div>

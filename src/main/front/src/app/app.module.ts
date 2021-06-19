@@ -10,15 +10,9 @@ import { RegistrationComponent } from './pages/registration/registration.compone
 import { RegistrationFormComponent } from './forms/registration-form/registration-form.component';
 import { LoginFormComponent } from './forms/login-form/login-form.component';
 import { LoginComponent } from './pages/login/login.component';
-import {StartComponent} from "./pages/start/start.component";
+import {StartComponent} from './pages/start/start.component';
 import { HeaderComponent } from './pages/components/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatIconModule } from '@angular/material/icon';
-import { MatListModule } from '@angular/material/list';
 import { FooterComponent } from './pages/components/footer/footer.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ArticleComponent } from './pages/article/article.component';
@@ -34,6 +28,9 @@ import { ProductCardComponent } from './pages/components/product-card/product-ca
 import { ProductMiniCardComponent } from './pages/components/product-card-mini/product-mini-card/product-mini-card.component';
 import { OrderComponent } from './pages/order/order.component';
 import { PayComponent } from './pages/pay/pay.component';
+import { StocksComponent } from './pages/stocks/stocks.component';
+import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
+import { ProductDetailCardComponent } from './pages/components/product-detail-card/product-detail-card.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +54,10 @@ import { PayComponent } from './pages/pay/pay.component';
     ProductCardComponent,
     ProductMiniCardComponent,
     OrderComponent,
-    PayComponent
+    PayComponent,
+    StocksComponent,
+    ProductDetailComponent,
+    ProductDetailCardComponent
   ],
     imports: [
         AppRoutingModule,
@@ -73,6 +73,8 @@ import { PayComponent } from './pages/pay/pay.component';
                 {path: 'account/addresses', component: AccountAddressesComponent},
                 {path: 'account/cards', component: AccountCardsComponent},
                 {path: 'products', component: ProductsComponent},
+                {path: 'product/:id', component: ProductDetailComponent},
+                {path: 'stocks', component: StocksComponent},
                 {path: 'article', component: ArticleComponent},
                 {path: 'order', component: OrderComponent},
                 {path: 'order/pay', component: PayComponent},
@@ -82,12 +84,6 @@ import { PayComponent } from './pages/pay/pay.component';
         HttpClientModule,
         ReactiveFormsModule,
         BrowserAnimationsModule,
-        LayoutModule,
-        MatToolbarModule,
-        MatButtonModule,
-        MatSidenavModule,
-        MatIconModule,
-        MatListModule,
         NgbModule,
         FormsModule
     ],

@@ -1,0 +1,73 @@
+<app-header></app-header>
+<main class="bg-light gf-main-container align-content-center" style="height: auto">
+  <div style="height: 15vh;"></div>
+  <div class="container">
+    <app-product-detail-card [product]="product"></app-product-detail-card>
+  </div>
+  <div class="container">
+    <section class="py-5 text-center container">
+      <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+          <h2>С этим тажке покупают</h2>
+        </div>
+      </div>
+    </section>
+
+    <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
+
+      <!--Controls-->
+      <div class="row">
+        <a class="btn-floating" href="#multi-item-example" data-slide="prev">Назад<i class="fa fa-star"></i></a>
+        <a class="btn-floating" href="#multi-item-example" data-slide="next">Вперед<i class="fa fa-chevron-right"></i></a>
+      </div>
+      <!--/.Controls-->
+
+      <!--Slides-->
+      <div *ngIf="productsPopular.length > 0" class="carousel-inner" role="listbox">
+
+        <!--First slide-->
+        <div class="carousel-item active">
+
+          <div class="row">
+            <div class="col-md-4">
+              <div class="card mb-2">
+                <app-product-card [product]="productsPopular[0][0]"></app-product-card>
+              </div>
+            </div>
+
+            <div class="col-md-4 clearfix d-none d-md-block" *ngFor="let p of productsPopular[0].slice(1)">
+              <div class="card mb-2">
+                <app-product-card [product]="p"></app-product-card>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!--/.First slide-->
+
+        <!--Second slide-->
+        <div class="carousel-item" *ngFor="let prs of this.productsPopular.slice(1)">
+
+          <div class="row">
+            <div class="col-md-4">
+              <div class="card mb-2">
+                <app-product-card [product]="prs[0]"></app-product-card>
+              </div>
+            </div>
+
+            <div class="col-md-4 clearfix d-none d-md-block" *ngFor="let p of prs.slice(1)">
+              <div class="card mb-2">
+                <app-product-card [product]="p"></app-product-card>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!--/.Second slide-->
+      </div>
+      <!--/.Slides-->
+
+    </div>
+  </div>
+</main>
+<app-footer></app-footer>
