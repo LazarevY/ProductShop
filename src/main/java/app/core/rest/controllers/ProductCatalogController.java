@@ -6,12 +6,16 @@ import app.core.requests.MultipleProductRequest;
 import app.core.requests.ProductDataRequest;
 import app.core.response.Response;
 import app.core.response.ResponseCode;
+import app.core.rest.front.models.PopularForProductRequest;
 import app.core.security.JwtProvider;
 import app.core.services.interfaces.ProductService;
 import app.core.services.interfaces.UserService;
+import app.data.modeles.ProductCategory;
 import app.data.modeles.ProductInStore;
 import app.data.modeles.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.reactive.context.ReactiveWebApplicationContext;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class ProductCatalogController {
@@ -55,6 +60,19 @@ public class ProductCatalogController {
 
     }
 
+    @PostMapping("/api/catalog/popular")
+    public Response getMostPopular(@RequestBody int storeId){
+        List<ProductInStore> mostPopular = productService.getMostPopular(storeId, 5);
+        return new Response(ResponseCode.OK, "", Map.of("products", mostPopular));
+    }
+
+    @PostMapping("/api/catalog/product-detail/popular")
+    public Response getMostPopularForProduct(@RequestBody PopularForProductRequest req){
+        List<ProductInStore> mostPopular = productService.getMostPopularForProduct(req.getStoreId(), req.getProductId(), 5);
+        return new Response(ResponseCode.OK, "", Map.of("products", mostPopular));
+    }
+
+
     @PostMapping("/api/catalog/product/info")
     public Response getProductData(@RequestBody ProductDataRequest request){
         Response r = new Response();
@@ -72,6 +90,18 @@ public class ProductCatalogController {
         r.setCode(ResponseCode.OK);
         return r;
 
+    }
+
+    @GetMapping("/api/products/categories")
+    public Response getProductCategories(){
+        List<ProductCategory> allProductCategories = productService.getAllProductCategories();
+        return new Response(ResponseCode.OK, "", Map.of("categories", allProductCategories));
+    }
+
+    @PostMapping("/api/products/stocks/get")
+    public Response getProductsWithStocks(@RequestBody long storeId){
+        List<ProductInStore> productsWithStocks = productService.getProductsWithStocks(storeId, new Date());
+        return new Response(ResponseCode.OK, "", Map.of("products", productsWithStocks));
     }
 
 

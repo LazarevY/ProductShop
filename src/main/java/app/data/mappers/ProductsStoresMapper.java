@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 @Mapper
@@ -59,10 +60,15 @@ public interface ProductsStoresMapper {
             @Param("categoriesId") int[] categoriesId
     );
 
+    List<ProductInStore> getAllStocks(@Param("storeId") long storeId, @Param("date") Date date);
+
     ProductInStore getProductData(@Param("storeId") long storeId, @Param("productId") long productId);
 
     List<ProductInStore> getProductsData(@Param("storeId") long storeId, @Param("productIds") List<Long> productIds);
 
     void deleteByProductAndStoreId(@Param("productId") long productId, @Param("storeId") long storeId);
+
+    List<ProductInStore> getMostPopular(@Param("storeId") long storeId, @Param("maxCount") int maxCount);
+    List<ProductInStore> getMostPopularForProduct(@Param("storeId") long storeId, @Param("productId") long productId, @Param("maxCount") int maxCount);
 
 }

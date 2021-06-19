@@ -7,8 +7,6 @@ import java.util.List;
 
 @Data
 public class ProductCategory {
-    private Long id;
+    private long id;
     private String name;
-
-    private List<Product> products = new ArrayList<>();
 }

@@ -61,7 +61,7 @@
         ps.count_of_products > 0 AND
         ps.product_price &lt;= #{priceHigh} AND
         ps.product_price >= #{priceLow}
-        WHERE ps.store_id = #{storeId} AND p.product_name LIKE #{productName};
+        WHERE ps.store_id = #{storeId} AND LOWER(p.product_name) LIKE LOWER(#{productName});
     </select>
     <select id="getAllInStoreFilteredOnlyByCategories" resultMap="ProductInStoreMap">
         SELECT ps.*
@@ -93,7 +93,7 @@
         </if>
         LEFT JOIN orders_products op on ps.product_id = op.product_id
         LEFT JOIN orders o on o.order_id = op.order_id
-        WHERE ps.store_id = #{storeId} AND p.product_name LIKE #{productName}
+        WHERE ps.store_id = #{storeId} AND LOWER(p.product_name) LIKE LOWER(#{productName})
         GROUP BY ps.product_id, ps.store_id, ps.count_of_products, ps.product_price, p.product_metadata_id, ps.stock_id
         ORDER BY coalesce(sum(op.count_of_products), 0) DESC, ps.product_id;
     </select>
@@ -116,7 +116,7 @@
         </if>
         LEFT JOIN orders_products op on ps.product_id = op.product_id
         LEFT JOIN orders o on o.order_id = op.order_id
-        WHERE ps.store_id = #{storeId} AND p.product_name LIKE #{productName}
+        WHERE ps.store_id = #{storeId} AND LOWER(p.product_name) LIKE LOWER(#{productName})
         GROUP BY ps.product_id, ps.store_id, ps.count_of_products, ps.product_price, p.product_metadata_id, ps.stock_id
         ORDER BY sum(CASE WHEN o.user_id IS NULL OR user_id != #{userId} THEN 0 ELSE op.count_of_products END) DESC,
         coalesce(sum(op.count_of_products), 0) DESC, ps.product_id;
@@ -136,5 +136,42 @@
         <foreach item="item" index="index" collection="productIds" open="(" separator="," close=")">
             #{item}
         </foreach>;
+    </select>
+    <select id="getAllStocks" resultMap="ProductInStoreMap">
+        SELECT ps.*, p.product_metadata_id
+        FROM products_stores ps
+                 LEFT JOIN products p on p.product_id = ps.product_id
+                 LEFT JOIN stocks s on ps.stock_id = s.stock_id
+        WHERE ps.store_id = #{storeId}
+          AND s.stock_start_date &lt;= #{date}
+          AND #{date} &lt;= s.stock_end_date
+    </select>
+    <select id="getMostPopular" resultMap="ProductInStoreMap">
+        SELECT ps.*, p.product_metadata_id, sum(op.count_of_products) AS sum
+        FROM orders o
+                 LEFT JOIN orders_products op ON o.order_id = op.order_id
+                 LEFT JOIN products_stores ps on op.product_id = ps.product_id
+                 LEFT OUTER JOIN products p on p.product_id = ps.product_id
+
+        WHERE o.store_id = #{storeId}
+        GROUP BY op.product_id, ps.product_id, ps.store_id, ps.count_of_products, ps.stock_id, ps.product_price,
+                 p.product_metadata_id
+        ORDER BY sum DESC
+        LIMIT #{maxCount}
+    </select>
+    <select id="getMostPopularForProduct" resultMap="ProductInStoreMap">
+        SELECT ps.*, p.product_metadata_id, sum(op.count_of_products) AS sum
+        FROM orders o
+                 LEFT JOIN orders_products op ON o.order_id = op.order_id
+                 LEFT JOIN products_stores ps on op.product_id = ps.product_id
+                 LEFT OUTER JOIN products p on p.product_id = ps.product_id
+
+        WHERE o.store_id = #{storeId} AND p.product_id != #{productId}
+          AND o.order_id in
+              (SELECT o1.order_id from orders_products o1 WHERE o1.product_id = #{productId} ORDER BY o1.order_id DESC LIMIT 50)
+        GROUP BY op.product_id, ps.product_id, ps.store_id, ps.count_of_products, ps.stock_id, ps.product_price,
+                 p.product_metadata_id
+        ORDER BY sum DESC
+        LIMIT #{maxCount};
     </select>
 </mapper>
