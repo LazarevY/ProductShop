@@ -8,10 +8,7 @@ import app.core.services.impl.UserServiceImpl;
 import app.core.services.interfaces.UserOrdersService;
 import app.core.services.interfaces.UserService;
 import app.data.mappers.GenderMapper;
-import app.data.modeles.Gender;
-import app.data.modeles.User;
-import app.data.modeles.UserAddress;
-import app.data.modeles.UserCalorieData;
+import app.data.modeles.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,8 +33,8 @@ public class UserController {
 
 
     @PostMapping("/api/user/orders")
-    public Response getUserOrders(@RequestBody String token){
-        if (token!= null  && jwtProvider.validateToken(token)){
+    public Response getUserOrders(@RequestBody String token) {
+        if (token != null && jwtProvider.validateToken(token)) {
             User u = userService.findByEmail(jwtProvider.getNicknameFromToken(token));
             return userOrdersService.getOrders(u.getId());
         }
@@ -46,8 +43,8 @@ public class UserController {
     }
 
     @PostMapping("/api/user/data")
-    public Response getUserData(@RequestBody String token){
-        if (token!= null  && jwtProvider.validateToken(token)){
+    public Response getUserData(@RequestBody String token) {
+        if (token != null && jwtProvider.validateToken(token)) {
             User u = userService.findByEmail(jwtProvider.getNicknameFromToken(token));
             return new Response(ResponseCode.OK, "", Map.of("data", u));
         }
@@ -55,8 +52,8 @@ public class UserController {
     }
 
     @PostMapping("/api/user/data/update")
-    public Response getUserData(@RequestBody UpdateUserData req){
-        if (req.getToken()!= null  && jwtProvider.validateToken(req.getToken())){
+    public Response getUserData(@RequestBody UpdateUserData req) {
+        if (req.getToken() != null && jwtProvider.validateToken(req.getToken())) {
             User u = userService.findByEmail(jwtProvider.getNicknameFromToken(req.getToken()));
             req.setId(u.getId());
             userService.updateUserData(req);
@@ -66,8 +63,8 @@ public class UserController {
     }
 
     @PostMapping("/api/user/address/get")
-    public Response getUserAddressList(@RequestBody UserAddressRequest req){
-        if (req.getToken()!= null  && jwtProvider.validateToken(req.getToken())){
+    public Response getUserAddressList(@RequestBody UserAddressRequest req) {
+        if (req.getToken() != null && jwtProvider.validateToken(req.getToken())) {
             User u = userService.findByEmail(jwtProvider.getNicknameFromToken(req.getToken()));
             req.setId(u.getId());
             List<UserAddress> userAddressList = userService.getUserAddressList(req);
@@ -77,8 +74,8 @@ public class UserController {
     }
 
     @PostMapping("/api/user/address/get-one")
-    public Response getUserAddress(@RequestBody UserAddressRequest req){
-        if (req.getToken()!= null  && jwtProvider.validateToken(req.getToken())){
+    public Response getUserAddress(@RequestBody UserAddressRequest req) {
+        if (req.getToken() != null && jwtProvider.validateToken(req.getToken())) {
             UserAddress userAddressList = userService.getUserAddress(req.getId());
             return new Response(ResponseCode.OK, "", Map.of("address", userAddressList));
         }
@@ -86,8 +83,8 @@ public class UserController {
     }
 
     @PostMapping("/api/user/address/update")
-    public Response updateUserAddress(@RequestBody UserAddAddressRequest req){
-        if (req.getToken()!= null  && jwtProvider.validateToken(req.getToken())){
+    public Response updateUserAddress(@RequestBody UserAddAddressRequest req) {
+        if (req.getToken() != null && jwtProvider.validateToken(req.getToken())) {
             User u = userService.findByEmail(jwtProvider.getNicknameFromToken(req.getToken()));
             req.setUserId(u.getId());
             userService.updateUserAddress(req);
@@ -97,8 +94,8 @@ public class UserController {
     }
 
     @PostMapping("/api/user/address/add")
-    public Response addUserAddress(@RequestBody UserAddAddressRequest req){
-        if (req.getToken()!= null  && jwtProvider.validateToken(req.getToken())){
+    public Response addUserAddress(@RequestBody UserAddAddressRequest req) {
+        if (req.getToken() != null && jwtProvider.validateToken(req.getToken())) {
             User u = userService.findByEmail(jwtProvider.getNicknameFromToken(req.getToken()));
             req.setUserId(u.getId());
             userService.addUserAddress(req);
@@ -108,8 +105,8 @@ public class UserController {
     }
 
     @PostMapping("/api/user/address/delete")
-    public Response deleteUserAddress(@RequestBody DeleteUserAddress req){
-        if (req.getToken()!= null  && jwtProvider.validateToken(req.getToken())){
+    public Response deleteUserAddress(@RequestBody DeleteUserAddress req) {
+        if (req.getToken() != null && jwtProvider.validateToken(req.getToken())) {
             userService.deleteUserAddress(req);
             return new Response(ResponseCode.OK, "");
         }
@@ -117,14 +114,14 @@ public class UserController {
     }
 
     @GetMapping("/api/data/genders")
-    public Response getGendersList(){
+    public Response getGendersList() {
         List<Gender> all = genderMapper.getAll();
         return new Response(ResponseCode.OK, "", Map.of("genders", all));
     }
 
     @PostMapping("/api/user/calories-data/update")
-    public Response updateCaloriesData(@RequestBody UserAddCalorieDataRequest request){
-        if (request.getToken() != null  && jwtProvider.validateToken(request.getToken())){
+    public Response updateCaloriesData(@RequestBody UserAddCalorieDataRequest request) {
+        if (request.getToken() != null && jwtProvider.validateToken(request.getToken())) {
             User u = userService.findByEmail(jwtProvider.getNicknameFromToken(request.getToken()));
             request.setUserId(u.getId());
             userService.updateUserCalorieData(request);
@@ -134,13 +131,57 @@ public class UserController {
     }
 
     @PostMapping("/api/user/calories-data/get")
-    public Response getCaloriesData(@RequestBody String token){
-        if (token!= null  && jwtProvider.validateToken(token)){
+    public Response getCaloriesData(@RequestBody String token) {
+        if (token != null && jwtProvider.validateToken(token)) {
             User u = userService.findByEmail(jwtProvider.getNicknameFromToken(token));
             UserCalorieData calorieData = userService.getCalorieData(u.getId());
             if (calorieData == null)
                 return new Response(ResponseCode.WARN, "", Map.of("calorie", new UserCalorieData()));
             return new Response(ResponseCode.OK, "", Map.of("calorie", calorieData));
+        }
+        return new Response(ResponseCode.ERROR, "", Map.of("success", false));
+    }
+
+    @PostMapping("/api/user/pay-methods/get")
+    public Response getUserPayMethods(@RequestBody UserAddPayMethodRequest req) {
+        if (req.getToken() != null && jwtProvider.validateToken(req.getToken())) {
+            User u = userService.findByEmail(jwtProvider.getNicknameFromToken(req.getToken()));
+            req.setUserId(u.getId());
+            List<PayMethod> userPayMethodsList = userService.getUserPayMethodsList(req);
+            return new Response(ResponseCode.OK, "", Map.of("pays", userPayMethodsList));
+        }
+        return new Response(ResponseCode.ERROR, "", Map.of("success", false));
+    }
+
+    @PostMapping("/api/user/pay-methods/add")
+    public Response getUserAddPayMethod(@RequestBody UserAddPayMethodRequest req) {
+        if (req.getToken() != null && jwtProvider.validateToken(req.getToken())) {
+            User u = userService.findByEmail(jwtProvider.getNicknameFromToken(req.getToken()));
+            req.setUserId(u.getId());
+            userService.addUserAddPayMethod(req);
+            return new Response(ResponseCode.OK, "");
+        }
+        return new Response(ResponseCode.ERROR, "", Map.of("success", false));
+    }
+
+    @PostMapping("/api/user/pay-methods/update")
+    public Response getUserUpdatePayMethod(@RequestBody UserAddPayMethodRequest req) {
+        if (req.getToken() != null && jwtProvider.validateToken(req.getToken())) {
+            User u = userService.findByEmail(jwtProvider.getNicknameFromToken(req.getToken()));
+            req.setUserId(u.getId());
+            userService.updateUserPayMethod(req);
+            return new Response(ResponseCode.OK, "");
+        }
+        return new Response(ResponseCode.ERROR, "", Map.of("success", false));
+    }
+
+    @PostMapping("/api/user/pay-methods/delete")
+    public Response getUserUpdatePayMethod(@RequestBody DeleteUserPayMethod req) {
+        if (req.getToken() != null && jwtProvider.validateToken(req.getToken())) {
+            User u = userService.findByEmail(jwtProvider.getNicknameFromToken(req.getToken()));
+            req.setUserId(u.getId());
+            userService.deleteUserPayMethod(req);
+            return new Response(ResponseCode.OK, "");
         }
         return new Response(ResponseCode.ERROR, "", Map.of("success", false));
     }

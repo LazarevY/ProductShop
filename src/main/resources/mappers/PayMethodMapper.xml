@@ -12,6 +12,13 @@
         INSERT INTO users_pay_methods (user_id, card_number, date_end)
         VALUES (#{userId}, #{cardNumber}, #{dateEnd})
     </insert>
+    <update id="updatePayMethod">
+        UPDATE users_pay_methods
+        SET card_number = #{cardNumber},
+            date_end    = #{dateEnd}
+        WHERE user_id = #{userId}
+          AND pay_method_id = #{methodId}
+    </update>
     <delete id="deleteById">
         DELETE
         FROM users_pay_methods

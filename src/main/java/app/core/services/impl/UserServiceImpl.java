@@ -5,10 +5,7 @@ import app.core.requests.CreateUserRequest;
 import app.core.rest.front.models.*;
 import app.core.services.interfaces.AuthorizationService;
 import app.core.services.interfaces.UserService;
-import app.data.mappers.GenderMapper;
-import app.data.mappers.UserAddressMapper;
-import app.data.mappers.UserCalorieDataMapper;
-import app.data.mappers.UserMapper;
+import app.data.mappers.*;
 import app.data.modeles.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +26,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserAddressMapper userAddressMapper;
+
+    @Autowired
+    private PayMethodMapper payMethodMapper;
 
     @Autowired
     private GenderMapper genderMapper;
@@ -119,6 +119,26 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUserAddress(DeleteUserAddress req) {
         userAddressMapper.deleteById(req.getId());
+    }
+
+    @Override
+    public List<PayMethod> getUserPayMethodsList(UserAddPayMethodRequest req) {
+        return payMethodMapper.getAllByUserId(req.getUserId());
+    }
+
+    @Override
+    public void addUserAddPayMethod(UserAddPayMethodRequest req) {
+        payMethodMapper.addPayMethod(req.getUserId(), req.getCard(), req.getDate());
+    }
+
+    @Override
+    public void updateUserPayMethod(UserAddPayMethodRequest req) {
+        payMethodMapper.updatePayMethod(req.getUserId(), req.getId(), req.getCard(), req.getDate());
+    }
+
+    @Override
+    public void deleteUserPayMethod(DeleteUserPayMethod req) {
+        payMethodMapper.deleteById(req.getMethodId());
     }
 
     @Override

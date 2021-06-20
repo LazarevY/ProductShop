@@ -12,6 +12,10 @@ public interface PayMethodMapper {
     void addPayMethod(@Param("userId") long userId,
                       @Param("cardNumber") String cardNumber,
                       @Param("dateEnd") String dateEnd);
+    void updatePayMethod(@Param("userId") long userId,
+                         @Param("methodId") long methodId,
+                         @Param("cardNumber") String cardNumber,
+                         @Param("dateEnd") String dateEnd);
 
     List<PayMethod> getAllByUserId(@Param("userId") long userId);
 
