@@ -6,6 +6,7 @@ import {Router} from '@angular/router';
 import {DataStorageService} from '../../services/storage/data-storage.service';
 import {OrderService} from '../../services/order/order.service';
 import {ApiResponse} from '../../models/api-response';
+import {ProductOrder} from '../../models/products';
 
 @Component({
   selector: 'app-pay',
@@ -24,6 +25,8 @@ export class PayComponent implements OnInit {
 
   address: any;
 
+  order: any;
+
   ngOnInit(): void {
     if (!this.userControl.isUserLogin()) {
       this.router.navigate(['/order']);
@@ -39,6 +42,7 @@ export class PayComponent implements OnInit {
     );
     this.cart.saveCurrentCalories();
     const order = this.cart.getProductOrder();
+    this.order = order;
     this.pay.getOrderPrice(order);
   }
 

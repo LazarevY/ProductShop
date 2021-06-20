@@ -45,6 +45,18 @@ export interface DeleteUserAddress{
   token: string;
 }
 
+export interface UserAddPayMethod{
+  id: number;
+  card: string;
+  token: string;
+  date: string;
+}
+
+export interface DeleteUserPayMethod{
+  id: number;
+  token: string;
+}
+
 export interface UserPayMethod{
   id: number;
   cardLastDigits: string;
@@ -53,8 +65,8 @@ export interface UserPayMethod{
 
 export interface UserPayMethodFull{
   id: number;
-  card: string;
-  cardEndDate: string;
+  cardNumber: string;
+  dateEnd: string;
 }
 
 export interface Gender{

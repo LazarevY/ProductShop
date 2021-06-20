@@ -4,8 +4,16 @@ import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {ApiResponse} from '../../models/api-response';
 import {AppConfig} from '../../app.component';
-import {DeleteUserAddress, User, UserAddAddress, UserCalorieData, UserUpdateData} from '../../models/user';
-import {UserAddressesRequest, UserAddressRequest} from '../../models/requests';
+import {
+  DeleteUserAddress,
+  DeleteUserPayMethod,
+  User,
+  UserAddAddress,
+  UserAddPayMethod,
+  UserCalorieData,
+  UserUpdateData
+} from '../../models/user';
+import {UserAddressesRequest, UserAddressRequest, UserPayMethodRequest} from '../../models/requests';
 
 @Injectable({
   providedIn: 'root'
@@ -98,6 +106,34 @@ export class UserControlService {
   deleteUserAddress(req: DeleteUserAddress): Observable<ApiResponse> {
     return this.http.post<ApiResponse>(
       this.conf.createBackendUrl('api/user/address/delete'),
+      req,
+      this.conf.getHeadersWithCorsAndJWTToken(this.storage.getParameter('authToken')));
+  }
+
+  getPayMethodList(req: UserPayMethodRequest): Observable<ApiResponse> {
+    return this.http.post<ApiResponse>(
+      this.conf.createBackendUrl('api/user/pay-methods/get'),
+      req,
+      this.conf.getHeadersWithCorsAndJWTToken(this.storage.getParameter('authToken')));
+  }
+
+  addUserPayMethod(req: UserAddPayMethod): Observable<ApiResponse> {
+    return this.http.post<ApiResponse>(
+      this.conf.createBackendUrl('api/user/pay-methods/add'),
+      req,
+      this.conf.getHeadersWithCorsAndJWTToken(this.storage.getParameter('authToken')));
+  }
+
+  updateUserPayMethod(req: UserAddPayMethod): Observable<ApiResponse> {
+    return this.http.post<ApiResponse>(
+      this.conf.createBackendUrl('api/user/pay-methods/update'),
+      req,
+      this.conf.getHeadersWithCorsAndJWTToken(this.storage.getParameter('authToken')));
+  }
+
+  deleteUserPayMethod(req: DeleteUserPayMethod): Observable<ApiResponse> {
+    return this.http.post<ApiResponse>(
+      this.conf.createBackendUrl('api/user/pay-methods/delete'),
       req,
       this.conf.getHeadersWithCorsAndJWTToken(this.storage.getParameter('authToken')));
   }

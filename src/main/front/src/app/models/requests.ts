@@ -27,3 +27,6 @@ export interface UserAddressRequest {
   id: number;
   token: string;
 }
+export interface UserPayMethodRequest {
+  token: string;
+}
