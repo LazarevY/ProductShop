@@ -20,14 +20,6 @@ export class AppConfig {
     this.setStoreId(1);
   }
 
-  setStoreId(id: number): void {
-    this.dataStorage.setParameter('store', id);
-  }
-
-  getStoreId(): number {
-    return this.dataStorage.getParameter('store');
-  }
-
   backendAddress = 'localhost:8080';
 
   httpCorsOptions = {
@@ -41,6 +33,14 @@ export class AppConfig {
       value: 'NNctr6Tjrw9794gFXf3fi6zWBZ78j6Gv3UCb3y0x',
     })
   };
+
+  setStoreId(id: number): void {
+    this.dataStorage.setParameter('store', id);
+  }
+
+  getStoreId(): number {
+    return this.dataStorage.getParameter('store');
+  }
 
   createBackendUrl(address: string): string {
     return 'http://' + this.backendAddress + '/' + address;

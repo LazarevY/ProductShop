@@ -20,6 +20,10 @@ export interface ProductsDataRequest {
 }
 
 
+export interface UserAddressesRequest {
+  token: string;
+}
 export interface UserAddressRequest {
+  id: number;
   token: string;
 }

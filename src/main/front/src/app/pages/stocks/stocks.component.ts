@@ -16,7 +16,7 @@ export class StocksComponent implements OnInit {
   products: Array<StoreProduct> = [];
 
   ngOnInit(): void {
-    this.productsService.getProductsWithStocks(1).subscribe(
+    this.productsService.getProductsWithStocks(this.storage.getParameter('activeStoreId')).subscribe(
       (data: ApiResponse) => this.products = data.parameters.products
     );
   }

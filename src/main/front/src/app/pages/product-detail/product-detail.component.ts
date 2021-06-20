@@ -3,6 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {ProductsService} from '../../services/products/products.service';
 import {StoreProduct} from '../../models/products';
 import {ApiResponse} from '../../models/api-response';
+import {DataStorageService} from '../../services/storage/data-storage.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -11,7 +12,7 @@ import {ApiResponse} from '../../models/api-response';
 })
 export class ProductDetailComponent implements OnInit {
 
-  constructor(private activeRouter: ActivatedRoute, private productService: ProductsService) {
+  constructor(private activeRouter: ActivatedRoute, private productService: ProductsService, private storage: DataStorageService) {
   }
 
   productId = 0;
@@ -22,7 +23,7 @@ export class ProductDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.activeRouter.params.subscribe(value => this.productId = value.id);
-    this.productService.getProductData({productId: this.productId, storeId: 1}).subscribe(
+    this.productService.getProductData({productId: this.productId, storeId: this.storage.getParameter('activeStoreId')}).subscribe(
       value => {
         this.product = value;
         this.product.actualPrice = this.product.price - this.productService.tryCalcStock(this.product);

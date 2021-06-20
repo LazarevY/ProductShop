@@ -6,8 +6,8 @@
     <h1>Детали заказа</h1>
     <h2>Сумма заказа: {{pay.orderPrice.toFixed(2)}}</h2>
     <h2>Ваша скидка: {{pay.orderStock.toFixed(2)}}</h2>
-    <h2>Общая калорийность: {{cart.caloriesSave}}</h2>
-    <h2>Адрес доставки: Воронеж, ул Домостроителей, д 17</h2>
+    <h2>Общая калорийность: {{storage.getParameter('orderCalories')}}</h2>
+    <h2>Адрес доставки: {{address.address}}</h2>
     <input type="button" class="btn gf-bg-cmp text-light" value="Оплатить">
   </div>
 

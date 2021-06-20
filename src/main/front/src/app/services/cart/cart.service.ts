@@ -31,7 +31,7 @@ export class CartService {
 
   loadCartAction(): void {
     this.loadCartChoose();
-    this.loadCart(this.conf.getStoreId(), Array.from(this.cartChoose.keys()));
+    this.loadCart(this.dataStorage.getParameter('activeStoreId'), Array.from(this.cartChoose.keys()));
   }
 
   loadCart(storeId: number, productIds: Array<number>): void {
@@ -99,11 +99,16 @@ export class CartService {
 
   getProductOrder(): ProductOrder {
     const orderItems: Array<ProductOrderItem> = [];
-    this.cart.forEach((value, key) => {
-      orderItems.push({productId: key, count: value.count});
+    this.loadCartChoose();
+    this.cartChoose.forEach((value, key) => {
+      orderItems.push({productId: key, count: value});
+    });
+    console.log({
+      storeId: this.dataStorage.getParameter('activeStoreId'),
+      products: orderItems
     });
     return {
-      storeId: this.conf.getStoreId(),
+      storeId: this.dataStorage.getParameter('activeStoreId'),
       products: orderItems
     };
   }

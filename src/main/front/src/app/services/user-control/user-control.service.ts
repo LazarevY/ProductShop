@@ -5,7 +5,7 @@ import {HttpClient} from '@angular/common/http';
 import {ApiResponse} from '../../models/api-response';
 import {AppConfig} from '../../app.component';
 import {DeleteUserAddress, User, UserAddAddress, UserCalorieData, UserUpdateData} from '../../models/user';
-import {UserAddressRequest} from '../../models/requests';
+import {UserAddressesRequest, UserAddressRequest} from '../../models/requests';
 
 @Injectable({
   providedIn: 'root'
@@ -45,9 +45,16 @@ export class UserControlService {
       this.conf.getHeadersWithCorsAndJWTToken(this.storage.getParameter('authToken')));
   }
 
-  getAddressList(req: UserAddressRequest): Observable<ApiResponse> {
+  getAddressList(req: UserAddressesRequest): Observable<ApiResponse> {
     return this.http.post<ApiResponse>(
       this.conf.createBackendUrl('api/user/address/get'),
+      req,
+      this.conf.getHeadersWithCorsAndJWTToken(this.storage.getParameter('authToken')));
+  }
+
+  getAddress(req: UserAddressRequest): Observable<ApiResponse> {
+    return this.http.post<ApiResponse>(
+      this.conf.createBackendUrl('api/user/address/get-one'),
       req,
       this.conf.getHeadersWithCorsAndJWTToken(this.storage.getParameter('authToken')));
   }

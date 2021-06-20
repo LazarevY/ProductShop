@@ -3,6 +3,7 @@ import {StoreProduct} from '../../models/products';
 import {ProductsService} from '../../services/products/products.service';
 import {ApiResponse} from '../../models/api-response';
 import {min} from 'rxjs/operators';
+import {DataStorageService} from '../../services/storage/data-storage.service';
 
 @Component({
   selector: 'app-start',
@@ -11,14 +12,15 @@ import {min} from 'rxjs/operators';
 })
 export class StartComponent implements OnInit {
 
-  constructor(private productService: ProductsService) {
+  constructor(private productService: ProductsService, private dataStorage: DataStorageService) {
   }
 
   products: Array<StoreProduct> = [];
   productsDivided: Array<Array<StoreProduct>> = [];
 
   ngOnInit(): void {
-    this.productService.getMostPopularProducts(1).subscribe(
+    const store = this.dataStorage.getParameter('activeStoreId');
+    this.productService.getMostPopularProducts(store).subscribe(
       (data: ApiResponse) => {
         this.products = data.parameters.products;
         const arr = [];

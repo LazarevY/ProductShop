@@ -11,7 +11,7 @@
       <div class="col-4">
         <div *ngFor="let kv of cartService.cart | keyvalue" class="row">
           <div class="card w-75">
-              <app-product-mini-card [product]="kv.value"></app-product-mini-card>
+            <app-product-mini-card [product]="kv.value"></app-product-mini-card>
           </div>
         </div>
       </div>
@@ -23,12 +23,19 @@
         <h4>Некоторые скидки учитываются после перехода к оплате заказа</h4>
         <h4>Преварительная сумма заказа: {{cartService.price}}р</h4>
         <h4>Общая калорийность: {{cartService.calories}} ккал</h4>
-        <h4>Адрес доставки</h4>
-        <select class="form-control" aria-label="Default select example">
-          <option value="1">Воронеж, ул Домостроителей, д 17</option>
-        </select>
-        <br>
-        <input routerLink="/order/pay" type="button" class="btn gf-bg-cmp" value="Перейти к оплате">
+        <div *ngIf="userControl.isUserLogin(); else elseBlock">
+          <h4>Адрес доставки</h4>
+          <select class="form-control" aria-label="Default select example" #t [value]="addressId" (change)="setAddress(t.value)">
+            <option *ngFor="let a of addresses" [value]="a.id">{{a.address}}</option>
+          </select>
+          <br>
+          <input routerLink="/order/pay" type="button" class="btn gf-bg-cmp" value="Перейти к оплате"
+                 [disabled]="addressId == 0" (click)="toPayAction()">
+        </div>
+        <ng-template #elseBlock>
+          <h2>Кажется, вы еще не вошли в свой аккаунт. Чтобы оформить заказ, неободимо <a routerLink="/login">войти</a>
+          </h2>
+        </ng-template>
       </div>
     </div>
   </section>

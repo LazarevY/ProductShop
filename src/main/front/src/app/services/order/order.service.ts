@@ -15,6 +15,8 @@ export class OrderService {
   constructor(private conf: AppConfig, private http: HttpClient, private storage: DataStorageService) {
   }
 
+  shipmentAddress: any;
+
   processOrder(order: ProductOrder): Observable<any> {
     return this.http.post<ApiResponse>(
       this.conf.createBackendUrl('api/order/new/'),

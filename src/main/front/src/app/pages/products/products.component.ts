@@ -62,7 +62,7 @@ export class ProductsComponent implements OnInit {
         namePattern: this.productFilterForm.value.namePattern,
         priceHigh: this.productFilterForm.value.priceHigh,
         priceLow: this.productFilterForm.value.priceLow,
-        storeId: 1,
+        storeId: this.storage.getParameter('activeStoreId'),
         token: this.storage.getParameter('authToken')
       }
     ).subscribe(
