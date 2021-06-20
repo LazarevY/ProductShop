@@ -76,6 +76,15 @@ public class UserController {
         return new Response(ResponseCode.ERROR, "", Map.of("success", false));
     }
 
+    @PostMapping("/api/user/address/get-one")
+    public Response getUserAddress(@RequestBody UserAddressRequest req){
+        if (req.getToken()!= null  && jwtProvider.validateToken(req.getToken())){
+            UserAddress userAddressList = userService.getUserAddress(req.getId());
+            return new Response(ResponseCode.OK, "", Map.of("address", userAddressList));
+        }
+        return new Response(ResponseCode.ERROR, "", Map.of("success", false));
+    }
+
     @PostMapping("/api/user/address/update")
     public Response updateUserAddress(@RequestBody UserAddAddressRequest req){
         if (req.getToken()!= null  && jwtProvider.validateToken(req.getToken())){

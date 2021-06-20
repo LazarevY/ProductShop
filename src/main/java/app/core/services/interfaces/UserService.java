@@ -24,4 +24,5 @@ public interface UserService {
     void addUserAddress(UserAddAddressRequest req);
     void updateUserAddress(UserAddAddressRequest req);
     void deleteUserAddress(DeleteUserAddress req);
+    UserAddress getUserAddress(long addressId);
 }
