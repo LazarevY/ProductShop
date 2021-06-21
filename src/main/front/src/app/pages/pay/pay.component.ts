@@ -7,6 +7,7 @@ import {DataStorageService} from '../../services/storage/data-storage.service';
 import {OrderService} from '../../services/order/order.service';
 import {ApiResponse} from '../../models/api-response';
 import {ProductOrder} from '../../models/products';
+import {UserPayMethodFull} from '../../models/user';
 
 @Component({
   selector: 'app-pay',
@@ -27,10 +28,19 @@ export class PayComponent implements OnInit {
 
   order: any;
 
+  payMethods: Array<UserPayMethodFull> = [];
+
+  orderPrice = 0;
+  orderStock = 0;
+
   ngOnInit(): void {
     if (!this.userControl.isUserLogin()) {
       this.router.navigate(['/order']);
+      return;
     }
+    this.userControl.getPayMethodList({token: this.storage.getParameter('authToken')}).subscribe(
+      (data: ApiResponse) => this.payMethods = data.parameters.pays
+    );
     this.userControl.getAddress({
       token: this.storage.getParameter('authToken'), id:
         this.storage.getParameter('shipmentAddress')
@@ -43,7 +53,24 @@ export class PayComponent implements OnInit {
     this.cart.saveCurrentCalories();
     const order = this.cart.getProductOrder();
     this.order = order;
-    this.pay.getOrderPrice(order);
+    this.pay.getOrderPrice(order).subscribe(
+      (data: ApiResponse) => {
+        this.orderStock = data.parameters.stock;
+        this.orderPrice = data.parameters.price - this.orderStock;
+      }
+    );
+  }
+
+  registerOrder(): void {
+    this.orderService.processOrder({
+      commonPrice: this.orderPrice + this.orderStock,
+      stockPrice: this.orderStock,
+      products: this.order.products,
+      storeId: this.order.storeId,
+      token: this.storage.getParameter('authToken')
+    }).subscribe(
+      _ => this.router.navigate(['/account/orders'])
+    );
   }
 
 }

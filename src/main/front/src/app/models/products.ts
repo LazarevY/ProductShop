@@ -56,6 +56,15 @@ export interface  ProductOrder{
   products: Array<ProductOrderItem>;
 }
 
+export interface  ProductRegisterOrder{
+  storeId: number;
+  commonPrice: number;
+  stockPrice: number;
+  token: string;
+  products: Array<ProductOrderItem>;
+}
+
+
 export interface ProductCategory{
   id: number;
   name: string;

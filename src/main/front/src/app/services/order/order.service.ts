@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {ProductOrder} from '../../models/products';
+import {ProductOrder, ProductRegisterOrder} from '../../models/products';
 import {Observable} from 'rxjs';
 import {AppConfig} from '../../app.component';
 import {HttpClient} from '@angular/common/http';
@@ -17,7 +17,7 @@ export class OrderService {
 
   shipmentAddress: any;
 
-  processOrder(order: ProductOrder): Observable<any> {
+  processOrder(order: ProductRegisterOrder): Observable<any> {
     return this.http.post<ApiResponse>(
       this.conf.createBackendUrl('api/order/new/'),
       order,
