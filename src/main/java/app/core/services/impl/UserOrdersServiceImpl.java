@@ -61,11 +61,11 @@ public class UserOrdersServiceImpl implements UserOrdersService {
     public Response registerOrder(ProductsRegisterOrder order) {
         var storeId = order.getStoreId();
         Response r = new Response();
-        for (var p: order.getProducts()){
-            ProductInStore productData = productsStoresMapper.getProductData(storeId, p.getProductId());
-            productsStoresMapper.updateProductCount(storeId, p.getProductId(),
-                    productData.getCount() - p.getCount());
-        }
+//        for (var p: order.getProducts()){
+//            ProductInStore productData = productsStoresMapper.getProductData(storeId, p.getProductId());
+//            productsStoresMapper.updateProductCount(storeId, p.getProductId(),
+//                    productData.getCount() - p.getCount());
+//        }
 
         var date = new Date();
         int orderId = orderMapper.addOrder(0, order.getUserId(),

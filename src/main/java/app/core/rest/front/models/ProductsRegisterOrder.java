@@ -12,5 +12,6 @@ public class ProductsRegisterOrder {
     private long userId;
     private int commonPrice;
     private int stockPrice;
+    private String token;
     private List<ProductOrderItem> products;
 }
