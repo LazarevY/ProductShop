@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {StoreProduct} from "../../../models/products";
+import {Stock, StoreProduct} from "../../../models/products";
 import {FormControl, FormGroup} from "@angular/forms";
+import {Gender} from "../../../models/user";
 
 @Component({
   selector: 'app-stock-product',
@@ -55,6 +56,25 @@ export class StockProductComponent implements OnInit {
         }),
       }),
     });
+
+  stock: Array<Stock> =
+    [
+      {
+        id: 1,
+        type: {id: 1, type: 'StockType1'},
+        values: {}
+      },
+      {
+        id: 2,
+        type: {id: 1, type: 'StockType1'},
+        values: {}
+      },
+      {
+        id: 3,
+        type: {id: 2, type: 'StockType2'},
+        values: {}
+      }
+    ]
 
   addInfo() {
     console.log(this.StoreProductFormControl.value);

@@ -8,23 +8,35 @@
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="product">Продукт</label>
-            <input type="product" class="form-control" id="product" placeholder="Продукт">
+            <input type="text" class="form-control" id="product" placeholder="Продукт">
+          </div>
+          <div class="form-group">
+            <div *ngFor="let s of stock" class="custom-control custom-radio" formGroupName="Stock">
+              <input class="custom-control-input" type="radio" id="flexRadioDefault{{s.id}}" formControlName="id" name="id" value="{{s.id}}">
+              <label class="custom-control-label" for="flexRadioDefault{{s.id}}">
+                {{s.type}}
+              </label>
+            </div>
           </div>
           <div class="form-group col-md-6">
             <label for="stock">Акция</label>
-            <input type="stock" class="form-control" id="stock" placeholder="Акция">
+            <input type="text" class="form-control" id="stock" placeholder="Акция">
           </div>
           <div class="form-group col-md-6">
             <label for="store">Магазин</label>
-            <input type="store" class="form-control" id="store" placeholder="Магазин">
+            <input type="text" class="form-control" id="store" placeholder="Магазин">
           </div>
           <div class="form-group col-md-6">
             <label for="count">Количество товаров</label>
-            <input type="count" class="form-control" id="count" placeholder="Количество товаров">
+            <input type="number" class="form-control" id="count" placeholder="Количество товаров">
           </div>
           <div class="form-group col-md-6">
             <label for="price">Цена</label>
-            <input type="price" class="form-control" id="price" placeholder="Цена">
+            <input type="number" class="form-control" id="price" placeholder="Цена">
+          </div>
+          <div class="form-group">
+            <label for="picture">Изображение</label>
+            <input type="text" class="form-control" id="picture" placeholder="Изображение">
           </div>
         </div>
         <button type="submit" class="btn btn-primary" (click)="addInfo()">Добавить</button>
