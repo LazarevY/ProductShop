@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {colors} from "@angular/cli/utilities/color";
-import {Stock, StockClause, StockType} from "../../../models/products";
+import {Product, Stock, StockClause, StockType} from "../../../models/products";
 import {ParameterMap} from "../../../models/types";
 import {FormControl, FormGroup} from "@angular/forms";
 
@@ -33,9 +33,28 @@ export class StockCreateComponent implements OnInit {
       }),
     });
 
-  addInfo(){
-    console.log(this.stockFormControl.value);
+  addStock(){
+    console.log(this.stockFormValue)
   }
+
+  onDelete(stock: Stock){
+    if(confirm("Are you sure to delete stock?")) {
+      this.deleteStock(stock)
+    }
+  }
+
+  deleteStock(stock: Stock){
+    console.log("delete stock")
+  }
+
+  stocks: Array<Stock> =
+    [
+      {
+        id: 1,
+        type: {id: 1, type: 'type'},
+        values: {T: {id: 1, item: {id: 1, value: '1234'}}}
+      }
+    ]
 
   ngOnInit(): void {
   }

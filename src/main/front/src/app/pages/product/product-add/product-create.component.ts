@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {colors} from "@angular/cli/utilities/color";
 import {FormControl, FormGroup} from "@angular/forms";
 import {Product} from "../../../models/products";
+import {UserAddress, UserPayMethodFull} from "../../../models/user";
 
 @Component({
   selector: 'app-product-add',
@@ -23,9 +24,30 @@ export class ProductCreateComponent implements OnInit {
       calories: new FormControl('')
     });
 
-  addInfo(){
-    console.log(this.productFormControl.value);
+  addProduct(){
+    console.log(this.productFormValue)
   }
+
+  onDelete(product: Product){
+    if(confirm("Are you sure to delete product?")) {
+      this.deleteProduct(product)
+    }
+  }
+
+  deleteProduct(product: Product){
+    console.log("delete product")
+  }
+
+  products: Array<Product> =
+    [
+      {
+        id: 1,
+        name: "banana",
+        description: "55555555",
+        weight: 1,
+        calories: 100
+      }
+    ]
 
   ngOnInit(): void {
   }

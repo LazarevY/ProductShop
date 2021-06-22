@@ -23,7 +23,21 @@
           <label for="inputCalories">Количество каллорий</label>
           <input type="number" class="form-control" id="inputCalories" placeholder="Количество каллорий">
         </div>
-        <button type="submit" class="btn btn-primary" (click)="addInfo()">Добавить</button>
+        <button type="submit" class="btn btn-primary" (click)="addProduct()">Добавить</button>
+        <div *ngFor="let product of products" class="row border" style="width: auto;">
+          <div class="col">
+            <h3>{{product.name.substring(12)}}</h3>
+          </div>
+          <div class="col">
+            <h3>{{product.description}}</h3>
+          </div>
+          <div class="col-1">
+            <div class="row">
+              <button type="submit" class="btn btn-primary" (click)="onDelete(product)">Удалить</button>
+            </div>
+          </div>
+        </div>
+
       </form>
     </section>
   </div>

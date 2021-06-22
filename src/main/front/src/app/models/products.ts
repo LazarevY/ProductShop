@@ -42,3 +42,8 @@ export interface StoreProduct{
   price: number;
   stockStore: Stock | null;
 }
+
+export interface Store{
+  id: number;
+  address: string;
+}
