@@ -1,0 +1,28 @@
+<main class="gf-bg-main" style="height: 100vh">
+  <meta charset="utf-8">
+  <div class="container">
+    <div style="height: 15vh;"></div>
+    <app-admin></app-admin>
+    <section class="container border">
+      <form class="py-2">
+        <div *ngFor="let storeProduct of storeProducts" class="row border" style="width: auto;">
+          <div class="col">
+            <h3>{{storeProduct.product.name}}</h3>
+          </div>
+          <div class="col">
+            <h3>{{storeProduct.metadata.productFileName}}</h3>
+          </div>
+          <div class="col">
+            <h3>{{storeProduct.stockStore}}</h3>
+          </div>
+          <div class="col-1">
+            <div class="row">
+              <button type="submit" class="btn btn-primary" (click)="onDelete(storeProduct)">Удалить</button>
+            </div>
+          </div>
+        </div>
+
+      </form>
+    </section>
+  </div>
+</main>
