@@ -7,25 +7,18 @@
       <form class="py-2">
         <div class="form-row">
           <div class="form-group col-md-6">
-            <label for="inputName">Название</label>
-            <input type="text" class="form-control" id="inputName" placeholder="Название">
-          </div>
-          <div class="form-group col-md-6">
             <label for="type">Тип акции</label>
             <input type="text" class="form-control" id="type" placeholder="Тип акции">
           </div>
-        </div>
-        <div class="form-group">
-          <label for="stockClause">StockClause</label>
-          <input type="text" class="form-control" id="stockClause" placeholder="stockClause">
+          <div class="form-group col-md-6">
+            <label for="stockClause">Пункты акции</label>
+            <input type="text" class="form-control" id="stockClause" placeholder="Пункты акции">
+          </div>
         </div>
         <button type="submit" class="btn btn-primary" (click)="addStock()">Добавить</button>
         <div *ngFor="let stock of stocks" class="row border" style="width: auto;">
           <div class="col">
             <h3>{{stock.type.type}}</h3>
-          </div>
-          <div class="col">
-            <h3>{{stock.values}}</h3>
           </div>
           <div class="col-1">
             <div class="row">

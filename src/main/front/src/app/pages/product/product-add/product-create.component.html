@@ -26,7 +26,7 @@
         <button type="submit" class="btn btn-primary" (click)="addProduct()">Добавить</button>
         <div *ngFor="let product of products" class="row border" style="width: auto;">
           <div class="col">
-            <h3>{{product.name.substring(12)}}</h3>
+            <h3>{{product.name}}</h3>
           </div>
           <div class="col">
             <h3>{{product.description}}</h3>

@@ -36,6 +36,7 @@ import { ProductCreateComponent} from "./pages/product/product-add/product-creat
 import {StockCreateComponent} from "./pages/stock/stock-add/stock-create.component";
 import {StockProductComponent} from "./pages/stock/stock-product/stock-product.component";
 import {AdminComponent} from "./pages/admin/admin.component";
+import {CatalogComponent} from "./pages/catalog/catalog.component";
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import {AdminComponent} from "./pages/admin/admin.component";
     ProductCreateComponent,
     StockCreateComponent,
     StockProductComponent,
+    CatalogComponent,
     AdminComponent
   ],
     imports: [
@@ -81,6 +83,7 @@ import {AdminComponent} from "./pages/admin/admin.component";
                 {path: 'article', component: ArticleComponent},
                 {path: 'stock/add', component: StockCreateComponent},
                 {path: 'stock/product', component: StockProductComponent},
+                {path: 'catalog', component: CatalogComponent},
                 {path: 'admin', component: AdminComponent},
                 {path: '', redirectTo: '/start', pathMatch: 'full'}
             ]

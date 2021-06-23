@@ -43,7 +43,7 @@ export class ProductCreateComponent implements OnInit {
       {
         id: 1,
         name: "banana",
-        description: "55555555",
+        description: "fruit",
         weight: 1,
         calories: 100
       }
