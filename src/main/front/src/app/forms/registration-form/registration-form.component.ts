@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {RegistrationService} from "../../services/reg/registration.service";
+import {AppConfig} from '../../app.component';
+import {ApiResponse} from '../../models/api-response';
 
 
 @Component({
@@ -22,13 +24,12 @@ export class RegistrationFormComponent{
   });
 
 
-  onSubmit() {
-    //console.log(this.registrationForm.value);
+  onSubmit(): void {
     this.registrationService.registerUser(this.registrationForm.value).subscribe(
-      {
-        error: (error: any) => {
-          console.error('There was an error!', error);
-        }
+      (data: ApiResponse) => {
+          if (data.code === 'OK'){
+            console.log('Reg success');
+          }
       }
     );
   }

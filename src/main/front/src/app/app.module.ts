@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
@@ -29,6 +29,11 @@ import { CaloriesDataComponent } from './pages/account/calories-data/calories-da
 import { AccountOrdersComponent } from './pages/account/account-orders/account-orders.component';
 import { AccountAddressesComponent } from './pages/account/account-addresses/account-addresses.component';
 import { AccountCardsComponent } from './pages/account/account-cards/account-cards.component';
+import { CartComponent } from './pages/components/cart/cart.component';
+import { ProductCardComponent } from './pages/components/product-card/product-card.component';
+import { ProductMiniCardComponent } from './pages/components/product-card-mini/product-mini-card/product-mini-card.component';
+import { OrderComponent } from './pages/order/order.component';
+import { PayComponent } from './pages/pay/pay.component';
 
 @NgModule({
   declarations: [
@@ -47,35 +52,45 @@ import { AccountCardsComponent } from './pages/account/account-cards/account-car
     CaloriesDataComponent,
     AccountOrdersComponent,
     AccountAddressesComponent,
-    AccountCardsComponent
+    AccountCardsComponent,
+    CartComponent,
+    ProductCardComponent,
+    ProductMiniCardComponent,
+    OrderComponent,
+    PayComponent
   ],
-  imports: [
-    AppRoutingModule,
-    BrowserModule,
-    RouterModule.forRoot(
-      [
-        {path: 'reg', component: RegistrationComponent},
-        {path: 'login', component: LoginComponent},
-        {path: '', component: StartComponent},
-        {path: 'account/info', component: AccountInfoComponent},
-        {path: 'account/calorie-data', component: CaloriesDataComponent},
-        {path: 'account/orders', component: AccountOrdersComponent},
-        {path: 'account/addresses', component: AccountAddressesComponent},
-        {path: 'account/cards', component: AccountCardsComponent},
-        {path: 'products', component: ProductsComponent}
-      ]
-    ),
-    HttpClientModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
-    LayoutModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule,
-    NgbModule
-  ],
+    imports: [
+        AppRoutingModule,
+        BrowserModule,
+        RouterModule.forRoot(
+            [
+                {path: 'reg', component: RegistrationComponent},
+                {path: 'login', component: LoginComponent},
+                {path: 'start', component: StartComponent},
+                {path: 'account/info', component: AccountInfoComponent},
+                {path: 'account/calorie-data', component: CaloriesDataComponent},
+                {path: 'account/orders', component: AccountOrdersComponent},
+                {path: 'account/addresses', component: AccountAddressesComponent},
+                {path: 'account/cards', component: AccountCardsComponent},
+                {path: 'products', component: ProductsComponent},
+                {path: 'article', component: ArticleComponent},
+                {path: 'order', component: OrderComponent},
+                {path: 'order/pay', component: PayComponent},
+                {path: '', redirectTo: '/start', pathMatch: 'full'}
+            ]
+        ),
+        HttpClientModule,
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        LayoutModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatSidenavModule,
+        MatIconModule,
+        MatListModule,
+        NgbModule,
+        FormsModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -1,12 +1,55 @@
-<body class="gf-bg-main">
 <app-header></app-header>
 <main class="gf-bg-main" style="height: 100vh">
-  <div style="height: 15vh;"></div>
-  <app-account></app-account>
-  <section class="container border">
-    <h2>Сохраненные карты</h2>
-  </section>
+  <div style="height: 15vh"></div>
+    <div class="container" style="width: 100%">
+      <div style="height: 15vh;"></div>
+      <app-account></app-account>
+      <div class="container border" style="width: 100%;">
+        <div class="row">
+          <div class="col">
+            <h2 class="py-lg-5">Сохраненные карты</h2></div>
+          <div class="col">
+            <button class="btn btn-lg btn-outline-primary my-lg-5" (click)="open(content)">Добавить</button>
+          </div>
+        </div>
+        <div *ngFor="let card of cards" class="row border" style="width: auto;">
+          <div class="col">
+            <h3>**** **** **** {{card.card.substring(12)}}</h3>
+          </div>
+          <div class="col">
+            <h3>{{card.cardEndDate}}</h3>
+          </div>
+          <div class="col-1">
+            <div class="row">
+              <button class="w-100 h-50" (click)="onUpdateOpen(card); open(content);">Изменить</button>
+              <button class="w-100 h-50" (click)="onDelete(card)">Удалить</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ng-template #content let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="addressInput" class="form-label">Card</label>
+              <input type="text" class="form-control" id="addressInput" [value]="cardFormValue.card">
+            </div>
+            <div class="mb-3">
+              <label for="dateInput" class="form-label">End Date</label>
+              <input type="text" class="form-control" id="dateInput" [value]="cardFormValue.cardEndDate">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" (click)="modal.close();addAddress()">Добавить/Изменить</button>
+        </div>
+      </ng-template>
+    </div>
 </main>
 <app-footer></app-footer>
-</body>
-

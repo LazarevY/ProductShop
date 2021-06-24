@@ -1,1 +1,45 @@
-<app-registration-form></app-registration-form>
+<app-header></app-header>
+<div style="height: 120vh">
+  <div style="height: 20vh"></div>
+  <main >
+    <div class="container my-5 px-5">
+      <form class="form-group" [formGroup]="registrationForm">
+        <h1 class="h3 mb-3 fw-normal text-center">Регистрация</h1>
+
+        <div *ngIf="message.value.length > 0" class="alert-danger">{{message.value}}</div>
+
+        <div class="form-group">
+          <label for="nameInput">Имя</label>
+          <input type="text" class="form-control" id="nameInput" placeholder="Имя" formControlName="firstName">
+        </div>
+        <div class="form-group">
+          <label for="surnameInput">Фамилия</label>
+          <input type="text" class="form-control" id="surnameInput" placeholder="Фамилия" formControlName="lastName">
+        </div>
+        <div class="form-group">
+          <label for="phoneInput">Телефон</label>
+          <input type="tel" class="form-control" id="phoneInput" placeholder="+7 (000) 000-00-00 " formControlName="phone">
+        </div>
+        <div class="form-group">
+          <label for="emailInput">Эл. почта</label>
+          <input type="tel" class="form-control" id="emailInput" placeholder="email@exaple.com" formControlName="email">
+        </div>
+        <div class="form-group">
+          <label class="col-form-label" for="floatingPassword">Password</label>
+          <input type="password" class="form-control" id="floatingPassword" placeholder="Password" formControlName="password">
+        </div>
+        <div class="form-group">
+          <label for="floatingPasswordRepeat">Repeat password</label>
+          <input type="password" class="form-control" id="floatingPasswordRepeat" placeholder="Password">
+        </div>
+        <br>
+        <input class="w-100 btn btn-lg btn-primary" type="submit" (click)="onSubmit()" value="Sign up"/>
+        <br>
+        <br>
+        <p class="h6 text-center">Уже есть аккаунт? <a routerLink="/login">Вход</a></p>
+      </form>
+    </div>
+  </main>
+
+</div>
+<app-footer></app-footer>

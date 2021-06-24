@@ -1,0 +1,14 @@
+<div class="container align-content-center">
+  <div *ngFor="let kv of cartService.cart | keyvalue" class="row w-50 h-50">
+    <div class="card">
+        <app-product-mini-card [product]="kv.value"></app-product-mini-card>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <h4>Предварительная сумма: {{cartService.price}}р</h4>
+  </div>
+  <div class="row">
+    <input routerLink="/order" type="button" class="btn gf-bg-cmp text-light" value="Оформить заказ">
+  </div>
+</div>
