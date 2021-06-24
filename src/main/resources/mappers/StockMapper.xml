@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="app.data.mappers.StockMapper">
+    <resultMap id="StockResultMap" type="app.data.modeles.Stock">
+        <id column="stock_id" property="id"/>
+        <result column="stock_name" property="name"/>
+        <result column="stock_start_date" property="startDate"/>
+        <result column="stock_end_date" property="endDate"/>
+    </resultMap>
+    <insert id="addStock">
+        INSERT INTO stocks (stock_name, stock_start_date, stock_end_date)
+        VALUES (#{name}, #{startDate}, #{endDate});
+    </insert>
+    <update id="updateStock">
+        UPDATE stocks
+        SET stock_name       = #{name},
+            stock_start_date = #{startDate},
+            stock_end_date   = #{endDate}
+        WHERE stock_id = #{id};
+    </update>
+    <select id="getById" resultMap="StockResultMap">
+        SELECT *
+        FROM stocks
+        WHERE stock_id = #{id};
+    </select>
+    <select id="findAll" resultMap="StockResultMap">
+        SELECT *
+        FROM stocks;
+    </select>
+    <delete id="deleteById">
+        DELETE
+        FROM stocks
+        WHERE stock_id = #{id};
+    </delete>
+
+</mapper>

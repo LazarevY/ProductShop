@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="app.data.mappers.ProductsStoresMapper">
+
+    <resultMap id="ProductInStoreMap" type="app.data.modeles.ProductInStore">
+        <result column="store_id" property="storeId"/>
+        <result column="count_of_products" property="count"/>
+        <result column="product_price" property="price"/>
+        <association property="product" column="product_id"
+                     select="app.data.mappers.ProductMapper.getProduct"/>
+    </resultMap>
+    <insert id="addProductToStore">
+        INSERT INTO products_stores (product_id, store_id, count_of_products, product_price)
+        VALUES (#{productId}, #{storeId}, #{count}, #{price})
+    </insert>
+    <update id="updateProductData">
+        UPDATE products_stores
+        SET store_id          = #{newStoreId},
+            count_of_products = #{count},
+            product_price     = #{price}
+        WHERE product_id = #{productId}
+          AND store_id = #{storeId};
+    </update>
+    <delete id="deleteByProductAndStoreId">
+        DELETE
+        FROM products_stores
+        WHERE product_id = #{productId}
+          AND store_id = #{storeId};
+    </delete>
+
+    <select id="getAllInStore" resultMap="ProductInStoreMap">
+        SELECT ps.*
+        FROM products p
+                 JOIN products_stores ps on p.product_id = ps.product_id
+        WHERE store_id = #{storeId};
+    </select>
+    <select id="getAllInStoreFilteredOnlyByPrice" resultMap="ProductInStoreMap">
+        SELECT ps.*
+        FROM products p
+                 JOIN products_stores ps
+                      on p.product_id = ps.product_id AND
+                         ps.count_of_products > 0 AND
+                         ps.product_price &lt;= #{priceHigh} AND
+                         ps.product_price >= #{priceLow}
+        WHERE store_id = #{storeId};
+    </select>
+    <select id="getAllInStoreFilteredByPriceAndName" resultMap="ProductInStoreMap">
+        <bind name="productName" value="name + '%'"/>
+        SELECT ps.*
+        FROM products p
+        JOIN products_stores ps
+        on p.product_id = ps.product_id AND
+        ps.count_of_products > 0 AND
+        ps.product_price &lt;= #{priceHigh} AND
+        ps.product_price >= #{priceLow}
+        WHERE ps.store_id = #{storeId} AND p.product_name LIKE #{productName};
+    </select>
+    <select id="getAllInStoreFilteredOnlyByCategories" resultMap="ProductInStoreMap">
+        SELECT ps.*
+        FROM products p
+        JOIN products_stores ps
+        on p.product_id = ps.product_id
+        JOIN products_product_categories ppc on ps.product_id = ppc.product_id AND ppc.product_category_id IN
+        <foreach item="item" index="index" collection="categoriesId" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+
+    </select>
+    <select id="getAllInStoreFilteredByPriceAndNameAndCategory" resultMap="ProductInStoreMap">
+        <bind name="productName" value="name + '%'"/>
+        SELECT ps.*
+        FROM products p
+
+        JOIN products_stores ps
+        on p.product_id = ps.product_id AND
+        ps.count_of_products > 0 AND
+        ps.product_price &lt;= #{priceHigh} AND
+        ps.product_price >= #{priceLow}
+
+        JOIN products_product_categories ppc on
+        ps.product_id = ppc.product_id AND
+        ppc.product_category_id IN
+        <foreach item="item" index="index" collection="categoriesId" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        WHERE ps.store_id = #{storeId} AND p.product_name LIKE #{productName};
+    </select>
+</mapper>

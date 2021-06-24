@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration  >
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"></transactionManager>
+            <dataSource type="POOLED">
+                <property name="driver" value="org.postgresql.Driver"/>
+                <property name="url" value="jdbc:postgresql://localhost:5432/product_shop_test"/>
+                <property name="username" value="postgres"/>
+                <property name="password" value="12345"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <mapper resource="mappers/UserMapper.xml"/>
+        <mapper resource="mappers/GenderMapper.xml"/>
+        <mapper resource="mappers/OrderMapper.xml"/>
+        <mapper resource="mappers/OrderProductMapper.xml"/>
+        <mapper resource="mappers/OrderStatusMapper.xml"/>
+        <mapper resource="mappers/ProductMapper.xml"/>
+        <mapper resource="mappers/ProductsProductsCategoriesMapper.xml"/>
+
+        <mapper resource="mappers/PayMethodMapper.xml"/>
+        <mapper resource="mappers/ProductCategoryMapper.xml"/>
+        <mapper resource="mappers/ProductMetadataMapper.xml"/>
+        <mapper resource="mappers/StockClauseItemMapper.xml"/>
+        <mapper resource="mappers/StockClauseMapper.xml"/>
+        <mapper resource="mappers/StockMapper.xml"/>
+        <mapper resource="mappers/StoreMapper.xml"/>
+        <mapper resource="mappers/UserAddressMapper.xml"/>
+        <mapper resource="mappers/UserCalorieDataMapper.xml"/>
+        <mapper resource="mappers/ProductsStoresMapper.xml"/>
+    </mappers>
+
+</configuration>
