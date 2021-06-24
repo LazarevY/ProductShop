@@ -138,4 +138,11 @@ export class UserControlService {
       this.conf.getHeadersWithCorsAndJWTToken(this.storage.getParameter('authToken')));
   }
 
+  tryGetUserCalorieNorm(token: string): Observable<ApiResponse> {
+    return this.http.post<ApiResponse>(
+      this.conf.createBackendUrl('api/user/calorie-data/norm'),
+      token,
+      this.conf.getHeadersWithCorsAndJWTToken(token));
+  }
+
 }

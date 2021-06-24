@@ -31,6 +31,7 @@ import { PayComponent } from './pages/pay/pay.component';
 import { StocksComponent } from './pages/stocks/stocks.component';
 import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
 import { ProductDetailCardComponent } from './pages/components/product-detail-card/product-detail-card.component';
+import { LogoutComponent } from './pages/logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { ProductDetailCardComponent } from './pages/components/product-detail-ca
     PayComponent,
     StocksComponent,
     ProductDetailComponent,
-    ProductDetailCardComponent
+    ProductDetailCardComponent,
+    LogoutComponent
   ],
     imports: [
         AppRoutingModule,
@@ -78,6 +80,7 @@ import { ProductDetailCardComponent } from './pages/components/product-detail-ca
                 {path: 'article', component: ArticleComponent},
                 {path: 'order', component: OrderComponent},
                 {path: 'order/pay', component: PayComponent},
+                {path: 'logout', component: LogoutComponent},
                 {path: '', redirectTo: '/start', pathMatch: 'full'}
             ]
         ),

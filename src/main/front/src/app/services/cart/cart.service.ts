@@ -3,7 +3,9 @@ import {ProductsService} from '../products/products.service';
 import {DataStorageService} from '../storage/data-storage.service';
 import {ProductOrder, ProductOrderItem, StoreProduct} from '../../models/products';
 import {AppConfig} from '../../app.component';
-import {tap} from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
+import {Observable, Subscriber} from 'rxjs';
+import {ApiResponse} from '../../models/api-response';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +34,13 @@ export class CartService {
   loadCartAction(): void {
     this.loadCartChoose();
     this.loadCart(this.dataStorage.getParameter('activeStoreId'), Array.from(this.cartChoose.keys()));
+  }
+
+  getCalories(): Observable<Array<StoreProduct>> {
+     return this.productService.getProductsData({
+      storeId: this.dataStorage.getParameter('activeStoreId'),
+      productIds: Array.from(this.cartChoose.keys()),
+    });
   }
 
   loadCart(storeId: number, productIds: Array<number>): void {
@@ -82,6 +91,7 @@ export class CartService {
       this.cartChoose.set(id, n);
     }
     this.updateCartChoose();
+    this.loadCartAction();
   }
 
   setProductCount(id: number, count: number): void {

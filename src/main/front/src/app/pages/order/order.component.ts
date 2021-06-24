@@ -5,6 +5,7 @@ import {ApiResponse} from '../../models/api-response';
 import {DataStorageService} from '../../services/storage/data-storage.service';
 import {UserAddress} from '../../models/user';
 import {OrderService} from '../../services/order/order.service';
+import {StoreProduct} from '../../models/products';
 
 @Component({
   selector: 'app-order',
@@ -23,6 +24,8 @@ export class OrderComponent implements OnInit {
 
   addressId = 0;
 
+  overNorm = 0;
+
   ngOnInit(): void {
     if (this.userControl.isUserLogin()) {
       this.userControl.getAddressList({token: this.dataStorage.getParameter('authToken')}).subscribe(
@@ -35,6 +38,7 @@ export class OrderComponent implements OnInit {
         }
       );
     }
+    this.isOverNorm();
   }
 
   setAddress(value: any): void {
@@ -45,4 +49,26 @@ export class OrderComponent implements OnInit {
     this.dataStorage.setParameter('orderCalories', this.cartService.calories);
   }
 
+  isOverNorm(): void {
+    this.overNorm = 0;
+    if (!this.userControl.isUserLogin()) {
+      return;
+    }
+    this.userControl.tryGetUserCalorieNorm(this.dataStorage.getParameter('authToken')).subscribe(
+      (data: ApiResponse) => {
+        console.log(data);
+        if (data.parameters.funcEnable) {
+          this.cartService.getCalories().subscribe((src: Array<StoreProduct>) => {
+            let calories = 0;
+            for (const p of src) {
+              // @ts-ignore
+              p.count = this.cartService.cartChoose.get(p.product.id);
+              calories += p.count * (p.product.weight / 100) * p.product.calories; // mass /100g * calories on 100g
+            }
+            this.overNorm = calories - data.parameters.norm;
+          });
+        }
+      }
+    );
+  }
 }

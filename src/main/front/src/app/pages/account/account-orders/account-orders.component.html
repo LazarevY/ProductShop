@@ -1,5 +1,5 @@
 <app-header></app-header>
-<main class="gf-bg-main" style="height: 100vh">
+<main class="gf-bg-main gf-main-container">
   <div style="height: 15vh"></div>
   <div class="container">
     <div style="height: 15vh;"></div>
@@ -8,7 +8,7 @@
       <h2>Информация о заказах</h2>
       <div class="row" *ngFor="let o of orders">
         <div class="col">
-          <h3>Заказ №{{o.id}}, общая сумма - {{o.commonPrice - o.stockPrice}}р</h3>
+          <h3>Заказ №{{o.id}}, общая сумма - {{(o.commonPrice - o.stockPrice).toFixed(2)}}р</h3>
         </div>
       </div>
     </section>

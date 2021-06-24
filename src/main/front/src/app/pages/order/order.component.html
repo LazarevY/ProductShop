@@ -21,8 +21,11 @@
       <div class="col-6 text-left">
         <h2>Оформить заказ</h2>
         <h4>Некоторые скидки учитываются после перехода к оплате заказа</h4>
-        <h4>Преварительная сумма заказа: {{cartService.price}}р</h4>
+        <h4>Преварительная сумма заказа: {{cartService.price.toFixed(2)}}р</h4>
         <h4>Общая калорийность: {{cartService.calories}} ккал</h4>
+        <div *ngIf="overNorm > 0">
+          <h4>Внимание! Суточная норма калорий превышена на {{overNorm}} ккал</h4>
+        </div>
         <div *ngIf="userControl.isUserLogin(); else elseBlock">
           <h4>Адрес доставки</h4>
           <select class="form-control" aria-label="Default select example" #t [value]="addressId" (change)="setAddress(t.value)">
