@@ -13,7 +13,7 @@ public interface ProductMetadataMapper {
 
     List<ProductMetadata> findAll();
 
-    void addProductMetadata(@Param("fileName") String fileName);
+    int addProductMetadata(@Param("fileName") String fileName);
 
     void updateProductMetadata(@Param("id") long id, @Param("fileName") String fileName);
 

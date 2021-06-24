@@ -8,6 +8,8 @@
         <result column="product_price" property="price"/>
         <association property="product" column="product_id"
                      select="app.data.mappers.ProductMapper.getProduct"/>
+        <association property="stock" column="stock_id"
+                     select="app.data.mappers.StockMapper.getById"/>
     </resultMap>
     <insert id="addProductToStore">
         INSERT INTO products_stores (product_id, store_id, count_of_products, product_price)
@@ -18,6 +20,12 @@
         SET store_id          = #{newStoreId},
             count_of_products = #{count},
             product_price     = #{price}
+        WHERE product_id = #{productId}
+          AND store_id = #{storeId};
+    </update>
+    <update id="updateProductCount">
+        UPDATE products_stores
+        SET count_of_products = #{newCount}
         WHERE product_id = #{productId}
           AND store_id = #{storeId};
     </update>
@@ -67,22 +75,66 @@
 
     </select>
     <select id="getAllInStoreFilteredByPriceAndNameAndCategory" resultMap="ProductInStoreMap">
-        <bind name="productName" value="name + '%'"/>
-        SELECT ps.*
-        FROM products p
-
-        JOIN products_stores ps
-        on p.product_id = ps.product_id AND
+        <bind name="productName" value="'%' + name + '%'"/>
+        SELECT ps.*, p.product_metadata_id
+        FROM products_stores ps
+        LEFT JOIN products p on p.product_id = ps.product_id AND
         ps.count_of_products > 0 AND
         ps.product_price &lt;= #{priceHigh} AND
         ps.product_price >= #{priceLow}
-
-        JOIN products_product_categories ppc on
-        ps.product_id = ppc.product_id AND
-        ppc.product_category_id IN
-        <foreach item="item" index="index" collection="categoriesId" open="(" separator="," close=")">
+        <if test="categoriesId.length > 0">
+            JOIN products_product_categories ppc on
+            ps.product_id = ppc.product_id
+            AND
+            ppc.product_category_id IN
+            <foreach item="item" index="index" collection="categoriesId" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        LEFT JOIN orders_products op on ps.product_id = op.product_id
+        LEFT JOIN orders o on o.order_id = op.order_id
+        WHERE ps.store_id = #{storeId} AND p.product_name LIKE #{productName}
+        GROUP BY ps.product_id, ps.store_id, ps.count_of_products, ps.product_price, p.product_metadata_id, ps.stock_id
+        ORDER BY coalesce(sum(op.count_of_products), 0) DESC, ps.product_id;
+    </select>
+    <select id="getUserOrientedList" resultMap="ProductInStoreMap">
+        <bind name="productName" value="'%' + name + '%'"/>
+        SELECT ps.*, p.product_metadata_id
+        FROM products_stores ps
+        LEFT JOIN products p on p.product_id = ps.product_id AND
+        ps.count_of_products > 0 AND
+        ps.product_price &lt;= #{priceHigh} AND
+        ps.product_price >= #{priceLow}
+        <if test="categoriesId.length > 0">
+            JOIN products_product_categories ppc on
+            ps.product_id = ppc.product_id
+            AND
+            ppc.product_category_id IN
+            <foreach item="item" index="index" collection="categoriesId" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        LEFT JOIN orders_products op on ps.product_id = op.product_id
+        LEFT JOIN orders o on o.order_id = op.order_id
+        WHERE ps.store_id = #{storeId} AND p.product_name LIKE #{productName}
+        GROUP BY ps.product_id, ps.store_id, ps.count_of_products, ps.product_price, p.product_metadata_id, ps.stock_id
+        ORDER BY sum(CASE WHEN o.user_id IS NULL OR user_id != #{userId} THEN 0 ELSE op.count_of_products END) DESC,
+        coalesce(sum(op.count_of_products), 0) DESC, ps.product_id;
+    </select>
+    <select id="getProductData" resultMap="ProductInStoreMap">
+        SELECT ps.*, p.product_metadata_id
+        FROM products_stores ps
+                 LEFT JOIN products p on p.product_id = ps.product_id
+        WHERE ps.product_id = #{productId}
+          AND store_id = #{storeId};
+    </select>
+    <select id="getProductsData" resultMap="ProductInStoreMap">
+        SELECT ps.*, p.product_metadata_id FROM products_stores ps
+        LEFT JOIN products p on p.product_id = ps.product_id
+        WHERE ps.store_id = #{storeId} AND
+        ps.product_id IN
+        <foreach item="item" index="index" collection="productIds" open="(" separator="," close=")">
             #{item}
-        </foreach>
-        WHERE ps.store_id = #{storeId} AND p.product_name LIKE #{productName};
+        </foreach>;
     </select>
 </mapper>

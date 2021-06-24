@@ -5,10 +5,12 @@ import lombok.Data;
 @Data
 public class UserCalorieData {
 
-    private Long userId;
-    private Long weight;
-    private Long growth;
-    private Long genderId;
-    private Long currentNorm;
+    private long userId;
+    private int age;
+    private double weight;
+    private double growth;
+    private long genderId;
+    private int currentNorm;
+    private boolean funcEnable;
 
 }

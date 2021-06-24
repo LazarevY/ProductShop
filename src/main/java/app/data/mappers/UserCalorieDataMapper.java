@@ -9,9 +9,21 @@ import java.util.List;
 @Mapper
 public interface UserCalorieDataMapper {
 
-    void addCalorieData(@Param("userId") long userId, @Param("weight") int weight, @Param("growth") int growth, @Param("genderId") long genderId, @Param("currentNorm") int currentNorm);
+    void addCalorieData(@Param("userId") long userId,
+                        @Param("weight") double weight,
+                        @Param("growth") int growth,
+                        @Param("age") int age,
+                        @Param("genderId") long genderId,
+                        @Param("currentNorm") int currentNorm,
+                        @Param("enable") boolean enable);
 
-    void updateCalorieData(@Param("userId") long userId, @Param("weight") int weight, @Param("growth") int growth, @Param("genderId") long genderId, @Param("currentNorm") int currentNorm);
+    void updateCalorieData(@Param("userId") long userId,
+                           @Param("weight") double weight,
+                           @Param("growth") int growth,
+                           @Param("age") int age,
+                           @Param("genderId") long genderId,
+                           @Param("currentNorm") int currentNorm,
+                           @Param("enable") boolean enable);
 
     UserCalorieData getByUserId(@Param("userId") long userId);
 

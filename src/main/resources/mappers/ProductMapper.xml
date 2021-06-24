@@ -9,6 +9,10 @@
         <result column="product_weight" jdbcType="VARCHAR" property="weight"/>
         <result column="product_calories" jdbcType="VARCHAR" property="calories"/>
         <result column="product_metadata_id" jdbcType="VARCHAR" property="metadataId"/>
+        <association property="metadata" column="product_metadata_id"
+                     select="app.data.mappers.ProductMetadataMapper.getProductMetadataById"/>
+        <collection property="categories" javaType="java.util.List" column="product_id"
+                    select="app.data.mappers.ProductsProductsCategoriesMapper.getCategoryListOfProduct"/>
     </resultMap>
 
 

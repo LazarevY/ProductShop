@@ -18,7 +18,7 @@ public interface OrderMapper {
     @ResultMap("OrderResultMap")
     List<Order> findAll();
 
-    void addOrder(
+    int addOrder(
             @Param("orderStatusId") long orderStatusId,
             @Param("userId") long userId,
             @Param("storeId") long storeId,

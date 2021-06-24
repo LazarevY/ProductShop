@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class StockClause {
     private long id;
-    private Long clauseId;
-    private Long clauseValue;
+    private StockClauseItem stockClauseItem;
+    private String clauseValue;
 }
