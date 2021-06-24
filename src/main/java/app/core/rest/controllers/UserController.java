@@ -153,6 +153,19 @@ public class UserController {
         return new Response(ResponseCode.ERROR, "", Map.of("success", false));
     }
 
+    @PostMapping("/api/user/calorie-data/norm")
+    public Response getUserCalorieNormIfExist(@RequestBody String token) {
+        if (token != null && jwtProvider.validateToken(token)) {
+            User u = userService.findByEmail(jwtProvider.getNicknameFromToken(token));
+            UserCalorieData calorieData = userService.getCalorieData(u.getId());
+            if (calorieData == null || !calorieData.isFuncEnable())
+                return new Response(ResponseCode.WARN, "",
+                        Map.of("success", false, "funcEnable", false));
+            return new Response(ResponseCode.OK, "", Map.of("funcEnable", true, "norm", calorieData.getCurrentNorm()));
+        }
+        return new Response(ResponseCode.ERROR, "", Map.of("success", false, "funcEnable", false));
+    }
+
     @PostMapping("/api/user/pay-methods/add")
     public Response getUserAddPayMethod(@RequestBody UserAddPayMethodRequest req) {
         if (req.getToken() != null && jwtProvider.validateToken(req.getToken())) {
